@@ -18,7 +18,7 @@ public class EclesiasticasBackendApplication {
 	}
 	@GetMapping
 	public List<Registro> index(){
-		
+		Registro r = new Registro("lol");
 		return List.of(
 				
 				);
