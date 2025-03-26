@@ -1,10 +1,10 @@
-package pixelpulse.eclesiasticasBackend;
+package pixelpulse.eclesiasticasbackend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EclesiasticasBackendApplicationTests {
+class EclesiasticasbackendApplicationTests {
 
 	@Test
 	void contextLoads() {
