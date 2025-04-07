@@ -115,9 +115,14 @@ public class AuthController {
 		String nombre = requestBody.get("nombre");
 		String apellido = requestBody.get("apellido");
         UserRecord.UpdateRequest updateRequest = new UserRecord.UpdateRequest(uid)
-            .setDisplayName(nombre+""+apellido).setEmail("email");
+            .setDisplayName(nombre+" "+apellido).setEmail("email");
         
         UserRecord user = firebaseAuth.updateUser(updateRequest);
+        
+        Map<String, String> response = new HashMap<>();
+		response.put("email", email);
+		response.put("displayName", user.getDisplayName());
+		
         return ResponseEntity.ok(user);	
 		} 
 		
