@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
@@ -105,6 +106,34 @@ public class AuthController {
 		}
 	}**/
 
+	@PostMapping("/update-profile")
+	public ResponseEntity<?> editProfile(@RequestHeader("Authorization") String token,
+			@RequestBody Map<String, String> requestBody) {
+		try {
+		String uid = firebaseAuth.verifyIdToken(token.replace("Bearer ", "")).getUid();
+		String email = requestBody.get("email");
+		String nombre = requestBody.get("nombre");
+		String apellido = requestBody.get("apellido");
+        UserRecord.UpdateRequest updateRequest = new UserRecord.UpdateRequest(uid)
+            .setDisplayName(nombre+""+apellido).setEmail("email");
+        
+        UserRecord user = firebaseAuth.updateUser(updateRequest);
+        return ResponseEntity.ok(user);	
+		} 
+		
+		catch (FirebaseAuthException e) {
+			logger.error("Failed to send password reset email: {}", e.getMessage(), e);
+
+			// Don't expose detailed error information to clients in production
+			Map<String, String> response = new HashMap<>();
+			response.put("error", "Failed to process password reset request");
+
+			return ResponseEntity.internalServerError().body(response);
+		}
+	}
+	
+	
+	
 	@PostMapping("/reset-password")
 	public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> requestBody) {
 		String email = requestBody.get("email");
