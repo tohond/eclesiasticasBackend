@@ -24,6 +24,7 @@ public class UserService {
         users.put("user1@example.com", "password1");
         users.put("user2@example.com", "password2");
         this.firebaseAuth = firebaseAuth;
+        
     }
     
     public boolean authenticateUser(String email, String password) {
