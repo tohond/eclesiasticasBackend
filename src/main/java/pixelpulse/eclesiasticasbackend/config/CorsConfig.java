@@ -15,7 +15,7 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
         
         // Allow all origins or specify your frontend URL
-        config.addAllowedOrigin("http://localhost:3000"); // Add your frontend URL here
+        config.addAllowedOrigin("https://github.com/Diegoj17/FrontendEclesiasticas.git"); // Add your frontend URL here
         
         // Allow all HTTP methods
         config.addAllowedMethod("*");
