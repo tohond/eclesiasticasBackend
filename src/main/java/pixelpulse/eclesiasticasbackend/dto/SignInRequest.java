@@ -4,6 +4,8 @@ package pixelpulse.eclesiasticasbackend.dto;
 
 
 public class SignInRequest {
+	private String nombre;
+	private String apellido;
     private String email;
     private String password;
 	public String getEmail() {
