@@ -37,10 +37,10 @@ public class UserService {
 
   
         
-        public UserRecord createUser(String email, String password) throws FirebaseAuthException {
+        public UserRecord createUser(String email, String password, String displayname) throws FirebaseAuthException {
             UserRecord.CreateRequest request = new UserRecord.CreateRequest()
                 .setEmail(email)
-                .setPassword(password);
+                .setPassword(password).setDisplayName(displayname);
                 
             return firebaseAuth.createUser(request);
         }
@@ -62,6 +62,10 @@ public class UserService {
             .setPassword(newPassword);
         	return firebaseAuth.updateUser(request);
         	
+        }
+        
+        public UserRecord getUserByEmail(String email) throws FirebaseAuthException {
+        	return firebaseAuth.getUserByEmail(email);
         }
     
     

@@ -144,7 +144,7 @@ public class AuthController {
 	@PostMapping("/register")
 	public ResponseEntity<?> registerUser(@RequestBody SignInRequest request) throws FirebaseAuthException {
 		try {
-			UserRecord user = userService.createUser(request.getEmail(), request.getPassword());
+			UserRecord user = userService.createUser(request.getEmail(), request.getPassword(), request.getNombre()+" "+request.getApellido());
 			return ResponseEntity.ok(user);
 		} catch (FirebaseAuthException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getLocalizedMessage());
@@ -152,7 +152,7 @@ public class AuthController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+	public ResponseEntity<?> login(@RequestBody LoginRequest request) throws FirebaseAuthException {
 
 		// For testing, we'll accept any username/password
 		// In a real app, you would validate against your database
@@ -167,12 +167,20 @@ public class AuthController {
 		 */
 
 		FirebaseSignInRequest requestBody = new FirebaseSignInRequest(uid, request.getPassword(), true);
+		UserRecord user = userService.getUserByEmail(uid);
+		FirebaseSignInResponse sResponse = sendSignInRequest(requestBody);
+		
+		Map<String, String> response = new HashMap<>();
+		response.put("email", requestBody.email());
+		response.put("displayName", user.getDisplayName());
+		response.put("idToken",sResponse.idToken());
+		response.put("refreshToken", sResponse.refreshToken());
 
 		try{
-			return ResponseEntity.ok(sendSignInRequest(requestBody));
+			return ResponseEntity.ok(response);
 		}
 		catch (HttpClientErrorException e) {
-			Map<String, String> response = new HashMap<>();
+			
 			
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getResponseBodyAsString());
 		}
