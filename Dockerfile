@@ -14,3 +14,5 @@ RUN ./mvnw dependency:go-offline
 COPY ./src /root/src
 
 RUN ./mvnw clean install -DskipTests
+
+ENTRYPOINT [ "java","-jar","/root/target/eclesiasticasbackend-0.0.1-SNAPSHOT.jar" ]
