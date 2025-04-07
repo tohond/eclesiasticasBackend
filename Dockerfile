@@ -8,7 +8,7 @@ WORKDIR /root
 COPY ./pom.xml /root
 COPY ./.mvn /root/.mvn
 COPY ./mvnw /root
-CHMOD +x ./mvnw
+RUN chmod +x ./mvnw
 
 RUN ./mvnw dependency:go-offline
 
