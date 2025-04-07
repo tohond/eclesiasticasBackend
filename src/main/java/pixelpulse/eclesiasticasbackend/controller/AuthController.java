@@ -121,9 +121,10 @@ public class AuthController {
         
         Map<String, String> response = new HashMap<>();
 		response.put("email", email);
-		response.put("displayName", user.getDisplayName());
+		response.put("nombre", nombre);
+		response.put("apellido", apellido);
 		
-        return ResponseEntity.ok(user);	
+        return ResponseEntity.ok(response);	
 		} 
 		
 		catch (FirebaseAuthException e) {
