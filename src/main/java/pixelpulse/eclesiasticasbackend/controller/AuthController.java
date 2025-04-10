@@ -110,31 +110,33 @@ public class AuthController {
 	public ResponseEntity<?> editProfile(@RequestHeader("Authorization") String token,
 			@RequestBody Map<String, String> requestBody) {
 		try {
-		String uid = firebaseAuth.verifyIdToken(token.replace("Bearer ", "")).getUid();
-		String email = requestBody.get("email");
-		String nombre = requestBody.get("nombre");
-		String apellido = requestBody.get("apellido");
-        UserRecord.UpdateRequest updateRequest = new UserRecord.UpdateRequest(uid)
-            .setDisplayName(nombre+" "+apellido).setEmail("email");
-        
-        UserRecord user = firebaseAuth.updateUser(updateRequest);
-        
-        Map<String, String> response = new HashMap<>();
-		response.put("email", email);
-		response.put("nombre", nombre);
-		response.put("apellido", apellido);
-		
-        return ResponseEntity.ok(response);	
+			String uid = firebaseAuth.verifyIdToken(token.replace("Bearer ", "")).getUid();
+	        String email = requestBody.get("email");
+	        String nombre = requestBody.get("nombre");
+	        String apellido = requestBody.get("apellido");
+	        
+	        // Corregir línea crítica (setEmail)
+	        UserRecord.UpdateRequest updateRequest = new UserRecord.UpdateRequest(uid)
+	            .setDisplayName(nombre + " " + apellido)
+	            .setEmail(email); // ← Aquí estaba el error
+	        
+	        UserRecord user = firebaseAuth.updateUser(updateRequest);
+	        
+	        Map<String, String> response = new HashMap<>();
+	        response.put("email", email);
+	        response.put("nombre", nombre);
+	        response.put("apellido", apellido);
+	        
+	        return ResponseEntity.ok(response);
+
 		} 
 		
 		catch (FirebaseAuthException e) {
-			logger.error("Failed to send password reset email: {}", e.getMessage(), e);
+			logger.error("Error actualizando perfil: {}", e.getMessage(), e);
+	        Map<String, String> response = new HashMap<>();
+	        response.put("error", "Error actualizando perfil");
+	        return ResponseEntity.internalServerError().body(response);
 
-			// Don't expose detailed error information to clients in production
-			Map<String, String> response = new HashMap<>();
-			response.put("error", "Failed to process password reset request");
-
-			return ResponseEntity.internalServerError().body(response);
 		}
 	}
 	
