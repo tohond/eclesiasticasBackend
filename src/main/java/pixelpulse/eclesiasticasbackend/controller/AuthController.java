@@ -114,11 +114,13 @@ public class AuthController {
 	        String email = requestBody.get("email");
 	        String nombre = requestBody.get("nombre");
 	        String apellido = requestBody.get("apellido");
+		String newPassword = requestBody.get("password");
 	        
 	        // Corregir línea crítica (setEmail)
 	        UserRecord.UpdateRequest updateRequest = new UserRecord.UpdateRequest(uid)
 	            .setDisplayName(nombre + " " + apellido)
-	            .setEmail(email); // ← Aquí estaba el error
+	            .setEmail(email)
+			.setPassword(newPassword); // ← Aquí estaba el error
 	        
 	        UserRecord user = firebaseAuth.updateUser(updateRequest);
 	        
@@ -126,6 +128,7 @@ public class AuthController {
 	        response.put("email", email);
 	        response.put("nombre", nombre);
 	        response.put("apellido", apellido);
+		response.put("password", newPassword);
 	        
 	        return ResponseEntity.ok(response);
 
