@@ -47,7 +47,7 @@ public class EmailServiceImpl implements EmailService {
 		
 		Map<String, Object> variables = Map.of(
 	            "name", name,
-	            "confirmationLink", link
+	            "resetLink", link
 	        );
 	        
 	        sendHtmlEmail(targetEmail, "Reestablecer contraseña", "reset-password-email", variables);
