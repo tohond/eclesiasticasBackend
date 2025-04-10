@@ -6,6 +6,8 @@ import com.google.firebase.auth.UserRecord;
 import com.google.firebase.auth.UserRecord.CreateRequest;
 import com.google.firebase.auth.UserRecord.UpdateRequest;
 
+import jakarta.mail.MessagingException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -162,7 +164,7 @@ public class AuthController {
 			// authentication enabled
 			String resetLink = firebaseAuth.generatePasswordResetLink(email);
 			
-			emailService.sendPasswordResetEmailLink(email, resetLink);
+			userService.sendPasswordResetEmailLink(email, resetLink);
 
 			Map<String, String> response = new HashMap<>();
 			response.put("message", "Password reset email sent successfully");
@@ -175,7 +177,13 @@ public class AuthController {
 
 			// Don't expose detailed error information to clients in production
 			Map<String, String> response = new HashMap<>();
-			response.put("error", "Failed to process password reset request");
+			response.put("error", "Failure in firebase password reset request");
+
+			return ResponseEntity.internalServerError().body(response);
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			Map<String, String> response = new HashMap<>();
+			response.put("error", "Failed to send password reset email");
 
 			return ResponseEntity.internalServerError().body(response);
 		}

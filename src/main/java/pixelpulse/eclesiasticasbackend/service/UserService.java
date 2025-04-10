@@ -8,22 +8,27 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import com.google.firebase.auth.UserRecord.UpdateRequest;
 
+import jakarta.mail.MessagingException;
+
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
 public class UserService {
 
+    private final EmailServiceImpl emailServiceImpl;
+
     private final FirebaseAuth firebaseAuth;
     
     // This is a simplified example. In a real application, you would use a database.
     private final Map<String, String> users = new HashMap<>();
     
-    public UserService(FirebaseAuth firebaseAuth) {
+    public UserService(FirebaseAuth firebaseAuth, EmailServiceImpl emailServiceImpl) {
         // Add some test users (username -> password)
         users.put("user1@example.com", "password1");
         users.put("user2@example.com", "password2");
         this.firebaseAuth = firebaseAuth;
+        this.emailServiceImpl = emailServiceImpl;
         
     }
     
@@ -45,14 +50,15 @@ public class UserService {
             return firebaseAuth.createUser(request);
         }
         
-        public String sendPasswordResetEmail(String email) throws FirebaseAuthException {
+        public void sendPasswordResetEmailLink(String targetEmail, String resetLink) throws FirebaseAuthException, MessagingException {
             ActionCodeSettings actionCodeSettings = ActionCodeSettings.builder()
                 .setUrl("https://your-app.com/reset-password")
                 .setHandleCodeInApp(true)
                 .build();
                 
-            firebaseAuth.getUserByEmail(email);
-            return firebaseAuth.generatePasswordResetLink(email, actionCodeSettings);
+            String displayName=firebaseAuth.getUserByEmail(targetEmail).getDisplayName();
+            emailServiceImpl.sendPasswordResetEmailLink(displayName, targetEmail, resetLink);
+            
         }
         
         public UserRecord confirmPasswordReset(String email,String oobCode, String newPassword) 
