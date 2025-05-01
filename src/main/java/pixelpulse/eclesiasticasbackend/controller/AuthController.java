@@ -50,7 +50,6 @@ public class AuthController {
 
 	private final UserService userService;
 	private final FirebaseTokenService firebaseTokenService;
-	private final EmailService emailService;
 
 	private static final String API_KEY_PARAM = "key";
 	private static final String INVALID_CREDENTIALS_ERROR = "INVALID_LOGIN_CREDENTIALS";
@@ -67,10 +66,9 @@ public class AuthController {
 		this.userService = userService;
 		this.firebaseTokenService = firebaseTokenService;
 		this.firebaseAuth = firebaseAuth;
-		this.emailService= emailService;
 	}
 
-	@SuppressWarnings("finally")
+	//@SuppressWarnings("finally")
 
 	
 	/**
@@ -108,87 +106,10 @@ public class AuthController {
 		}
 	}**/
 
-	@PostMapping("/update-profile")
-	public ResponseEntity<?> editProfile(@RequestHeader("Authorization") String token,
-			@RequestBody Map<String, String> requestBody) {
-		try {
-			String uid = firebaseAuth.verifyIdToken(token.replace("Bearer ", "")).getUid();
-	        String email = requestBody.get("email");
-	        String nombre = requestBody.get("nombre");
-	        String apellido = requestBody.get("apellido");
-		String newPassword = requestBody.get("password");
-	        
-	        // Corregir línea crítica (setEmail)
-	        UserRecord.UpdateRequest updateRequest = new UserRecord.UpdateRequest(uid)
-	            .setDisplayName(nombre + " " + apellido)
-	            .setEmail(email)
-			.setPassword(newPassword); // ← Aquí estaba el error
-	        
-	        UserRecord user = firebaseAuth.updateUser(updateRequest);
-	        
-	        Map<String, String> response = new HashMap<>();
-	        response.put("email", email);
-	        response.put("nombre", nombre);
-	        response.put("apellido", apellido);
-		response.put("password", newPassword);
-	        
-	        return ResponseEntity.ok(response);
-
-		} 
-		
-		catch (FirebaseAuthException e) {
-			logger.error("Error actualizando perfil: {}", e.getMessage(), e);
-	        Map<String, String> response = new HashMap<>();
-	        response.put("error", "Error actualizando perfil");
-	        return ResponseEntity.internalServerError().body(response);
-
-		}
-	}
 	
 	
 	
-	@PostMapping("/reset-password")
-	public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> requestBody) {
-		String email = requestBody.get("email");
-		
-		if (email == null || email.trim().isEmpty()) {
-			logger.warn("Password reset requested with empty email");
-			return ResponseEntity.badRequest().body("Email is required");
-		}
-
-		try {
-			logger.info("Sending password reset email to: {}", email);
-
-			// Use Firebase Admin SDK to send password reset email
-			// Note: This requires the Firebase project to have Email/Password
-			// authentication enabled
-			String resetLink = firebaseAuth.generatePasswordResetLink(email);
-			
-			userService.sendPasswordResetEmailLink(email, resetLink);
-
-			Map<String, String> response = new HashMap<>();
-			response.put("message", "Password reset email sent successfully");
-
-			logger.info("Password reset link generated successfully for: {}", email);
-			return ResponseEntity.ok(response);
-
-		} catch (FirebaseAuthException e) {
-			logger.error("Failed to send password reset email: {}", e.getMessage(), e);
-
-			// Don't expose detailed error information to clients in production
-			Map<String, String> response = new HashMap<>();
-			response.put("error", "Failure in firebase password reset request");
-
-			return ResponseEntity.internalServerError().body(response);
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			Map<String, String> response = new HashMap<>();
-			response.put("error", "Failed to send password reset email");
-
-			return ResponseEntity.internalServerError().body(response);
-		}
-	}
-
+	
 	@PostMapping("/register")
 	public ResponseEntity<?> registerUser(@RequestBody SignInRequest request) throws FirebaseAuthException {
 		try {
