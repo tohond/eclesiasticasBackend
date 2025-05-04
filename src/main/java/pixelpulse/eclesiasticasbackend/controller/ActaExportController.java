@@ -1,8 +1,8 @@
 package pixelpulse.eclesiasticasbackend.controller;
 
 import pixelpulse.eclesiasticasbackend.service.PDFGeneratorService;
-import pixelpulse.eclesiasticasbackend.entities.ActaMatrimonio;
-import pixelpulse.eclesiasticasbackend.repository.ActaMatrimonioRepository;
+import pixelpulse.eclesiasticasbackend.model.Matrimonio;
+import pixelpulse.eclesiasticasbackend.repository.MatrimonioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +18,12 @@ public class ActaExportController {
     private PDFGeneratorService pdfService;
 
     @Autowired
-    private ActaMatrimonioRepository actaRepository;
+    private MatrimonioRepository actaRepository;
 
     @GetMapping("/matrimonio/{id}")
     public ResponseEntity<String> exportMatrimonioToPdf(@PathVariable Long id) {
         try {
-            ActaMatrimonio acta = actaRepository.findById(id).orElseThrow();
+            Matrimonio acta = actaRepository.findById(id).orElseThrow();
             String filePath = pdfService.generarActaMatrimonio(acta);
             return ResponseEntity.ok("PDF generado en: " + filePath);
         } catch (Exception e) {

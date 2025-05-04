@@ -1,4 +1,4 @@
-package pixelpulse.eclesiasticasbackend.entities;
+package pixelpulse.eclesiasticasbackend.model;
 
 import jakarta.persistence.*;
 

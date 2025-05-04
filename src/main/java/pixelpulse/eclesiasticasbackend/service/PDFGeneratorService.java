@@ -6,7 +6,7 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.eclesiasticas.model.ActaMatrimonio;
+import pixelpulse.eclesiasticasbackend.model.Matrimonio;
 
 @Service
 public class PDFGeneratorService {
@@ -14,12 +14,12 @@ public class PDFGeneratorService {
     @Autowired
     private FileStorageService fileStorageService;
 
-    public String generarActaMatrimonio(ActaMatrimonio acta) throws Exception {
+    public String generarActaMatrimonio(Matrimonio acta) throws Exception {
         String docsPath = fileStorageService.crearDirectorioActas();
         String fileName = fileStorageService.generarRutaArchivo(
             "ACTA_DE_MATRIMONIO_",
-            acta.getContrayente1().replace(" ", ""),
-            acta.getContrayente2().replace(" ", ""),
+            acta.getPersonaA().replace(" ", ""),
+            acta.getPersonaB().replace(" ", ""),
             acta.getFecha().toString()
         );
 
@@ -33,7 +33,7 @@ public class PDFGeneratorService {
             contentStream.newLineAtOffset(100, 700);
             contentStream.showText("ACTA DE MATRIMONIO");
             contentStream.newLineAtOffset(0, -20);
-            contentStream.showText("Contrayentes: " + acta.getContrayente1() + " y " + acta.getContrayente2());
+            contentStream.showText("Contrayentes: " + acta.getPersonaA() + " y " + acta.getPersonaB());
             contentStream.endText();
             contentStream.close();
 
