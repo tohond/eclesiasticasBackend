@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/personas")
@@ -23,15 +24,15 @@ public class PersonasController {
     public ResponseEntity<List<PersonaDTO>> getAllPersonas() {
         return ResponseEntity.ok(personaService.getAllPersonas());
     }
-
+    /*
     @GetMapping("/{id}")
     public ResponseEntity<PersonaDTO> getPersonaById(@PathVariable String id) {
         try {
-            return ResponseEntity.ok(personaService.getPersonaById(id));
+            return ResponseEntity.ok(personaService.getPersonaById(UUID.fromString(id)));
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
-    }
+    }*/
 
     @PostMapping
     public ResponseEntity<PersonaDTO> createPersona(@RequestBody PersonaDTO personaDTO) {

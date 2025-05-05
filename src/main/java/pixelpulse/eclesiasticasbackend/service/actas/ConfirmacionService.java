@@ -45,12 +45,12 @@ public class ConfirmacionService {
         return mapper.toDtoList(confirmacionRepository.findAll());
         		
     }
-
+    /*
     public ConfirmacionDTO getConfirmacionByNombre(String nombre) {
     	Persona p = pMapper.fromDto(pService.getPersonaByNombre(nombre)); 
         Confirmacion confirmacion = confirmacionRepository.findByPersona(p);
                  return mapper.toDto(confirmacion);
-    }
+    }*/
 
     public ConfirmacionDTO createConfirmacion(ConfirmacionDTO confirmacionDTO) {
         Confirmacion confirmacion = mapper.fromDto(confirmacionDTO);

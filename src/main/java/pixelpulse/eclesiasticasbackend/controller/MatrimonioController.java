@@ -23,7 +23,7 @@ public class MatrimonioController {
     public ResponseEntity<List<MatrimonioDTO>> getAllMatrimonios() {
         return ResponseEntity.ok(matrimonioService.getAllMatrimonios());
     }
-
+    /*
     @GetMapping("/{id}")
     public ResponseEntity<MatrimonioDTO> getMatrimonioById(@PathVariable String id) {
         try {
@@ -55,5 +55,5 @@ public class MatrimonioController {
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
-    }
+    }*/
 }

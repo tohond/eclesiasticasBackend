@@ -42,12 +42,12 @@ public class ActaService {
         return actaMapper.toDtoList(actaRepository.findAll());
     }
 	
-	
+	/*
 	public List<ActaDTO> getActasByName(String name) {
 		Persona p = pMapper.fromDto(pService.getPersonaByNombre(name));
 		List<ActaDTO> lista = new ArrayList<>();
         
-    }
+    }*/
     
    
     
