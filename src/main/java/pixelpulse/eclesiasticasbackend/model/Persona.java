@@ -11,9 +11,9 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "persona")
-/*@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
 property = "id")
-@JsonIdentityReference(alwaysAsId = true)*/
+@JsonIdentityReference(alwaysAsId = true)
 
 public class Persona {
     
@@ -21,21 +21,71 @@ public class Persona {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     
-    @Column(name = "nombre1", length = 100)
+    @Column(name = "nombre", length = 100)
     private String nombre;
-  
+    
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_padre", referencedColumnName = "id")
     private Persona padre;
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_madre", referencedColumnName = "id")
     private Persona madre;
+    
+    public List<Persona> getHijosPadre() {
+		return hijosPadre;
+	}
 
-    @OneToMany (mappedBy = "padre")
+	public void setHijosPadre(List<Persona> hijosPadre) {
+		this.hijosPadre = hijosPadre;
+	}
+
+	public List<Persona> getHijosMadre() {
+		return hijosMadre;
+	}
+
+	public void setHijosMadre(List<Persona> hijosMadre) {
+		this.hijosMadre = hijosMadre;
+	}
+
+	public List<Bautizo> getBautizo() {
+		return bautizo;
+	}
+
+	public void setBautizo(List<Bautizo> bautizo) {
+		this.bautizo = bautizo;
+	}
+
+	public List<Matrimonio> getMatrimonio() {
+		return matrimonio;
+	}
+
+	public void setMatrimonio(List<Matrimonio> matrimonio) {
+		this.matrimonio = matrimonio;
+	}
+
+	public List<Confirmacion> getConfirmacion() {
+		return confirmacion;
+	}
+
+	public void setConfirmacion(List<Confirmacion> confirmacion) {
+		this.confirmacion = confirmacion;
+	}
+	
+	@OneToMany (mappedBy = "padre")
     private List<Persona> hijosPadre;
     
     @OneToMany (mappedBy = "madre")
+    
     private List<Persona> hijosMadre;
+    
+    @OneToMany (mappedBy = "idBautizado",cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private List<Bautizo> bautizo;
+    
+    @OneToMany (mappedBy = "personaA",cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private List<Matrimonio> matrimonio;
+    
+    @OneToMany (mappedBy = "confirmante",cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private List<Confirmacion> confirmacion;
 
 	public UUID getId() {
 		return id;
@@ -54,7 +104,7 @@ public class Persona {
 	}
 
 	
-
+	
 	public Persona getPadre() {
 		return padre;
 	}

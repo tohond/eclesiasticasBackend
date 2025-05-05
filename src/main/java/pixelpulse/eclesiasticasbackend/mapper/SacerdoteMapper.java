@@ -1,16 +1,46 @@
 package pixelpulse.eclesiasticasbackend.mapper;
 
+import pixelpulse.eclesiasticasbackend.dto.PersonaDTO;
 import pixelpulse.eclesiasticasbackend.dto.SacerdoteDTO;
+import pixelpulse.eclesiasticasbackend.model.Persona;
 import pixelpulse.eclesiasticasbackend.model.Sacerdote;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@Mapper(componentModel = "spring", uses = PersonaMapper.class)
-public interface SacerdoteMapper {
 
-    @Mapping(source = "persona.id", target = "idPersona")
-    SacerdoteDTO toDto(Sacerdote sacerdote);
+@Mapper(componentModel = "spring")
+@Component
+public class SacerdoteMapper {
 
-    @Mapping(source = "idPersona", target = "persona.id")
-    Sacerdote toEntity(SacerdoteDTO sacerdoteDTO);
+	
+
+	@Autowired
+    private ModelMapper modelMapper;
+ 	
+ 
+
+ 
+ 
+    public SacerdoteDTO toDto(Sacerdote persona) {
+    	SacerdoteDTO p = modelMapper.map(persona, SacerdoteDTO.class);
+    	return p;
+    }
+
+    public List<SacerdoteDTO> toDtoList(List<Sacerdote> personas) {
+        return personas.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
+
+    public Sacerdote fromDto(SacerdoteDTO SacerdoteDTO) {
+        return modelMapper.map(SacerdoteDTO, Sacerdote.class);
+    }
 }

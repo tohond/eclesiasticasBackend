@@ -21,19 +21,69 @@ public class Matrimonio {
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idacta", referencedColumnName = "id", nullable = false)
     private Acta acta;
-    /*
+    
     // --- Campos específicos ---
-    @Column(name = "personaA", nullable = false, length = 10)
-    //private Persona personaA;
+    @ManyToOne
+    @JoinColumn(name = "personaa", nullable = false)
+    private Persona personaA;
+    
+    @ManyToOne
+    @JoinColumn(name = "personab", nullable = false)
+    private Persona personaB;
+    @ManyToOne
+    @JoinColumn(name = "idmadrina", nullable = false)
+    private Persona idMadrina;
+    @ManyToOne
+    @JoinColumn(name = "idpadrino", nullable = false)
+    private Persona idPadrino;
+    ///
 
-    @Column(name = "personaB", nullable = false, length = 10)
-    //private Persona personaB;
+	public UUID getId() {
+		return id;
+	}
 
-    @Column(name = "idMadrina", nullable = false, length = 10)
-    //private Persona idMadrina;
+	public void setId(UUID id) {
+		this.id = id;
+	}
 
-    @Column(name = "idPadrino", nullable = false, length = 10)
-    //private Persona idPadrino;
-    ///*/
+	public Acta getActa() {
+		return acta;
+	}
 
+	public void setActa(Acta acta) {
+		this.acta = acta;
+	}
+
+	public Persona getPersonaA() {
+		return personaA;
+	}
+
+	public void setPersonaA(Persona personaA) {
+		this.personaA = personaA;
+	}
+
+	public Persona getPersonaB() {
+		return personaB;
+	}
+
+	public void setPersonaB(Persona personaB) {
+		this.personaB = personaB;
+	}
+
+	public Persona getIdMadrina() {
+		return idMadrina;
+	}
+
+	public void setIdMadrina(Persona idMadrina) {
+		this.idMadrina = idMadrina;
+	}
+
+	public Persona getIdPadrino() {
+		return idPadrino;
+	}
+
+	public void setIdPadrino(Persona idPadrino) {
+		this.idPadrino = idPadrino;
+	}
+    
 }

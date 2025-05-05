@@ -2,7 +2,7 @@ package pixelpulse.eclesiasticasbackend.controller;
 
 import pixelpulse.eclesiasticasbackend.dto.SacerdoteDTO;
 import pixelpulse.eclesiasticasbackend.dto.SacerdotePersonaDTO;
-import pixelpulse.eclesiasticasbackend.service.users.SacerdoteService;
+import pixelpulse.eclesiasticasbackend.service.personas.SacerdoteService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,9 +57,5 @@ public class SacerdoteController {
         }
     }
 
-    @PostMapping("/with-persona")
-    public ResponseEntity<SacerdotePersonaDTO> createSacerdoteWithPersona(@RequestBody SacerdotePersonaDTO sacerdotePersonaDTO) {
-        SacerdotePersonaDTO created = sacerdoteService.createSacerdoteWithPersona(sacerdotePersonaDTO);
-        return new ResponseEntity<>(created, HttpStatus.CREATED);
-    }
+ 
 }

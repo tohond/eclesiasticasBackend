@@ -1,17 +1,24 @@
 package pixelpulse.eclesiasticasbackend.service.actas;
 
+import pixelpulse.eclesiasticasbackend.dto.ConfirmacionDTO;
 import pixelpulse.eclesiasticasbackend.dto.MatrimonioDTO;
+import pixelpulse.eclesiasticasbackend.mapper.MatrimonioMapper;
+import pixelpulse.eclesiasticasbackend.mapper.PersonaMapper;
 import pixelpulse.eclesiasticasbackend.model.Acta;
+import pixelpulse.eclesiasticasbackend.model.Confirmacion;
 import pixelpulse.eclesiasticasbackend.model.Matrimonio;
 import pixelpulse.eclesiasticasbackend.model.Persona;
 import pixelpulse.eclesiasticasbackend.repository.ActaRepository;
 import pixelpulse.eclesiasticasbackend.repository.MatrimonioRepository;
 import pixelpulse.eclesiasticasbackend.repository.PersonaRepository;
+import pixelpulse.eclesiasticasbackend.service.personas.PersonaService;
+
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,104 +32,48 @@ public class MatrimonioService {
     
     @Autowired
     private PersonaRepository personaRepository;
+    
+    @Autowired
+    private PersonaService pService;
+    
+    private PersonaMapper pMapper;
+    
+    @Autowired
+    private MatrimonioMapper mapper;
 
     public List<MatrimonioDTO> getAllMatrimonios() {
-        return matrimonioRepository.findAll().stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+        return mapper.toDtoList(matrimonioRepository.findAll());
+        		
     }
 
-    public MatrimonioDTO getMatrimonioById(String id) {
-        Matrimonio matrimonio = matrimonioRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Matrimonio no encontrado con ID: " + id));
-        return convertToDTO(matrimonio);
+    public MatrimonioDTO getMatrimonioByNombre(String nombre) {
+    	Persona p = pMapper.fromDto(pService.getPersonaByNombre(nombre)); 
+        Matrimonio confirmacion = matrimonioRepository.findByPersonaA(p);
+                 return mapper.toDto(confirmacion);
     }
 
-    public MatrimonioDTO createMatrimonio(MatrimonioDTO matrimonioDTO) {
-        Matrimonio matrimonio = convertToEntity(matrimonioDTO);
-        Matrimonio savedMatrimonio = matrimonioRepository.save(matrimonio);
-        return convertToDTO(savedMatrimonio);
+    public MatrimonioDTO createConfirmacion(MatrimonioDTO confirmacionDTO) {
+    	Matrimonio confirmacion = mapper.fromDto(confirmacionDTO);
+    	Matrimonio savedConfirmacion = matrimonioRepository.save(confirmacion);
+        return mapper.toDto(savedConfirmacion);
     }
 
-    public MatrimonioDTO updateMatrimonio(String id, MatrimonioDTO matrimonioDTO) {
-        if (!matrimonioRepository.existsById(id)) {
-            throw new EntityNotFoundException("Matrimonio no encontrado con ID: " + id);
+    public MatrimonioDTO updateConfirmacion(String id, MatrimonioDTO confirmacionDTO) {
+        if (!matrimonioRepository.existsById(UUID.fromString(id))) {
+            throw new EntityNotFoundException("Confirmación no encontrada con ID: " + id);
         }
         
-        Matrimonio matrimonio = convertToEntity(matrimonioDTO);
-        matrimonio.setId(id);
-        Matrimonio updatedMatrimonio = matrimonioRepository.save(matrimonio);
-        return convertToDTO(updatedMatrimonio);
+        Matrimonio confirmacion = mapper.fromDto(confirmacionDTO);
+        
+        Matrimonio updatedConfirmacion = matrimonioRepository.save(confirmacion);
+        return mapper.toDto(updatedConfirmacion);
     }
 
-    public void deleteMatrimonio(String id) {
-        if (!matrimonioRepository.existsById(id)) {
-            throw new EntityNotFoundException("Matrimonio no encontrado con ID: " + id);
+    public void deleteConfirmacion(String id) {
+        if (!matrimonioRepository.existsById(UUID.fromString(id))) {
+            throw new EntityNotFoundException("Confirmación no encontrada con ID: " + id);
         }
-        matrimonioRepository.deleteById(id);
+        matrimonioRepository.deleteById(UUID.fromString(id));
     }
-
-    private MatrimonioDTO convertToDTO(Matrimonio matrimonio) {
-        MatrimonioDTO dto = new MatrimonioDTO();
-        dto.setId(matrimonio.getId());
-        
-        if (matrimonio.getActa() != null) {
-            dto.setIdActa(matrimonio.getActa().getId());
-        }
-        
-        if (matrimonio.getMadrina() != null) {
-            dto.setIdMadrina(matrimonio.getMadrina().getId());
-        }
-        
-        if (matrimonio.getPadrino() != null) {
-            dto.setIdPadrino(matrimonio.getPadrino().getId());
-        }
-        
-        if (matrimonio.getPersonaA() != null) {
-            dto.setPersonaA(matrimonio.getPersonaA().getId());
-        }
-        
-        if (matrimonio.getPersonaB() != null) {
-            dto.setPersonaB(matrimonio.getPersonaB().getId());
-        }
-        
-        return dto;
-    }
-
-    private Matrimonio convertToEntity(MatrimonioDTO dto) {
-        Matrimonio matrimonio = new Matrimonio();
-        matrimonio.setId(dto.getId());
-        
-        if (dto.getIdActa() != null) {
-            Acta acta = actaRepository.findById(dto.getIdActa())
-                    .orElseThrow(() -> new EntityNotFoundException("Acta no encontrada con ID: " + dto.getIdActa()));
-            matrimonio.setActa(acta);
-        }
-        
-        if (dto.getIdMadrina() != null) {
-            Persona madrina = personaRepository.findById(dto.getIdMadrina())
-                    .orElseThrow(() -> new EntityNotFoundException("Persona no encontrada con ID: " + dto.getIdMadrina()));
-            matrimonio.setMadrina(madrina);
-        }
-        
-        if (dto.getIdPadrino() != null) {
-            Persona padrino = personaRepository.findById(dto.getIdPadrino())
-                    .orElseThrow(() -> new EntityNotFoundException("Persona no encontrada con ID: " + dto.getIdPadrino()));
-            matrimonio.setPadrino(padrino);
-        }
-        
-        if (dto.getPersonaA() != null) {
-            Persona personaA = personaRepository.findById(dto.getPersonaA())
-                    .orElseThrow(() -> new EntityNotFoundException("Persona no encontrada con ID: " + dto.getPersonaA()));
-            matrimonio.setPersonaA(personaA);
-        }
-        
-        if (dto.getPersonaB() != null) {
-            Persona personaB = personaRepository.findById(dto.getPersonaB())
-                    .orElseThrow(() -> new EntityNotFoundException("Persona no encontrada con ID: " + dto.getPersonaB()));
-            matrimonio.setPersonaB(personaB);
-        }
-        
-        return matrimonio;
-    }
+    
 }

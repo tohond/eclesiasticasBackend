@@ -1,4 +1,4 @@
-package pixelpulse.eclesiasticasbackend.service.users;
+package pixelpulse.eclesiasticasbackend.service.personas;
 
 import pixelpulse.eclesiasticasbackend.dto.SacerdoteDTO;
 import pixelpulse.eclesiasticasbackend.dto.SacerdotePersonaDTO;
@@ -22,45 +22,45 @@ public class SacerdoteService {
     @Autowired
     private SacerdoteRepository sacerdoteRepository;
     
-    @Autowired
     private SacerdoteMapper sacerdoteMapper;
 
     
 
     public List<SacerdoteDTO> getAllSacerdotes() {
-        return sacerdoteRepository.findAll().stream()
-                .map(this::sacerdoteMapper)
-                .collect(Collectors.toList());
+        return sacerdoteMapper.toDtoList(sacerdoteRepository.findAll());
+        		
+        		
+        		
     }
 
     public SacerdoteDTO getSacerdoteById(String id) {
         Sacerdote sacerdote = sacerdoteRepository.findById(UUID.fromString(id))
                 .orElseThrow(() -> new EntityNotFoundException("Sacerdote no encontrado con ID: " + id));
-        return convertToDTO(sacerdote);
+        return sacerdoteMapper.toDto(sacerdote);
     }
 
     public SacerdoteDTO createSacerdote(SacerdoteDTO sacerdoteDTO) {
-        Sacerdote sacerdote = convertToEntity(sacerdoteDTO);
+        Sacerdote sacerdote = sacerdoteMapper.fromDto(sacerdoteDTO);
         Sacerdote savedSacerdote = sacerdoteRepository.save(sacerdote);
-        return convertToDTO(savedSacerdote);
+        return sacerdoteMapper.toDto(savedSacerdote);
     }
 
     public SacerdoteDTO updateSacerdote(String id, SacerdoteDTO sacerdoteDTO) {
-        if (!sacerdoteRepository.existsById(id)) {
+        if (!sacerdoteRepository.existsById(UUID.fromString(id))) {
             throw new EntityNotFoundException("Sacerdote no encontrado con ID: " + id);
         }
         
-        Sacerdote sacerdote = convertToEntity(sacerdoteDTO);
-        sacerdote.setId(id);
+        Sacerdote sacerdote = sacerdoteMapper.fromDto(sacerdoteDTO);
+       
         Sacerdote updatedSacerdote = sacerdoteRepository.save(sacerdote);
-        return convertToDTO(updatedSacerdote);
+        return sacerdoteMapper.toDto(updatedSacerdote);
     }
 
     public void deleteSacerdote(String id) {
-        if (!sacerdoteRepository.existsById(id)) {
+        if (!sacerdoteRepository.existsById(UUID.fromString(id))) {
             throw new EntityNotFoundException("Sacerdote no encontrado con ID: " + id);
         }
-        sacerdoteRepository.deleteById(id);
+        sacerdoteRepository.deleteById(UUID.fromString(id));
     }
 
     

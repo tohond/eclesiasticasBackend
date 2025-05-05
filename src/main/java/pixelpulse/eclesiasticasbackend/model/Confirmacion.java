@@ -50,4 +50,78 @@ public class Confirmacion {
     @ManyToOne
     @JoinColumn(name = "idmadrina")
     private Persona madrina;
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public Acta getActa() {
+		return acta;
+	}
+
+	public void setActa(Acta acta) {
+		this.acta = acta;
+	}
+
+	public Parroquia getParroquia() {
+		return parroquia;
+	}
+
+	public void setParroquia(Parroquia parroquia) {
+		this.parroquia = parroquia;
+	}
+
+	public Persona getConfirmante() {
+		return confirmante;
+	}
+
+	public void setConfirmante(Persona confirmante) {
+		this.confirmante = confirmante;
+	}
+
+	public Sacerdote getMonsr() {
+		return monsr;
+	}
+
+	public void setMonsr(Sacerdote monsr) {
+		this.monsr = monsr;
+	}
+
+	public Sacerdote getSacerdote() {
+		return sacerdote;
+	}
+
+	public void setSacerdote(Sacerdote sacerdote) {
+		this.sacerdote = sacerdote;
+	}
+
+	public Sacerdote getDoyfe() {
+		return doyfe;
+	}
+
+	public void setDoyfe(Sacerdote doyfe) {
+		this.doyfe = doyfe;
+	}
+
+	public Persona getPadrino() {
+		return padrino;
+	}
+
+	public void setPadrino(Persona padrino) {
+		this.padrino = padrino;
+	}
+
+	public Persona getMadrina() {
+		return madrina;
+	}
+
+	public void setMadrina(Persona madrina) {
+		this.madrina = madrina;
+	}
+    
+    
 }
