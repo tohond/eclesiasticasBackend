@@ -25,12 +25,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 
-import pixelpulse.eclesiasticasbackend.dto.LoginRequest;
-import pixelpulse.eclesiasticasbackend.dto.SignInRequest;
+import pixelpulse.eclesiasticasbackend.dto.requests.LoginRequestDTO;
+import pixelpulse.eclesiasticasbackend.dto.requests.SignInRequestDTO;
 import pixelpulse.eclesiasticasbackend.security.FirebaseAuthenticationFilter;
-import pixelpulse.eclesiasticasbackend.service.EmailService;
-import pixelpulse.eclesiasticasbackend.service.FirebaseTokenService;
-import pixelpulse.eclesiasticasbackend.service.UserService;
+import pixelpulse.eclesiasticasbackend.service.auth.FirebaseTokenService;
+import pixelpulse.eclesiasticasbackend.service.others.EmailService;
+import pixelpulse.eclesiasticasbackend.service.users.UserService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,8 +38,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-
-	private final FirebaseAuth firebaseAuth;
+	
 
 	record FirebaseSignInRequest(String email, String password, boolean returnSecureToken) {
 	}
@@ -48,7 +47,11 @@ public class AuthController {
 	}
 	record FirebaseRegisterResponse(String code, String message ) {}
 
+	@Autowired
+	private final FirebaseAuth firebaseAuth;
+	@Autowired
 	private final UserService userService;
+	@Autowired
 	private final FirebaseTokenService firebaseTokenService;
 
 	private static final String API_KEY_PARAM = "key";
@@ -111,7 +114,7 @@ public class AuthController {
 	
 	
 	@PostMapping("/register")
-	public ResponseEntity<?> registerUser(@RequestBody SignInRequest request) throws FirebaseAuthException {
+	public ResponseEntity<?> registerUser(@RequestBody SignInRequestDTO request) throws FirebaseAuthException {
 		try {
 			UserRecord user = userService.createUser(request.getEmail(), request.getPassword(), request.getNombre()+" "+request.getApellido());
 			return ResponseEntity.ok(user);
@@ -121,7 +124,7 @@ public class AuthController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginRequest request) throws FirebaseAuthException {
+	public ResponseEntity<?> login(@RequestBody LoginRequestDTO request) throws FirebaseAuthException {
 
 		// For testing, we'll accept any username/password
 		// In a real app, you would validate against your database

@@ -19,9 +19,9 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 
 import jakarta.mail.MessagingException;
-import pixelpulse.eclesiasticasbackend.service.EmailService;
-import pixelpulse.eclesiasticasbackend.service.FirebaseTokenService;
-import pixelpulse.eclesiasticasbackend.service.UserService;
+import pixelpulse.eclesiasticasbackend.service.auth.FirebaseTokenService;
+import pixelpulse.eclesiasticasbackend.service.others.EmailService;
+import pixelpulse.eclesiasticasbackend.service.users.UserService;
 
 
 

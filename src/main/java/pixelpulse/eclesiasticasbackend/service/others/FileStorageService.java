@@ -1,4 +1,4 @@
-package pixelpulse.eclesiasticasbackend.service;
+package pixelpulse.eclesiasticasbackend.service.others;
 
 import org.springframework.stereotype.Service;
 import java.nio.file.Files;

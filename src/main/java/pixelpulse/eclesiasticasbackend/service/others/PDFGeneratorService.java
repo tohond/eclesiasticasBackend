@@ -1,4 +1,4 @@
-package pixelpulse.eclesiasticasbackend.service;
+package pixelpulse.eclesiasticasbackend.service.others;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -6,14 +6,14 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pixelpulse.eclesiasticasbackend.model.Matrimonio;
+//import pixelpulse.eclesiasticasbackend.model.Matrimonio;
 
 @Service
 public class PDFGeneratorService {
 
     @Autowired
     private FileStorageService fileStorageService;
-
+    /*
     public String generarActaMatrimonio(Matrimonio acta) throws Exception {
         String docsPath = fileStorageService.crearDirectorioActas();
         String fileName = fileStorageService.generarRutaArchivo(
@@ -41,5 +41,5 @@ public class PDFGeneratorService {
         }
 
         return docsPath + fileName;
-    }
+    }*/
 }

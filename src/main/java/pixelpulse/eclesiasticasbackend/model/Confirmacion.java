@@ -1,42 +1,53 @@
 package pixelpulse.eclesiasticasbackend.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.UUID;
 
 @Entity
-@Table(name = "Confirmacion")
-@Getter
-@Setter
-public class Confirmacion extends Acta {
-
+@Table(name = "confirmacion")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Confirmacion {
+    
     @Id
-    @Column(name = "id", nullable = false, length = 10)
-    private String id;
-
-    // --- Relación con Acta ---
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "uuid")
+    private UUID id;
+    
     @ManyToOne
-    @JoinColumn(name = "idActa", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "idacta")
     private Acta acta;
-
-    @Column(name = "idParroquia", nullable = false, length = 10)
-    private String idParroquia;
-
-    @Column(name = "idConfirmante", nullable = false, length = 10)
-    private String idConfirmante;
-
-    @Column(name = "idMonsr", nullable = false, length = 10)
-    private String idMonsr; // Persona que da fe
-
-    @Column(name = "idSacerdote", nullable = false, length = 10)
-    private String idSacerdote;
-
-    @Column(name = "idDoyfe", nullable = false, length = 10)
-    private String idDoyfe;
-
-    @Column(name = "idPadrino", nullable = false, length = 10)
-    private String idPadrino;
-
-    @Column(name = "idMadrina", nullable = false, length = 10)
-    private String idMadrina;
+    
+    @ManyToOne
+    @JoinColumn(name = "idparroquia")
+    private Parroquia parroquia;
+    
+    @OneToOne
+    @JoinColumn(name = "idconfirmante")
+    private Persona confirmante;
+    
+    @ManyToOne
+    @JoinColumn(name = "idmonsr")
+    private Sacerdote monsr;
+    
+    @ManyToOne
+    @JoinColumn(name = "idsacerdote")
+    private Sacerdote sacerdote;
+    
+    @ManyToOne
+    @JoinColumn(name = "iddoyfe")
+    private Sacerdote doyfe;
+    
+    @ManyToOne
+    @JoinColumn(name = "idpadrino")
+    private Persona padrino;
+    
+    @ManyToOne
+    @JoinColumn(name = "idmadrina")
+    private Persona madrina;
 }

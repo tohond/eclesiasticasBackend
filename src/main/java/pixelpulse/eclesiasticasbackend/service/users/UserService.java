@@ -1,4 +1,4 @@
-package pixelpulse.eclesiasticasbackend.service;
+package pixelpulse.eclesiasticasbackend.service.users;
 
 import org.springframework.stereotype.Service;
 
@@ -9,6 +9,7 @@ import com.google.firebase.auth.UserRecord;
 import com.google.firebase.auth.UserRecord.UpdateRequest;
 
 import jakarta.mail.MessagingException;
+import pixelpulse.eclesiasticasbackend.service.others.EmailServiceImpl;
 
 import java.util.HashMap;
 import java.util.Map;

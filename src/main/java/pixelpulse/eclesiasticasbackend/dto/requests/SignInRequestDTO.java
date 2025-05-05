@@ -1,9 +1,9 @@
-package pixelpulse.eclesiasticasbackend.dto;
+package pixelpulse.eclesiasticasbackend.dto.requests;
 
 
 
 
-public class SignInRequest {
+public class SignInRequestDTO {
 	private String nombre;
 	private String apellido;
     private String email;

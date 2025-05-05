@@ -1,4 +1,4 @@
-package pixelpulse.eclesiasticasbackend.service;
+package pixelpulse.eclesiasticasbackend.service.auth;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;

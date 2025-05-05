@@ -1,11 +1,11 @@
-package pixelpulse.eclesiasticasbackend.service;
+package pixelpulse.eclesiasticasbackend.service.auth;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import pixelpulse.eclesiasticasbackend.dto.LoginRequest;
-import pixelpulse.eclesiasticasbackend.dto.LoginResponse;
+import pixelpulse.eclesiasticasbackend.dto.requests.LoginRequestDTO;
+import pixelpulse.eclesiasticasbackend.dto.requests.LoginResponseDTO;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -34,7 +34,7 @@ public class FirebaseAuthService {
         this.objectMapper = new ObjectMapper();
     }
     
-    public LoginResponse loginWithEmailPassword(LoginRequest loginRequest) {
+    public LoginResponseDTO loginWithEmailPassword(LoginRequestDTO loginRequest) {
         try {
             // Prepare headers
             HttpHeaders headers = new HttpHeaders();
@@ -59,7 +59,7 @@ public class FirebaseAuthService {
             JsonNode root = objectMapper.readTree(response.getBody());
             
             // Create and return the login response
-            LoginResponse loginResponse = new LoginResponse();
+            LoginResponseDTO loginResponse = new LoginResponseDTO();
             loginResponse.setIdToken(root.path("idToken").asText());
             loginResponse.setEmail(root.path("email").asText());
             loginResponse.setRefreshToken(root.path("refreshToken").asText());
@@ -70,7 +70,7 @@ public class FirebaseAuthService {
             return loginResponse;
             
         } catch (Exception e) {
-            LoginResponse errorResponse = new LoginResponse();
+            LoginResponseDTO errorResponse = new LoginResponseDTO();
             errorResponse.setError("Authentication failed: " + e.getMessage());
             return errorResponse;
         }

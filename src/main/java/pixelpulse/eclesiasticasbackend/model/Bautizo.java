@@ -1,5 +1,7 @@
 package pixelpulse.eclesiasticasbackend.model;
 
+import java.util.UUID;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,26 +10,25 @@ import lombok.Setter;
 @Table(name = "Bautizo")
 @Getter
 @Setter
-public class Bautizo extends Acta {
+public class Bautizo  {
 
     @Id
-    @Column(name = "id", nullable = false, length = 10)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     // --- Relación con Acta ---
     @ManyToOne
-    @JoinColumn(name = "idActa", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "idacta", referencedColumnName = "id", nullable = false)
     private Acta acta;
 
-    @Column(name = "idBautizado", nullable = false, length = 10)
-    private String idBautizado;
-
-    @Column(name = "idSacerdote", nullable = false, length = 10)
-    private String idSacerdote;
-
-    @Column(name = "idDoyfe", nullable = false, length = 10)
-    private String idDoyfe;
-
-    @Column(name = "idLocalidad", nullable = false, length = 10)
-    private String idLocalidad;
+    @ManyToOne
+    @JoinColumn(name = "idbautizado")
+    private Persona idBautizado;
+    @ManyToOne
+    @JoinColumn(name = "idsacerdote")
+    private Sacerdote idSacerdote;
+    @ManyToOne
+    @JoinColumn(name = "iddoyfe")
+    private Sacerdote idDoyfe;
+   
 }

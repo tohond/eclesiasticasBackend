@@ -1,5 +1,7 @@
 package pixelpulse.eclesiasticasbackend.model;
 
+import java.util.UUID;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,24 +14,26 @@ import pixelpulse.eclesiasticasbackend.model.Acta;
 public class Matrimonio {
 
     @Id
-    @Column(name = "id", length = 10)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     // --- Relación con Acta ---
-    @ManyToOne
-    @JoinColumn(name = "idActa", referencedColumnName = "id", nullable = false)
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "idacta", referencedColumnName = "id", nullable = false)
     private Acta acta;
-
+    /*
     // --- Campos específicos ---
     @Column(name = "personaA", nullable = false, length = 10)
-    private String personaA;
+    //private Persona personaA;
 
     @Column(name = "personaB", nullable = false, length = 10)
-    private String personaB;
+    //private Persona personaB;
 
     @Column(name = "idMadrina", nullable = false, length = 10)
-    private String idMadrina;
+    //private Persona idMadrina;
 
     @Column(name = "idPadrino", nullable = false, length = 10)
-    private String idPadrino;
+    //private Persona idPadrino;
+    ///*/
+
 }

@@ -1,8 +1,8 @@
-package pixelpulse.eclesiasticasbackend.dto;
+package pixelpulse.eclesiasticasbackend.dto.requests;
 
 
 
-public class LoginResponse {
+public class LoginResponseDTO {
     private String idToken;
     private String refreshToken;
     private String expiresIn;
@@ -11,11 +11,11 @@ public class LoginResponse {
     private boolean registered;
     private String error;
     
-    public LoginResponse() {
+    public LoginResponseDTO() {
     	
     };
     
-	public LoginResponse(String idToken, String refreshToken, String expiresIn, String localId, String email,
+	public LoginResponseDTO(String idToken, String refreshToken, String expiresIn, String localId, String email,
 			boolean registered, String error) {
 		super();
 		this.idToken = idToken;

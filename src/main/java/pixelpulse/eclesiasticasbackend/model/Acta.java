@@ -6,16 +6,17 @@ import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
-@Getter
-@Setter
+
 @Entity
-public abstract class Acta {
+@Table(name = "acta")
+public class Acta {
     @Id
-    @Column(name = "id", length = 10)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
-    @Column(name = "numeroActa", length = 10)
+    @Column(name = "numeroacta", length = 10)
     private String numeroActa;
 
     @Column(name = "folio", length = 4)
@@ -27,10 +28,72 @@ public abstract class Acta {
     @Column(name = "fecha")
     private Date fecha;
 
-    @Column(name = "notas", length = 200)
+    @Column(name = "notamarginal", length = 200)
     private String notas;
+    
+    @Column (name = "tipo", length = 10)
+    private String tipo;
+    
 
-    // --- Relaciones OneToMany ---
+    public String getTipo() {
+		return tipo;
+	}
+    
+    public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+    
+    
+    public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public String getNumeroActa() {
+		return numeroActa;
+	}
+
+	public void setNumeroActa(String numeroActa) {
+		this.numeroActa = numeroActa;
+	}
+
+	public String getFolio() {
+		return folio;
+	}
+
+	public void setFolio(String folio) {
+		this.folio = folio;
+	}
+
+	public String getLibro() {
+		return libro;
+	}
+
+	public void setLibro(String libro) {
+		this.libro = libro;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
+	public String getNotas() {
+		return notas;
+	}
+
+	public void setNotas(String notas) {
+		this.notas = notas;
+	}
+
+	/*
+	// --- Relaciones OneToMany ---
     @OneToMany(mappedBy = "acta", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Matrimonio> matrimonios;
 
@@ -38,5 +101,5 @@ public abstract class Acta {
     private List<Bautizo> bautizos;
 
     @OneToMany(mappedBy = "acta", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Confirmacion> confirmaciones;
+    private List<Confirmacion> confirmaciones;*/
 }
