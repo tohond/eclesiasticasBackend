@@ -53,41 +53,7 @@ public class UserController {
 		this.emailService= emailService;
 	}
 
-	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginRequestDTO request) throws FirebaseAuthException {
-
-		// For testing, we'll accept any username/password
-		// In a real app, you would validate against your database
-		logger.info("apikey:" + webApiKey);
-		// Generate a custom token using the email as the user ID
-		String uid = request.getEmail();
-		// String customToken = FirebaseAuth.getInstance().createCustomToken(uid);
-
-		/*
-		 * Map<String, String> response = new HashMap<>(); response.put("token",
-		 * customToken);
-		 */
-
-		FirebaseSignInRequest requestBody = new FirebaseSignInRequest(uid, request.getPassword(), true);
-		UserRecord user = userService.getUserByEmail(uid);
-		FirebaseSignInResponse sResponse = sendSignInRequest(requestBody);
-		
-		Map<String, String> response = new HashMap<>();
-		response.put("email", requestBody.email());
-		response.put("displayName", user.getDisplayName());
-		response.put("idToken",sResponse.idToken());
-		response.put("refreshToken", sResponse.refreshToken());
-
-		try{
-			return ResponseEntity.ok(response);
-		}
-		catch (HttpClientErrorException e) {
-			
-			
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getResponseBodyAsString());
-		}
-
-	}
+	
 
 	@PostMapping("/update-profile")
 	public ResponseEntity<?> editProfile(@RequestHeader("Authorization") String token,
