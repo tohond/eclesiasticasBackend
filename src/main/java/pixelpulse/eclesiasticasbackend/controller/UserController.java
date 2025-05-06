@@ -7,18 +7,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 
 import jakarta.mail.MessagingException;
+import pixelpulse.eclesiasticasbackend.controller.AuthController.FirebaseSignInRequest;
+import pixelpulse.eclesiasticasbackend.controller.AuthController.FirebaseSignInResponse;
+import pixelpulse.eclesiasticasbackend.dto.requests.LoginRequestDTO;
 import pixelpulse.eclesiasticasbackend.service.auth.FirebaseTokenService;
 import pixelpulse.eclesiasticasbackend.service.others.EmailService;
 import pixelpulse.eclesiasticasbackend.service.users.UserService;
@@ -47,7 +52,42 @@ public class UserController {
 		this.firebaseAuth = firebaseAuth;
 		this.emailService= emailService;
 	}
-	
+
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody LoginRequestDTO request) throws FirebaseAuthException {
+
+		// For testing, we'll accept any username/password
+		// In a real app, you would validate against your database
+		logger.info("apikey:" + webApiKey);
+		// Generate a custom token using the email as the user ID
+		String uid = request.getEmail();
+		// String customToken = FirebaseAuth.getInstance().createCustomToken(uid);
+
+		/*
+		 * Map<String, String> response = new HashMap<>(); response.put("token",
+		 * customToken);
+		 */
+
+		FirebaseSignInRequest requestBody = new FirebaseSignInRequest(uid, request.getPassword(), true);
+		UserRecord user = userService.getUserByEmail(uid);
+		FirebaseSignInResponse sResponse = sendSignInRequest(requestBody);
+		
+		Map<String, String> response = new HashMap<>();
+		response.put("email", requestBody.email());
+		response.put("displayName", user.getDisplayName());
+		response.put("idToken",sResponse.idToken());
+		response.put("refreshToken", sResponse.refreshToken());
+
+		try{
+			return ResponseEntity.ok(response);
+		}
+		catch (HttpClientErrorException e) {
+			
+			
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getResponseBodyAsString());
+		}
+
+	}
 
 	@PostMapping("/update-profile")
 	public ResponseEntity<?> editProfile(@RequestHeader("Authorization") String token,
@@ -85,6 +125,8 @@ public class UserController {
 
 		}
 	}
+	
+	
 	
 	@PostMapping("/reset-password")
 	public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> requestBody) {
