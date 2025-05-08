@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class MatrimonioDTO {
     private UUID id;
     private UUID idActa;

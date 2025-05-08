@@ -1,5 +1,6 @@
 package pixelpulse.eclesiasticasbackend.service.actas;
 
+import lombok.RequiredArgsConstructor;
 import pixelpulse.eclesiasticasbackend.dto.ConfirmacionDTO;
 import pixelpulse.eclesiasticasbackend.mapper.ConfirmacionMapper;
 import pixelpulse.eclesiasticasbackend.mapper.PersonaMapper;
@@ -16,6 +17,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ConfirmacionService {
 
     @Autowired

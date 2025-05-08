@@ -25,5 +25,5 @@ public interface ActaRepository extends JpaRepository<Acta, UUID> {
 	           nativeQuery = true) 
 			List<Acta> findAll();
 
-    
+
 }

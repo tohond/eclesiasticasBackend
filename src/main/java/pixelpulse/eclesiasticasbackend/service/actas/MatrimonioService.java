@@ -1,5 +1,7 @@
 package pixelpulse.eclesiasticasbackend.service.actas;
 
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import pixelpulse.eclesiasticasbackend.dto.ConfirmacionDTO;
 import pixelpulse.eclesiasticasbackend.dto.MatrimonioDTO;
 import pixelpulse.eclesiasticasbackend.mapper.MatrimonioMapper;
@@ -22,6 +24,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class MatrimonioService {
 
     @Autowired
@@ -52,11 +55,50 @@ public class MatrimonioService {
                  return mapper.toDto(confirmacion);
     }
 
-    public MatrimonioDTO createConfirmacion(MatrimonioDTO confirmacionDTO) {
-    	Matrimonio confirmacion = mapper.fromDto(confirmacionDTO);
-    	Matrimonio savedConfirmacion = matrimonioRepository.save(confirmacion);
+
+    public MatrimonioDTO createMatrimonio(MatrimonioDTO matrimonioDTO) {
+    	Matrimonio matrimonio = mapper.fromDto(matrimonioDTO);
+    	Matrimonio savedConfirmacion = matrimonioRepository.save(matrimonio);
         return mapper.toDto(savedConfirmacion);
     }
+
+
+
+    /*
+    /**
+     * Crea un nuevo matrimonio
+     * @param matrimonioDTO Datos del matrimonio
+     * @return Matrimonio creado
+     */
+    /*
+    @Transactional
+    public MatrimonioDTO createMatrimonio(MatrimonioDTO matrimonioDTO) {
+        // Crear o recuperar las personas involucradas
+        Persona personaA = getOrCreatePersona(matrimonioDTO.getPersonaA());
+        Persona personaB = getOrCreatePersona(matrimonioDTO.getPersonaB());
+        Persona padrino = getOrCreatePersona(matrimonioDTO.getIdPadrino());
+        Persona madrina = getOrCreatePersona(matrimonioDTO.getIdMadrina());
+
+        // Crear el acta asociada
+        Acta acta = new Acta();
+        acta.setTipo("Matrimonio");
+        // Aquí se pueden establecer más propiedades del acta
+        acta = actaRepository.save(acta);
+
+        // Crear el matrimonio
+        Matrimonio matrimonio = new Matrimonio();
+        matrimonio.setActa(acta);
+        matrimonio.setPersonaA(personaA);
+        matrimonio.setPersonaB(personaB);
+        matrimonio.setIdPadrino(padrino);
+        matrimonio.setIdMadrina(madrina);
+
+        Matrimonio savedMatrimonio = matrimonioRepository.save(matrimonio);
+        return mapper.toDto(savedMatrimonio);
+    }
+
+     */
+
 
     public MatrimonioDTO updateConfirmacion(String id, MatrimonioDTO confirmacionDTO) {
         if (!matrimonioRepository.existsById(UUID.fromString(id))) {
@@ -68,6 +110,7 @@ public class MatrimonioService {
         Matrimonio updatedConfirmacion = matrimonioRepository.save(confirmacion);
         return mapper.toDto(updatedConfirmacion);
     }
+
 
     public void deleteConfirmacion(String id) {
         if (!matrimonioRepository.existsById(UUID.fromString(id))) {
