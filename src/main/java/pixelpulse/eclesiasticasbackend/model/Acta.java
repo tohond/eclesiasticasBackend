@@ -92,14 +92,6 @@ public class Acta {
 		this.notas = notas;
 	}
 
-	/*
-	// --- Relaciones OneToMany ---
-    @OneToMany(mappedBy = "acta", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Matrimonio> matrimonios;
+	
 
-    @OneToMany(mappedBy = "acta", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Bautizo> bautizos;
-
-    @OneToMany(mappedBy = "acta", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Confirmacion> confirmaciones;*/
 }

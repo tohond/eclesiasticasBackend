@@ -19,8 +19,8 @@ public class Confirmacion {
     @Column(name = "id", updatable = false, nullable = false, columnDefinition = "uuid")
     private UUID id;
     
-    @ManyToOne
-    @JoinColumn(name = "idacta")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idacta", referencedColumnName = "id", nullable = false)
     private Acta acta;
     
     @ManyToOne

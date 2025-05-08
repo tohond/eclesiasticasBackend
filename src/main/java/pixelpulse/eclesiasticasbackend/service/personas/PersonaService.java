@@ -1,5 +1,6 @@
 package pixelpulse.eclesiasticasbackend.service.personas;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,6 +14,7 @@ import pixelpulse.eclesiasticasbackend.dto.ActaDTO;
 import pixelpulse.eclesiasticasbackend.dto.PersonaDTO;
 import pixelpulse.eclesiasticasbackend.mapper.ActaMapper;
 import pixelpulse.eclesiasticasbackend.mapper.PersonaMapper;
+import pixelpulse.eclesiasticasbackend.model.Acta;
 import pixelpulse.eclesiasticasbackend.model.Bautizo;
 import pixelpulse.eclesiasticasbackend.model.Confirmacion;
 import pixelpulse.eclesiasticasbackend.model.Matrimonio;
@@ -44,10 +46,11 @@ public class PersonaService {
 
 
         // Collect all related records for each persona
-                List<Matrimonio> matrimonios = matrimonioRepository.findAllByPersonaInAnyRole(p);
-                List<Bautizo> bautizos = bautizoRepository.findByIdBautizado(p);
-                List<Confirmacion> confirmaciones = confirmacionRepository.findAllByPersonaInAnyRole(p);
-                return new PersonaSearchResult(p, matrimonios, bautizos, confirmaciones);
+        List<Acta> actasByPerson = new ArrayList<>();
+                 matrimonioRepository.findAllByPersonaInAnyRole(p).forEach(e -> actasByPerson.add(e.getActa()) );
+                bautizoRepository.findByIdBautizado(p).forEach(e -> actasByPerson.add(e.getActa() ) ) ;
+                confirmacionRepository.findBy(p).forEach(e -> actasByPerson.add(e.getActa() ) );
+                return new PersonaSearchResult(p, actasByPerson);
             
     
 }
@@ -99,17 +102,13 @@ public class PersonaService {
     public record PersonaSearchResult(
     	    UUID personaId,
     	    String personaName,
-    	    List<Matrimonio> matrimonios,
-    	    List<Bautizo> bautizos,
-    	    List<Confirmacion> confirmaciones
+    	    List<Acta> actas
     	) {
-    	    public PersonaSearchResult(Persona persona, List<Matrimonio> matrimonios, List<Bautizo> bautizos, List<Confirmacion> confirmaciones) {
+    	    public PersonaSearchResult(Persona persona, List<Acta> actas) {
     	        this(
     	            persona.getId(),
     	            persona.getNombre(),
-    	            matrimonios,
-    	            bautizos,
-    	            confirmaciones
+    	            actas
     	        );
     	    }
     	}

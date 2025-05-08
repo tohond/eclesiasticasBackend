@@ -11,9 +11,10 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "persona")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-property = "id")
-@JsonIdentityReference(alwaysAsId = true)
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+//property = "id")
+//@JsonIdentityReference(alwaysAsId = true)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 
 public class Persona {
     

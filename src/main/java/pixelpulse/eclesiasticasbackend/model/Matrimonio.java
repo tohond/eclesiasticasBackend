@@ -18,7 +18,7 @@ public class Matrimonio {
     private UUID id;
 
     // --- Relación con Acta ---
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idacta", referencedColumnName = "id", nullable = false)
     private Acta acta;
     

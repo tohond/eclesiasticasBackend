@@ -16,7 +16,7 @@ public class Bautizo  {
     private UUID id;
 
     // --- Relación con Acta ---
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idacta", referencedColumnName = "id", nullable = false)
     private Acta acta;
 

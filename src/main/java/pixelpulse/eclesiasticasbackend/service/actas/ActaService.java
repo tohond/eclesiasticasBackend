@@ -2,7 +2,7 @@ package pixelpulse.eclesiasticasbackend.service.actas;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 
@@ -41,6 +41,8 @@ public class ActaService {
 	public List<ActaDTO> getAllActas() {
         return actaMapper.toDtoList(actaRepository.findAll());
     }
+	
+
 	
 	/*
 	public List<ActaDTO> getActasByName(String name) {
