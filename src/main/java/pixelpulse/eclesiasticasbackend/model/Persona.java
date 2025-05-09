@@ -22,7 +22,7 @@ public class Persona {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     
-    @Column(name = "nombre", length = 100)
+    @Column(name = "nombre", length = 100, nullable = false)
     private String nombre;
     
     @Column (name = "ciudadnacimiento", length = 20)

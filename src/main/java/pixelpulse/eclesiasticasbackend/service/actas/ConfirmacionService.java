@@ -1,6 +1,9 @@
 package pixelpulse.eclesiasticasbackend.service.actas;
 
+import pixelpulse.eclesiasticasbackend.dto.BautizoDTO;
 import pixelpulse.eclesiasticasbackend.dto.ConfirmacionDTO;
+import pixelpulse.eclesiasticasbackend.dto.create.createBautizoDTO;
+import pixelpulse.eclesiasticasbackend.dto.create.createConfirmacionDTO;
 import pixelpulse.eclesiasticasbackend.mapper.ConfirmacionMapper;
 import pixelpulse.eclesiasticasbackend.mapper.PersonaMapper;
 import pixelpulse.eclesiasticasbackend.model.*;
@@ -52,10 +55,84 @@ public class ConfirmacionService {
                  return mapper.toDto(confirmacion);
     }*/
 
-    public ConfirmacionDTO createConfirmacion(ConfirmacionDTO confirmacionDTO) {
-        Confirmacion confirmacion = mapper.fromDto(confirmacionDTO);
-        Confirmacion savedConfirmacion = confirmacionRepository.save(confirmacion);
-        return mapper.toDto(savedConfirmacion);
+    public Confirmacion createBautizo(createConfirmacionDTO dto) {
+    	Acta a = new Acta(null, dto.getNumeroActa(), dto.getFolio(), dto.getLibro(), dto.getFecha(), dto.getNotaMarginal(), dto.getTipo());
+		
+		Persona padre = new Persona();
+		
+		padre.setNombre(dto.getNombresPadre());
+		Persona madre = new Persona();
+		madre.setNombre(dto.getNombresMadre());
+		Persona madrina = new Persona();
+		
+		madrina.setNombre(dto.getNombremadrinas());
+		
+		Persona padrino = new Persona();
+		padrino.setNombre(dto.getNombrepadrinos());
+		
+		
+		Persona confirmado = new Persona();
+		confirmado.setMadre(madre);
+		confirmado.setPadre(padre);
+		confirmado.setCiudadnacimiento(dto.getCiudadNacimiento());
+		confirmado.setNombre(dto.getNombre1()+" "+dto.getNombre2()+" "+dto.getNombre3()+" "+dto.getNombre4()+" ");
+	
+		
+		
+		Sacerdote monsr = new Sacerdote();
+		//s, el parroco de la confirmacion
+		Sacerdote s = new Sacerdote();
+		Sacerdote doyfe = new Sacerdote();
+		
+    	if(dto.getIdDoyFe()==null||dto.getIdDoyFe().isBlank() ) {
+    		
+    		Persona p1 = new Persona();
+    		p1.setNombre(dto.getNombresDoyFe());
+    		doyfe.setPersona(p1);
+    		
+    	}
+    	else {
+    		doyfe=sacerdoteRepository.findSacerdoteById(UUID.fromString(dto.getIdDoyFe()));
+    	}
+    	
+    	if(dto.getIdSacerdote()==null||dto.getIdSacerdote().isBlank() ) {
+    		
+    		Persona p2 = new Persona();
+    		p2.setNombre(dto.getNombresSacerdote());
+    		s.setPersona(p2);
+    		
+    	}
+    	else {
+    		s=sacerdoteRepository.findSacerdoteById(UUID.fromString(dto.getIdSacerdote()));
+    	}
+    	
+    	if(dto.getIdmonsr()==null||dto.getIdmonsr().isBlank() ) {
+    		
+    		Persona p3 = new Persona();
+    		p3.setNombre(dto.getNombresSacerdote());
+    		monsr.setPersona(p3);
+    		
+    	}
+    	else {
+    		monsr=sacerdoteRepository.findSacerdoteById(UUID.fromString(dto.getIdSacerdote()));
+    	}
+    	
+    	
+    	Confirmacion b = new Confirmacion();
+    	b.setConfirmante(confirmado);
+    	b.setDoyfe(doyfe);
+    	b.setSacerdote(s);
+    	b.setMonsr(monsr);
+    	b.setActa(a);
+    	b.setMadrina(madrina);
+    	b.setPadrino(padrino);
+    	
+    	
+    	
+    	
+  
+    	Confirmacion savedconf = confirmacionRepository.save(b);
+        return savedconf;
     }
 
     public ConfirmacionDTO updateConfirmacion(String id, ConfirmacionDTO confirmacionDTO) {

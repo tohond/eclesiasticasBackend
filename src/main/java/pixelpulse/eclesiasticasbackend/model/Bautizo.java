@@ -26,10 +26,10 @@ public class Bautizo  {
     @JoinColumn(name = "idbautizado", referencedColumnName = "id",nullable = false)
     private Persona idBautizado;
     @ManyToOne (cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "idsacerdote",referencedColumnName = "id",nullable = false)
+    @JoinColumn(name = "idsacerdote", referencedColumnName = "id",nullable = false)
     private Sacerdote idSacerdote;
     @ManyToOne (cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "iddoyfe",referencedColumnName = "id",nullable = false)
+    @JoinColumn(name = "iddoyfe", referencedColumnName = "id",nullable = false)
     private Sacerdote idDoyfe;
     
     @Column (name = "abuelopaterno", length = 100)

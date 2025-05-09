@@ -50,8 +50,8 @@ public class BautizoService {
         return bautizoMapper.toDto(bautizo);
     }
 
-    public BautizoDTO createMatrimonio(createBautizoDTO dto) {
-    	Acta a = new Acta(null, dto.getNumeroActa(), dto.getFolio(), dto.getLibro(), dto.getFecha(), dto.getNotas(), dto.getTipo());
+    public Bautizo createBautizo(createBautizoDTO dto) {
+    	Acta a = new Acta(null, dto.getNumeroActa(), dto.getFolio(), dto.getLibro(), dto.getFecha(), dto.getNotaMarginal(), dto.getTipo());
 		
 		Persona padre = new Persona();
 		
@@ -107,9 +107,8 @@ public class BautizoService {
     	
     	
     	
-    	
     	Bautizo savedbautizo = bautizoRepository.save(b);
-        return bautizoMapper.toDto(savedbautizo);
+        return savedbautizo;
     }
 
     public BautizoDTO updateBautizo(UUID id, BautizoDTO bautizoDTO) {

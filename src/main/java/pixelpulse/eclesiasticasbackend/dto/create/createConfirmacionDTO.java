@@ -44,8 +44,8 @@ public class createConfirmacionDTO{
     
     
     
-    private String nombrepadrinos;
-    private String nombremadrinas;
+    private String nombrespadrino;
+    private String nombresmadrina;
     
     private String notaMarginal;
 
@@ -249,19 +249,19 @@ public class createConfirmacionDTO{
 	
 
 	public String getNombrepadrinos() {
-		return nombrepadrinos;
+		return nombrespadrino;
 	}
 
 	public void setNombrepadrinos(String nombrepadrinos) {
-		this.nombrepadrinos = nombrepadrinos;
+		this.nombrespadrino = nombrepadrinos;
 	}
 
 	public String getNombremadrinas() {
-		return nombremadrinas;
+		return nombresmadrina;
 	}
 
 	public void setNombremadrinas(String nombremadrinas) {
-		this.nombremadrinas = nombremadrinas;
+		this.nombresmadrina = nombremadrinas;
 	}
 
 	public String getNotaMarginal() {

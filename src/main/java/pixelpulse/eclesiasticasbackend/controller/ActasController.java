@@ -1,5 +1,6 @@
 package pixelpulse.eclesiasticasbackend.controller;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -87,6 +88,7 @@ public class ActasController {
 			@RequestBody List<Map<String,String>> batchActas ){
 		ObjectMapper mapper = new ObjectMapper();
 		
+		List<ActaDTO> actas = new ArrayList<>();
 		for (Map<String, String> map : batchActas) {
 		
 			String tipo = map.get("tipo").toLowerCase();
@@ -100,7 +102,7 @@ public class ActasController {
 			}
 			else if (tipo.equals("bautizo") ){
 				createBautizoDTO dto =mapper.convertValue(map, createBautizoDTO.class);
-				bautizoService.createMatrimonio(dto);
+				bautizoService.createBautizo(dto);
 			}
 		}
 		
