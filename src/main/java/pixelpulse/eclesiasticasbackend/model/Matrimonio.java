@@ -36,7 +36,32 @@ public class Matrimonio {
     @ManyToOne
     @JoinColumn(name = "idpadrino", nullable = false)
     private Persona idPadrino;
+    
+    @ManyToOne
+    @JoinColumn(name = "iddoyfe", nullable = false)
+    private Sacerdote idDoyFe;
+    
+    @ManyToOne
+    @JoinColumn(name = "idsacerdote", nullable = false)
+    private Sacerdote idSacerdote;
+    
     ///
+
+	public Sacerdote getIdDoyFe() {
+		return idDoyFe;
+	}
+
+	public void setIdDoyFe(Sacerdote idDoyFe) {
+		this.idDoyFe = idDoyFe;
+	}
+
+	public Sacerdote getIdSacerdote() {
+		return idSacerdote;
+	}
+
+	public void setIdSacerdote(Sacerdote idSacerdote) {
+		this.idSacerdote = idSacerdote;
+	}
 
 	public UUID getId() {
 		return id;

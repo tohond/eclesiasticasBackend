@@ -49,7 +49,7 @@ public class PersonaService {
         List<Acta> actasByPerson = new ArrayList<>();
                  matrimonioRepository.findAllByPersonaInAnyRole(p).forEach(e -> actasByPerson.add(e.getActa()) );
                 bautizoRepository.findByIdBautizado(p).forEach(e -> actasByPerson.add(e.getActa() ) ) ;
-                confirmacionRepository.findBy(p).forEach(e -> actasByPerson.add(e.getActa() ) );
+                //confirmacionRepository.findBy(p).forEach(e -> actasByPerson.add(e.getActa() ) );
                 return new PersonaSearchResult(p, actasByPerson);
             
     

@@ -22,8 +22,7 @@ public class MatrimonioMapper {
  	
  
 
- 
- 
+	 
     public MatrimonioDTO toDto(Matrimonio acta) {
     	MatrimonioDTO a = modelMapper.map(acta, MatrimonioDTO.class);
     	return a;

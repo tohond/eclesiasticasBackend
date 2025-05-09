@@ -1,5 +1,6 @@
 package pixelpulse.eclesiasticasbackend.controller;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -16,11 +17,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.auth.FirebaseAuth;
 
 import pixelpulse.eclesiasticasbackend.dto.ActaDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createActaDTO;
+import pixelpulse.eclesiasticasbackend.dto.create.createBautizoDTO;
+import pixelpulse.eclesiasticasbackend.dto.create.createConfirmacionDTO;
+import pixelpulse.eclesiasticasbackend.dto.create.createMatrimonioDTO;
 import pixelpulse.eclesiasticasbackend.service.actas.ActaService;
+import pixelpulse.eclesiasticasbackend.service.actas.BautizoService;
+import pixelpulse.eclesiasticasbackend.service.actas.MatrimonioService;
 import pixelpulse.eclesiasticasbackend.service.auth.FirebaseTokenService;
 import pixelpulse.eclesiasticasbackend.service.others.EmailService;
 import pixelpulse.eclesiasticasbackend.service.personas.PersonaService;
@@ -30,19 +37,26 @@ import pixelpulse.eclesiasticasbackend.service.users.UserService;
 @RestController
 @RequestMapping("/api/actas")
 public class ActasController {
+
+    private final BautizoService bautizoService;
+
+    
 	
 	@Autowired
 	private final FirebaseAuth firebaseAuth;
 	private final ActaService actaService;
 	private final PersonaService personaService;
+	private final MatrimonioService matrimonioService;
 	
 	
 	
-	public ActasController(FirebaseAuth firebaseAuth, ActaService actaservice,PersonaService personaService) {
+	public ActasController(FirebaseAuth firebaseAuth, ActaService actaservice,PersonaService personaService, MatrimonioService matrimonioService, BautizoService bautizoService) {
 		
 		this.firebaseAuth = firebaseAuth;
 		this.actaService = actaservice;
 		this.personaService = personaService;
+		this.matrimonioService = matrimonioService;
+		this.bautizoService = bautizoService;
 	}
 	
 	
@@ -69,9 +83,28 @@ public class ActasController {
 		
 	}
 	@PostMapping("/batch")
-	public ResponseEntity<?> postActaBatch(
-			@RequestBody List<createActaDTO> batchActas ){
-		UUID uuid = UUID.fromString(id);
+	public ResponseEntity<?> createActaBatch(
+			@RequestBody List<Map<String,String>> batchActas ){
+		ObjectMapper mapper = new ObjectMapper();
+		
+		for (Map<String, String> map : batchActas) {
+		
+			String tipo = map.get("tipo").toLowerCase();
+			map.replace("tipo", tipo);
+			if ( tipo.equals("matrimonio") ){
+				createMatrimonioDTO dto = mapper.convertValue(map, createMatrimonioDTO.class);
+				matrimonioService.createMatrimonio(dto);
+			}
+			else if (tipo.equals("confirmación") ){
+				createConfirmacionDTO dto =mapper.convertValue(map, createConfirmacionDTO.class);
+			}
+			else if (tipo.equals("bautizo") ){
+				createBautizoDTO dto =mapper.convertValue(map, createBautizoDTO.class);
+				bautizoService.createMatrimonio(dto);
+			}
+		}
+		
+		
 		//actaService.deleteActaById(uuid);
 		return null;
 		

@@ -2,6 +2,8 @@ package pixelpulse.eclesiasticasbackend.model;
 
 import java.util.UUID;
 
+import org.hibernate.annotations.Cascade;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,15 +22,52 @@ public class Bautizo  {
     @JoinColumn(name = "idacta", referencedColumnName = "id", nullable = false)
     private Acta acta;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idbautizado")
     private Persona idBautizado;
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idsacerdote")
     private Sacerdote idSacerdote;
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     @JoinColumn(name = "iddoyfe")
     private Sacerdote idDoyfe;
+    
+    @Column (name = "abuelopaterno", length = 100)
+    private String abueloPaterno;
+    
+    @Column (name = "abuelomaterno", length = 100)
+    private String abueloMaterno;
+    
+    @Column (name = "abuelapaterna", length = 100)
+    private String abuelaPaterna;
+    
+    @Column (name = "abuelamaterna", length = 100)
+    private String abuelaMaterna;
+    
+	public String getAbueloPaterno() {
+		return abueloPaterno;
+	}
+	public void setAbueloPaterno(String abueloPaterno) {
+		this.abueloPaterno = abueloPaterno;
+	}
+	public String getAbueloMaterno() {
+		return abueloMaterno;
+	}
+	public void setAbueloMaterno(String abueloMaterno) {
+		this.abueloMaterno = abueloMaterno;
+	}
+	public String getAbuelaPaterna() {
+		return abuelaPaterna;
+	}
+	public void setAbuelaPaterna(String abuelaPaterna) {
+		this.abuelaPaterna = abuelaPaterna;
+	}
+	public String getAbuelaMaterna() {
+		return abuelaMaterna;
+	}
+	public void setAbuelaMaterna(String abuelaMaterna) {
+		this.abuelaMaterna = abuelaMaterna;
+	}
 	public UUID getId() {
 		return id;
 	}

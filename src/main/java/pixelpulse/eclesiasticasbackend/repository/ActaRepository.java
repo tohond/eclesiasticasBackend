@@ -13,9 +13,9 @@ import pixelpulse.eclesiasticasbackend.model.Acta;
 @Repository
 public interface ActaRepository extends JpaRepository<Acta, UUID> {
 	
-	@Query(value = 
+	/*@Query(value = 
 	           "SELECT a.id, a.numero_acta, 'BAUTIZO' as tipo, b.id as related_id " +
-	           "FROM acta a INNER JOIN bautizo b ON a.id = b.numero_acta " +
+	           "FROM acta a INNER JOIN bautizo b ON a.id = b.numeroacta " +
 	           "UNION ALL " +
 	           "SELECT a.id, a.numero_acta, 'CONFIRMACION' as tipo, c.id as related_id " +
 	           "FROM acta a INNER JOIN confirmacion c ON a.id = c.id_acta " +
@@ -23,7 +23,8 @@ public interface ActaRepository extends JpaRepository<Acta, UUID> {
 	           "SELECT a.id, a.numero_acta, 'MATRIMONIO' as tipo, m.id as related_id " +
 	           "FROM acta a INNER JOIN matrimonio m ON a.id = m.id_acta", 
 	           nativeQuery = true) 
-			List<Acta> findAll();
+			List<Acta> findAll();*/
+		List<Acta> findAll();
 
     
 }

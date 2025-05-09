@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class createBautizoDTO{
+public class createConfirmacionDTO{
 	
 	private int numero_formulario;
 	private String numeroActa;
@@ -19,22 +19,14 @@ public class createBautizoDTO{
 	private String nombresSacerdote;
 	private String idDoyFe;
 	private String nombresDoyFe;
+	private String idmonsr;
+	private String nombresmonsr;
 	
 	private String nombre1;
 	private String nombre2;
 	private String nombre3;
 	private String nombre4;
 	
-	// --- Datos del Bautizado ---
-    
-    private String primerNombre;
-    
-    private String segundoNombre;
-    
-    
-    private String primerApellido;
-    
-    private String segundoApellido;
 
     // --- Fecha de Nacimiento ---
     @JsonFormat(pattern="dd-MM-yy")
@@ -49,28 +41,21 @@ public class createBautizoDTO{
     // --- Datos Anexos ---
     private String nombresPadre;
     private String nombresMadre;
-    private String abueloPaterno;
-    private String abuelaPaterna;
-    private String abueloMaterno;
-    private String abuelaMaterna;
+    
     
     
     private String nombrepadrinos;
     private String nombremadrinas;
     
     private String notaMarginal;
-    
-    
-    public createBautizoDTO() {
-    	
-    }
-	public createBautizoDTO(int numero_formulario, String numeroActa, String folio, String libro, Date fecha,
+
+	public createConfirmacionDTO(int numero_formulario, String numeroActa, String folio, String libro, Date fecha,
 			String notas, String tipo, String idSacerdote, String nombresSacerdote, String idDoyFe, String nombresDoyFe,
 			String nombre1, String nombre2, String nombre3, String nombre4, String primerNombre, String segundoNombre,
 			String primerApellido, String segundoApellido, Date fechaNacimiento, String lugarNacimiento,
-			String ciudadNacimiento, String nombresPadre, String nombresMadre, String abueloPaterno,
-			String abuelaPaterna, String abueloMaterno, String abuelaMaterna, String nombrepadrinos,
-			String nombremadrinas, String notaMarginal) {
+			String ciudadNacimiento, String nombresPadre, String nombresMadre, String nombrepadrinos,
+			String nombremadrinas, String nombresmonsr,
+			String idmonsr, String notaMarginal) {
 		super();
 		this.numero_formulario = numero_formulario;
 		this.numeroActa = numeroActa;
@@ -79,6 +64,7 @@ public class createBautizoDTO{
 		this.fecha = fecha;
 		this.notas = notas;
 		this.tipo = tipo;
+		
 		this.idSacerdote = idSacerdote;
 		this.nombresSacerdote = nombresSacerdote;
 		this.idDoyFe = idDoyFe;
@@ -87,22 +73,16 @@ public class createBautizoDTO{
 		this.nombre2 = nombre2;
 		this.nombre3 = nombre3;
 		this.nombre4 = nombre4;
-		this.primerNombre = primerNombre;
-		this.segundoNombre = segundoNombre;
-		this.primerApellido = primerApellido;
-		this.segundoApellido = segundoApellido;
+		
 		this.fechaNacimiento = fechaNacimiento;
 		this.lugarNacimiento = lugarNacimiento;
 		this.ciudadNacimiento = ciudadNacimiento;
 		this.nombresPadre = nombresPadre;
 		this.nombresMadre = nombresMadre;
-		this.abueloPaterno = abueloPaterno;
-		this.abuelaPaterna = abuelaPaterna;
-		this.abueloMaterno = abueloMaterno;
-		this.abuelaMaterna = abuelaMaterna;
-		this.nombrepadrinos = nombrepadrinos;
-		this.nombremadrinas = nombremadrinas;
+	
 		this.notaMarginal = notaMarginal;
+		this.idmonsr = idmonsr;
+		this.nombresmonsr = nombresmonsr;
 	}
 
 	public int getNumero_formulario() {
@@ -225,37 +205,6 @@ public class createBautizoDTO{
 		this.nombre4 = nombre4;
 	}
 
-	public String getPrimerNombre() {
-		return primerNombre;
-	}
-
-	public void setPrimerNombre(String primerNombre) {
-		this.primerNombre = primerNombre;
-	}
-
-	public String getSegundoNombre() {
-		return segundoNombre;
-	}
-
-	public void setSegundoNombre(String segundoNombre) {
-		this.segundoNombre = segundoNombre;
-	}
-
-	public String getPrimerApellido() {
-		return primerApellido;
-	}
-
-	public void setPrimerApellido(String primerApellido) {
-		this.primerApellido = primerApellido;
-	}
-
-	public String getSegundoApellido() {
-		return segundoApellido;
-	}
-
-	public void setSegundoApellido(String segundoApellido) {
-		this.segundoApellido = segundoApellido;
-	}
 
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
@@ -297,37 +246,7 @@ public class createBautizoDTO{
 		this.nombresMadre = nombresMadre;
 	}
 
-	public String getAbueloPaterno() {
-		return abueloPaterno;
-	}
-
-	public void setAbueloPaterno(String abueloPaterno) {
-		this.abueloPaterno = abueloPaterno;
-	}
-
-	public String getAbuelaPaterna() {
-		return abuelaPaterna;
-	}
-
-	public void setAbuelaPaterna(String abuelaPaterna) {
-		this.abuelaPaterna = abuelaPaterna;
-	}
-
-	public String getAbueloMaterno() {
-		return abueloMaterno;
-	}
-
-	public void setAbueloMaterno(String abueloMaterno) {
-		this.abueloMaterno = abueloMaterno;
-	}
-
-	public String getAbuelaMaterna() {
-		return abuelaMaterna;
-	}
-
-	public void setAbuelaMaterna(String abuelaMaterna) {
-		this.abuelaMaterna = abuelaMaterna;
-	}
+	
 
 	public String getNombrepadrinos() {
 		return nombrepadrinos;
@@ -351,6 +270,22 @@ public class createBautizoDTO{
 
 	public void setNotaMarginal(String notaMarginal) {
 		this.notaMarginal = notaMarginal;
+	}
+
+	public String getIdmonsr() {
+		return idmonsr;
+	}
+
+	public void setIdmonsr(String idmonsr) {
+		this.idmonsr = idmonsr;
+	}
+
+	public String getNombresmonsr() {
+		return nombresmonsr;
+	}
+
+	public void setNombresmonsr(String nombresmonsr) {
+		this.nombresmonsr = nombresmonsr;
 	}
 	
 	

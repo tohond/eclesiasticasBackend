@@ -25,12 +25,24 @@ public class Persona {
     @Column(name = "nombre", length = 100)
     private String nombre;
     
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @Column (name = "ciudadnacimiento", length = 20)
+    private String ciudadnacimiento;
+    
+    public String getCiudadnacimiento() {
+		return ciudadnacimiento;
+	}
+
+	public void setCiudadnacimiento(String ciudadnacimiento) {
+		this.ciudadnacimiento = ciudadnacimiento;
+	}
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_padre", referencedColumnName = "id")
     private Persona padre;
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_madre", referencedColumnName = "id")
     private Persona madre;
+    
     
     public List<Persona> getHijosPadre() {
 		return hijosPadre;

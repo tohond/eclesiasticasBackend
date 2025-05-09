@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import pixelpulse.eclesiasticasbackend.dto.ActaDTO;
 import pixelpulse.eclesiasticasbackend.model.Acta;
+import pixelpulse.eclesiasticasbackend.model.Bautizo;
 
 @Component
 public class ActaMapper {

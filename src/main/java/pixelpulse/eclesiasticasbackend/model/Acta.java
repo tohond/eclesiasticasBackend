@@ -12,7 +12,10 @@ import java.util.UUID;
 @Entity
 @Table(name = "acta")
 public class Acta {
-    @Id
+	
+    
+
+	@Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
@@ -34,8 +37,24 @@ public class Acta {
     @Column (name = "tipo", length = 10)
     private String tipo;
     
+    
+    public Acta() {
+    	
+    }
+    public Acta(UUID id, String numeroActa, String folio, String libro, Date fecha, String notas, String tipo) {
+		super();
+		this.id = id;
+		this.numeroActa = numeroActa;
+		this.folio = folio;
+		this.libro = libro;
+		this.fecha = fecha;
+		this.notas = notas;
+		this.tipo = tipo;
+	}
+    
+    
 
-    public String getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
     

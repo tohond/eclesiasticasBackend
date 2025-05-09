@@ -2,6 +2,7 @@ package pixelpulse.eclesiasticasbackend.mapper;
 
 import pixelpulse.eclesiasticasbackend.dto.BautizoDTO;
 import pixelpulse.eclesiasticasbackend.dto.PersonaDTO;
+import pixelpulse.eclesiasticasbackend.dto.create.createBautizoDTO;
 import pixelpulse.eclesiasticasbackend.model.Bautizo;
 import pixelpulse.eclesiasticasbackend.model.Persona;
 
@@ -24,7 +25,6 @@ public class BautizoMapper {
  	
  
 
- 
  
     public BautizoDTO toDto(Bautizo Bautizo) {
     	BautizoDTO p = modelMapper.map(Bautizo, BautizoDTO.class);

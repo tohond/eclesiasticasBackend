@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class createBautizoDTO{
+public class createMatrimonioDTO{
 	
 	private int numero_formulario;
 	private String numeroActa;
@@ -20,26 +20,23 @@ public class createBautizoDTO{
 	private String idDoyFe;
 	private String nombresDoyFe;
 	
-	private String nombre1;
-	private String nombre2;
-	private String nombre3;
-	private String nombre4;
+	private String esposonombre1;
+	private String esposonombre2;
+	private String esposonombre3;
+	private String esposonombre4;
 	
-	// --- Datos del Bautizado ---
-    
-    private String primerNombre;
-    
-    private String segundoNombre;
-    
-    
-    private String primerApellido;
-    
-    private String segundoApellido;
+	@JsonFormat(pattern="dd-MM-yy")
+    private Date fechaNacimientoEsposo;
+	
+	private String esposanombre1;
+	private String esposanombre2;
+	private String esposanombre3;
+	private String esposanombre4;
+	
+	@JsonFormat(pattern="dd-MM-yy")
+    private Date fechaNacimientoEsposa;
 
-    // --- Fecha de Nacimiento ---
-    @JsonFormat(pattern="dd-MM-yy")
-    private Date fechaNacimiento;
-    
+    private String nombreCiudad;
     
     private String lugarNacimiento;
     
@@ -59,51 +56,6 @@ public class createBautizoDTO{
     private String nombremadrinas;
     
     private String notaMarginal;
-    
-    
-    public createBautizoDTO() {
-    	
-    }
-	public createBautizoDTO(int numero_formulario, String numeroActa, String folio, String libro, Date fecha,
-			String notas, String tipo, String idSacerdote, String nombresSacerdote, String idDoyFe, String nombresDoyFe,
-			String nombre1, String nombre2, String nombre3, String nombre4, String primerNombre, String segundoNombre,
-			String primerApellido, String segundoApellido, Date fechaNacimiento, String lugarNacimiento,
-			String ciudadNacimiento, String nombresPadre, String nombresMadre, String abueloPaterno,
-			String abuelaPaterna, String abueloMaterno, String abuelaMaterna, String nombrepadrinos,
-			String nombremadrinas, String notaMarginal) {
-		super();
-		this.numero_formulario = numero_formulario;
-		this.numeroActa = numeroActa;
-		this.folio = folio;
-		this.libro = libro;
-		this.fecha = fecha;
-		this.notas = notas;
-		this.tipo = tipo;
-		this.idSacerdote = idSacerdote;
-		this.nombresSacerdote = nombresSacerdote;
-		this.idDoyFe = idDoyFe;
-		this.nombresDoyFe = nombresDoyFe;
-		this.nombre1 = nombre1;
-		this.nombre2 = nombre2;
-		this.nombre3 = nombre3;
-		this.nombre4 = nombre4;
-		this.primerNombre = primerNombre;
-		this.segundoNombre = segundoNombre;
-		this.primerApellido = primerApellido;
-		this.segundoApellido = segundoApellido;
-		this.fechaNacimiento = fechaNacimiento;
-		this.lugarNacimiento = lugarNacimiento;
-		this.ciudadNacimiento = ciudadNacimiento;
-		this.nombresPadre = nombresPadre;
-		this.nombresMadre = nombresMadre;
-		this.abueloPaterno = abueloPaterno;
-		this.abuelaPaterna = abuelaPaterna;
-		this.abueloMaterno = abueloMaterno;
-		this.abuelaMaterna = abuelaMaterna;
-		this.nombrepadrinos = nombrepadrinos;
-		this.nombremadrinas = nombremadrinas;
-		this.notaMarginal = notaMarginal;
-	}
 
 	public int getNumero_formulario() {
 		return numero_formulario;
@@ -193,76 +145,92 @@ public class createBautizoDTO{
 		this.nombresDoyFe = nombresDoyFe;
 	}
 
-	public String getNombre1() {
-		return nombre1;
+	public String getEsposonombre1() {
+		return esposonombre1;
 	}
 
-	public void setNombre1(String nombre1) {
-		this.nombre1 = nombre1;
+	public void setEsposonombre1(String esposonombre1) {
+		this.esposonombre1 = esposonombre1;
 	}
 
-	public String getNombre2() {
-		return nombre2;
+	public String getEsposonombre2() {
+		return esposonombre2;
 	}
 
-	public void setNombre2(String nombre2) {
-		this.nombre2 = nombre2;
+	public void setEsposonombre2(String esposonombre2) {
+		this.esposonombre2 = esposonombre2;
 	}
 
-	public String getNombre3() {
-		return nombre3;
+	public String getEsposonombre3() {
+		return esposonombre3;
 	}
 
-	public void setNombre3(String nombre3) {
-		this.nombre3 = nombre3;
+	public void setEsposonombre3(String esposonombre3) {
+		this.esposonombre3 = esposonombre3;
 	}
 
-	public String getNombre4() {
-		return nombre4;
+	public String getEsposonombre4() {
+		return esposonombre4;
 	}
 
-	public void setNombre4(String nombre4) {
-		this.nombre4 = nombre4;
+	public void setEsposonombre4(String esposonombre4) {
+		this.esposonombre4 = esposonombre4;
 	}
 
-	public String getPrimerNombre() {
-		return primerNombre;
+	public Date getFechaNacimientoEsposo() {
+		return fechaNacimientoEsposo;
 	}
 
-	public void setPrimerNombre(String primerNombre) {
-		this.primerNombre = primerNombre;
+	public void setFechaNacimientoEsposo(Date fechaNacimientoEsposo) {
+		this.fechaNacimientoEsposo = fechaNacimientoEsposo;
 	}
 
-	public String getSegundoNombre() {
-		return segundoNombre;
+	public String getEsposanombre1() {
+		return esposanombre1;
 	}
 
-	public void setSegundoNombre(String segundoNombre) {
-		this.segundoNombre = segundoNombre;
+	public void setEsposanombre1(String esposanombre1) {
+		this.esposanombre1 = esposanombre1;
 	}
 
-	public String getPrimerApellido() {
-		return primerApellido;
+	public String getEsposanombre2() {
+		return esposanombre2;
 	}
 
-	public void setPrimerApellido(String primerApellido) {
-		this.primerApellido = primerApellido;
+	public void setEsposanombre2(String esposanombre2) {
+		this.esposanombre2 = esposanombre2;
 	}
 
-	public String getSegundoApellido() {
-		return segundoApellido;
+	public String getEsposanombre3() {
+		return esposanombre3;
 	}
 
-	public void setSegundoApellido(String segundoApellido) {
-		this.segundoApellido = segundoApellido;
+	public void setEsposanombre3(String esposanombre3) {
+		this.esposanombre3 = esposanombre3;
 	}
 
-	public Date getFechaNacimiento() {
-		return fechaNacimiento;
+	public String getEsposanombre4() {
+		return esposanombre4;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
+	public void setEsposanombre4(String esposanombre4) {
+		this.esposanombre4 = esposanombre4;
+	}
+
+	public Date getFechaNacimientoEsposa() {
+		return fechaNacimientoEsposa;
+	}
+
+	public void setFechaNacimientoEsposa(Date fechaNacimientoEsposa) {
+		this.fechaNacimientoEsposa = fechaNacimientoEsposa;
+	}
+
+	public String getNombreCiudad() {
+		return nombreCiudad;
+	}
+
+	public void setNombreCiudad(String nombreCiudad) {
+		this.nombreCiudad = nombreCiudad;
 	}
 
 	public String getLugarNacimiento() {
@@ -352,7 +320,50 @@ public class createBautizoDTO{
 	public void setNotaMarginal(String notaMarginal) {
 		this.notaMarginal = notaMarginal;
 	}
-	
-	
+
+	public createMatrimonioDTO(int numero_formulario, String numeroActa, String folio, String libro, Date fecha,
+			String notas, String tipo, String idSacerdote, String nombresSacerdote, String idDoyFe, String nombresDoyFe,
+			String esposonombre1, String esposonombre2, String esposonombre3, String esposonombre4,
+			Date fechaNacimientoEsposo, String esposanombre1, String esposanombre2, String esposanombre3,
+			String esposanombre4, Date fechaNacimientoEsposa, String nombreCiudad, String lugarNacimiento,
+			String ciudadNacimiento, String nombresPadre, String nombresMadre, String abueloPaterno,
+			String abuelaPaterna, String abueloMaterno, String abuelaMaterna, String nombrepadrinos,
+			String nombremadrinas, String notaMarginal) {
+		super();
+		this.numero_formulario = numero_formulario;
+		this.numeroActa = numeroActa;
+		this.folio = folio;
+		this.libro = libro;
+		this.fecha = fecha;
+		this.notas = notas;
+		this.tipo = tipo;
+		this.idSacerdote = idSacerdote;
+		this.nombresSacerdote = nombresSacerdote;
+		this.idDoyFe = idDoyFe;
+		this.nombresDoyFe = nombresDoyFe;
+		this.esposonombre1 = esposonombre1;
+		this.esposonombre2 = esposonombre2;
+		this.esposonombre3 = esposonombre3;
+		this.esposonombre4 = esposonombre4;
+		this.fechaNacimientoEsposo = fechaNacimientoEsposo;
+		this.esposanombre1 = esposanombre1;
+		this.esposanombre2 = esposanombre2;
+		this.esposanombre3 = esposanombre3;
+		this.esposanombre4 = esposanombre4;
+		this.fechaNacimientoEsposa = fechaNacimientoEsposa;
+		this.nombreCiudad = nombreCiudad;
+		this.lugarNacimiento = lugarNacimiento;
+		this.ciudadNacimiento = ciudadNacimiento;
+		this.nombresPadre = nombresPadre;
+		this.nombresMadre = nombresMadre;
+		this.abueloPaterno = abueloPaterno;
+		this.abuelaPaterna = abuelaPaterna;
+		this.abueloMaterno = abueloMaterno;
+		this.abuelaMaterna = abuelaMaterna;
+		this.nombrepadrinos = nombrepadrinos;
+		this.nombremadrinas = nombremadrinas;
+		this.notaMarginal = notaMarginal;
+	}
+    
 	
 }

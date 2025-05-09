@@ -22,6 +22,34 @@ public class Sacerdote {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_persona")
     private Persona persona;
+
+	public Sacerdote(UUID id, Persona persona) {
+		super();
+		this.id = id;
+		this.persona = persona;
+	}
+	
+	public Sacerdote() {
+		
+	}
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public Persona getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
+    
+    
     
     // Additional fields
     // private String ordenadoEn;
