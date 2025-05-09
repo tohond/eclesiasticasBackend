@@ -20,7 +20,7 @@ public class Sacerdote {
     private UUID id;
     
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_persona")
+    @JoinColumn(name = "id_persona", referencedColumnName = "id", nullable = false)
     private Persona persona;
 
 	public Sacerdote(UUID id, Persona persona) {

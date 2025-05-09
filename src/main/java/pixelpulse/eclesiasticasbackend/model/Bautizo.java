@@ -23,13 +23,13 @@ public class Bautizo  {
     private Acta acta;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "idbautizado")
+    @JoinColumn(name = "idbautizado", referencedColumnName = "id",nullable = false)
     private Persona idBautizado;
     @ManyToOne (cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "idsacerdote")
+    @JoinColumn(name = "idsacerdote",referencedColumnName = "id",nullable = false)
     private Sacerdote idSacerdote;
     @ManyToOne (cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "iddoyfe")
+    @JoinColumn(name = "iddoyfe",referencedColumnName = "id",nullable = false)
     private Sacerdote idDoyfe;
     
     @Column (name = "abuelopaterno", length = 100)
