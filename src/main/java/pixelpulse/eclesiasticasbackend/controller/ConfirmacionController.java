@@ -34,7 +34,8 @@ public class ConfirmacionController {
 
     @PostMapping
     public ResponseEntity<ConfirmacionDTO> createConfirmacion(@RequestBody ConfirmacionDTO confirmacionDTO) {
-        return new ResponseEntity<>(confirmacionService.createConfirmacion(confirmacionDTO), HttpStatus.CREATED);
+        return null;
+        		//new ResponseEntity<>(confirmacionService.createConfirmacion(confirmacionDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

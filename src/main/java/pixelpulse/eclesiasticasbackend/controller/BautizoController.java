@@ -35,7 +35,8 @@ public class BautizoController {
 
     @PostMapping
     public ResponseEntity<BautizoDTO> createBautizo(@RequestBody BautizoDTO bautizoDTO) {
-        return new ResponseEntity<>(bautizoService.createConfirmacion(bautizoDTO), HttpStatus.CREATED);
+    	return null;
+        		//new ResponseEntity<>(bautizoService.createConfirmacion(bautizoDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
