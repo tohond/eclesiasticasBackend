@@ -26,9 +26,6 @@ public class Parroquia {
     @Column(name = "direccion", length = 80)
     private String direccion;
     
-    public Parroquia() {
-    	
-    }
 
 	public UUID getId() {
 		return id;
