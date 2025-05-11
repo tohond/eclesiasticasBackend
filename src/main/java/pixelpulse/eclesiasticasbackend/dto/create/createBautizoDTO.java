@@ -5,6 +5,10 @@ import java.util.Date;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 public class createBautizoDTO{
 	
@@ -12,6 +16,9 @@ public class createBautizoDTO{
 	private String numeroActa;
     private String folio;
     private String libro;
+    
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     @JsonFormat(pattern="dd-MM-yy")
     private LocalDate fecha;
     private String notas;
@@ -39,6 +46,8 @@ public class createBautizoDTO{
     private String segundoApellido;
 
     // --- Fecha de Nacimiento ---
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     @JsonFormat(pattern="dd-MM-yy")
     private LocalDate fechaNacimiento;
     

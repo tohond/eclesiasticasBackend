@@ -23,10 +23,10 @@ public class Acta {
     @Column(name = "numeroacta", length = 10)
     private String numeroActa;
 
-    @Column(name = "folio", length = 4)
+    @Column(name = "folio", length = 10)
     private String folio;
 
-    @Column(name = "libro", length = 4)
+    @Column(name = "libro", length = 10)
     private String libro;
 
     @Column(name = "fecha")
