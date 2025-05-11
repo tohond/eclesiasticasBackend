@@ -23,16 +23,8 @@ public class Sacerdote {
     @JoinColumn(name = "id_persona", referencedColumnName = "id", nullable = false)
     private Persona persona;
 
-	public Sacerdote(UUID id, Persona persona) {
-		super();
-		this.id = id;
-		this.persona = persona;
-	}
 	
-	public Sacerdote() {
-		
-	}
-
+	
 	public UUID getId() {
 		return id;
 	}

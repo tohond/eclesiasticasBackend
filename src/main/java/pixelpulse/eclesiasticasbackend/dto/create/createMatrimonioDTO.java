@@ -1,9 +1,14 @@
 package pixelpulse.eclesiasticasbackend.dto.create;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 public class createMatrimonioDTO{
 	
@@ -11,8 +16,10 @@ public class createMatrimonioDTO{
 	private String numeroActa;
     private String folio;
     private String libro;
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     @JsonFormat(pattern="dd-MM-yy")
-    private Date fecha;
+    private LocalDate fecha;
     private String notas;
     private String tipo;
     private String idSacerdote;
@@ -25,15 +32,19 @@ public class createMatrimonioDTO{
 	private String esposonombre3;
 	private String esposonombre4;
 	
-	@JsonFormat(pattern="dd-MM-yy")
-    private Date fechaNacimientoEsposo;
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonFormat(pattern="dd-MM-yy")
+    private LocalDate fechaNacimientoEsposo;
 	
 	private String esposanombre1;
 	private String esposanombre2;
 	private String esposanombre3;
 	private String esposanombre4;
 	
-	@JsonFormat(pattern="dd-MM-yy")
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonFormat(pattern="dd-MM-yy")
     private Date fechaNacimientoEsposa;
 
     private String nombreCiudad;
@@ -52,8 +63,8 @@ public class createMatrimonioDTO{
     private String abuelaMaterna;
     
     
-    private String nombrepadrinos;
-    private String nombremadrinas;
+    private String nombrespadrino;
+    private String nombresmadrina;
     
     private String notaMarginal;
 
@@ -89,11 +100,11 @@ public class createMatrimonioDTO{
 		this.libro = libro;
 	}
 
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 
@@ -177,11 +188,11 @@ public class createMatrimonioDTO{
 		this.esposonombre4 = esposonombre4;
 	}
 
-	public Date getFechaNacimientoEsposo() {
+	public LocalDate getFechaNacimientoEsposo() {
 		return fechaNacimientoEsposo;
 	}
 
-	public void setFechaNacimientoEsposo(Date fechaNacimientoEsposo) {
+	public void setFechaNacimientoEsposo(LocalDate fechaNacimientoEsposo) {
 		this.fechaNacimientoEsposo = fechaNacimientoEsposo;
 	}
 
@@ -298,19 +309,19 @@ public class createMatrimonioDTO{
 	}
 
 	public String getNombrepadrinos() {
-		return nombrepadrinos;
+		return nombrespadrino;
 	}
 
 	public void setNombrepadrinos(String nombrepadrinos) {
-		this.nombrepadrinos = nombrepadrinos;
+		this.nombrespadrino = nombrepadrinos;
 	}
 
 	public String getNombremadrinas() {
-		return nombremadrinas;
+		return nombresmadrina;
 	}
 
 	public void setNombremadrinas(String nombremadrinas) {
-		this.nombremadrinas = nombremadrinas;
+		this.nombresmadrina = nombremadrinas;
 	}
 
 	public String getNotaMarginal() {
@@ -321,48 +332,8 @@ public class createMatrimonioDTO{
 		this.notaMarginal = notaMarginal;
 	}
 
-	public createMatrimonioDTO(int numero_formulario, String numeroActa, String folio, String libro, Date fecha,
-			String notas, String tipo, String idSacerdote, String nombresSacerdote, String idDoyFe, String nombresDoyFe,
-			String esposonombre1, String esposonombre2, String esposonombre3, String esposonombre4,
-			Date fechaNacimientoEsposo, String esposanombre1, String esposanombre2, String esposanombre3,
-			String esposanombre4, Date fechaNacimientoEsposa, String nombreCiudad, String lugarNacimiento,
-			String ciudadNacimiento, String nombresPadre, String nombresMadre, String abueloPaterno,
-			String abuelaPaterna, String abueloMaterno, String abuelaMaterna, String nombrepadrinos,
-			String nombremadrinas, String notaMarginal) {
-		super();
-		this.numero_formulario = numero_formulario;
-		this.numeroActa = numeroActa;
-		this.folio = folio;
-		this.libro = libro;
-		this.fecha = fecha;
-		this.notas = notas;
-		this.tipo = tipo;
-		this.idSacerdote = idSacerdote;
-		this.nombresSacerdote = nombresSacerdote;
-		this.idDoyFe = idDoyFe;
-		this.nombresDoyFe = nombresDoyFe;
-		this.esposonombre1 = esposonombre1;
-		this.esposonombre2 = esposonombre2;
-		this.esposonombre3 = esposonombre3;
-		this.esposonombre4 = esposonombre4;
-		this.fechaNacimientoEsposo = fechaNacimientoEsposo;
-		this.esposanombre1 = esposanombre1;
-		this.esposanombre2 = esposanombre2;
-		this.esposanombre3 = esposanombre3;
-		this.esposanombre4 = esposanombre4;
-		this.fechaNacimientoEsposa = fechaNacimientoEsposa;
-		this.nombreCiudad = nombreCiudad;
-		this.lugarNacimiento = lugarNacimiento;
-		this.ciudadNacimiento = ciudadNacimiento;
-		this.nombresPadre = nombresPadre;
-		this.nombresMadre = nombresMadre;
-		this.abueloPaterno = abueloPaterno;
-		this.abuelaPaterna = abuelaPaterna;
-		this.abueloMaterno = abueloMaterno;
-		this.abuelaMaterna = abuelaMaterna;
-		this.nombrepadrinos = nombrepadrinos;
-		this.nombremadrinas = nombremadrinas;
-		this.notaMarginal = notaMarginal;
+	public createMatrimonioDTO() {
+		
 	}
     
 	
