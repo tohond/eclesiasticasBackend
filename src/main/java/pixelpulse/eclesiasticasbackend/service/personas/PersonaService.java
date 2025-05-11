@@ -30,12 +30,31 @@ public class PersonaService {
 
     @Autowired
     private PersonaRepository personaRepository;
+    @Autowired
     private PersonaMapper personaMapper;
+    @Autowired
     private  MatrimonioRepository matrimonioRepository;
+    @Autowired
     private BautizoRepository bautizoRepository;
+    @Autowired
     private ConfirmacionRepository confirmacionRepository;
 
-    public List<PersonaDTO> getAllPersonas() {
+    
+    
+    
+    public PersonaService(PersonaRepository personaRepository, PersonaMapper personaMapper,
+			MatrimonioRepository matrimonioRepository, BautizoRepository bautizoRepository,
+			ConfirmacionRepository confirmacionRepository) {
+		super();
+		this.personaRepository = personaRepository;
+		this.personaMapper = personaMapper;
+		this.matrimonioRepository = matrimonioRepository;
+		this.bautizoRepository = bautizoRepository;
+		this.confirmacionRepository = confirmacionRepository;
+	}
+
+
+	public List<PersonaDTO> getAllPersonas() {
         return personaMapper.toDtoList(personaRepository.findAll());
     }
     
