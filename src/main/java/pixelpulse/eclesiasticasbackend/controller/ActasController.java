@@ -28,6 +28,7 @@ import pixelpulse.eclesiasticasbackend.dto.create.createConfirmacionDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createMatrimonioDTO;
 import pixelpulse.eclesiasticasbackend.service.actas.ActaService;
 import pixelpulse.eclesiasticasbackend.service.actas.BautizoService;
+import pixelpulse.eclesiasticasbackend.service.actas.ConfirmacionService;
 import pixelpulse.eclesiasticasbackend.service.actas.MatrimonioService;
 import pixelpulse.eclesiasticasbackend.service.auth.FirebaseTokenService;
 import pixelpulse.eclesiasticasbackend.service.others.EmailService;
@@ -38,6 +39,8 @@ import pixelpulse.eclesiasticasbackend.service.users.UserService;
 @RestController
 @RequestMapping("/api/actas")
 public class ActasController {
+
+    private final ConfirmacionService confirmacionService;
 
     private final BautizoService bautizoService;
 
@@ -51,13 +54,14 @@ public class ActasController {
 	
 	
 	
-	public ActasController(FirebaseAuth firebaseAuth, ActaService actaservice,PersonaService personaService, MatrimonioService matrimonioService, BautizoService bautizoService) {
+	public ActasController(FirebaseAuth firebaseAuth, ActaService actaservice,PersonaService personaService, MatrimonioService matrimonioService, BautizoService bautizoService, ConfirmacionService confirmacionService) {
 		
 		this.firebaseAuth = firebaseAuth;
 		this.actaService = actaservice;
 		this.personaService = personaService;
 		this.matrimonioService = matrimonioService;
 		this.bautizoService = bautizoService;
+		this.confirmacionService = confirmacionService;
 	}
 	
 	
@@ -97,8 +101,9 @@ public class ActasController {
 				createMatrimonioDTO dto = mapper.convertValue(map, createMatrimonioDTO.class);
 				matrimonioService.createMatrimonio(dto);
 			}
-			else if (tipo.equals("confirmación") ){
+			else if (tipo.equals("confirmacion") ){
 				createConfirmacionDTO dto =mapper.convertValue(map, createConfirmacionDTO.class);
+				confirmacionService.createConfirmacion(dto);
 			}
 			else if (tipo.equals("bautizo") ){
 				createBautizoDTO dto =mapper.convertValue(map, createBautizoDTO.class);

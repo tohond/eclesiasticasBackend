@@ -1,5 +1,6 @@
 package pixelpulse.eclesiasticasbackend.dto.create;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -12,8 +13,8 @@ public class createConfirmacionDTO{
     private String folio;
     private String libro;
     @JsonFormat(pattern="dd-MM-yy")
-    private Date fecha;
-    private String notas;
+    private LocalDate fecha;
+    
     private String tipo;
     private String idSacerdote;
 	private String nombresSacerdote;
@@ -21,6 +22,7 @@ public class createConfirmacionDTO{
 	private String nombresDoyFe;
 	private String idmonsr;
 	private String nombresmonsr;
+	private String idParroquia;
 	
 	private String nombre1;
 	private String nombre2;
@@ -30,7 +32,7 @@ public class createConfirmacionDTO{
 
     // --- Fecha de Nacimiento ---
     @JsonFormat(pattern="dd-MM-yy")
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
     
     
     private String lugarNacimiento;
@@ -48,42 +50,10 @@ public class createConfirmacionDTO{
     private String nombresmadrina;
     
     private String notaMarginal;
-
-	public createConfirmacionDTO(int numero_formulario, String numeroActa, String folio, String libro, Date fecha,
-			String notas, String tipo, String idSacerdote, String nombresSacerdote, String idDoyFe, String nombresDoyFe,
-			String nombre1, String nombre2, String nombre3, String nombre4, String primerNombre, String segundoNombre,
-			String primerApellido, String segundoApellido, Date fechaNacimiento, String lugarNacimiento,
-			String ciudadNacimiento, String nombresPadre, String nombresMadre, String nombrepadrinos,
-			String nombremadrinas, String nombresmonsr,
-			String idmonsr, String notaMarginal) {
-		super();
-		this.numero_formulario = numero_formulario;
-		this.numeroActa = numeroActa;
-		this.folio = folio;
-		this.libro = libro;
-		this.fecha = fecha;
-		this.notas = notas;
-		this.tipo = tipo;
-		
-		this.idSacerdote = idSacerdote;
-		this.nombresSacerdote = nombresSacerdote;
-		this.idDoyFe = idDoyFe;
-		this.nombresDoyFe = nombresDoyFe;
-		this.nombre1 = nombre1;
-		this.nombre2 = nombre2;
-		this.nombre3 = nombre3;
-		this.nombre4 = nombre4;
-		
-		this.fechaNacimiento = fechaNacimiento;
-		this.lugarNacimiento = lugarNacimiento;
-		this.ciudadNacimiento = ciudadNacimiento;
-		this.nombresPadre = nombresPadre;
-		this.nombresMadre = nombresMadre;
-	
-		this.notaMarginal = notaMarginal;
-		this.idmonsr = idmonsr;
-		this.nombresmonsr = nombresmonsr;
-	}
+    
+    public createConfirmacionDTO() {
+    	
+    }
 
 	public int getNumero_formulario() {
 		return numero_formulario;
@@ -117,20 +87,12 @@ public class createConfirmacionDTO{
 		this.libro = libro;
 	}
 
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
-	}
-
-	public String getNotas() {
-		return notas;
-	}
-
-	public void setNotas(String notas) {
-		this.notas = notas;
 	}
 
 	public String getTipo() {
@@ -206,11 +168,11 @@ public class createConfirmacionDTO{
 	}
 
 
-	public Date getFechaNacimiento() {
+	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
@@ -248,20 +210,20 @@ public class createConfirmacionDTO{
 
 	
 
-	public String getNombrepadrinos() {
+	public String getNombrespadrino() {
 		return nombrespadrino;
 	}
 
-	public void setNombrepadrinos(String nombrepadrinos) {
-		this.nombrespadrino = nombrepadrinos;
+	public void setNombrespadrino(String nombrespadrino) {
+		this.nombrespadrino = nombrespadrino;
 	}
 
-	public String getNombremadrinas() {
+	public String getNombresmadrina() {
 		return nombresmadrina;
 	}
 
-	public void setNombremadrinas(String nombremadrinas) {
-		this.nombresmadrina = nombremadrinas;
+	public void setNombresmadrina(String nombresmadrina) {
+		this.nombresmadrina = nombresmadrina;
 	}
 
 	public String getNotaMarginal() {
@@ -286,6 +248,14 @@ public class createConfirmacionDTO{
 
 	public void setNombresmonsr(String nombresmonsr) {
 		this.nombresmonsr = nombresmonsr;
+	}
+
+	public String getIdParroquia() {
+		return idParroquia;
+	}
+
+	public void setIdParroquia(String idParroquia) {
+		this.idParroquia = idParroquia;
 	}
 	
 	

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -29,19 +30,19 @@ public class Acta {
     private String libro;
 
     @Column(name = "fecha")
-    private Date fecha;
+    private LocalDate fecha;
 
     @Column(name = "notamarginal", length = 200)
     private String notas;
     
-    @Column (name = "tipo", length = 10)
+    @Column (name = "tipo", length = 20)
     private String tipo;
     
     
     public Acta() {
     	
     }
-    public Acta(UUID id, String numeroActa, String folio, String libro, Date fecha, String notas, String tipo) {
+    public Acta(UUID id, String numeroActa, String folio, String libro, LocalDate fecha, String notas, String tipo) {
 		super();
 		this.id = id;
 		this.numeroActa = numeroActa;
@@ -95,11 +96,11 @@ public class Acta {
 		this.libro = libro;
 	}
 
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 

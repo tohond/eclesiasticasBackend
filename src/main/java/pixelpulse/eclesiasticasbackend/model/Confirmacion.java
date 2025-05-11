@@ -27,27 +27,27 @@ public class Confirmacion {
     @JoinColumn(name = "idparroquia")
     private Parroquia parroquia;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idconfirmante")
     private Persona confirmante;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idmonsr")
     private Sacerdote monsr;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idsacerdote")
     private Sacerdote sacerdote;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "iddoyfe")
     private Sacerdote doyfe;
     
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idpadrino")
     private Persona padrino;
     
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idmadrina")
     private Persona madrina;
 

@@ -1,5 +1,6 @@
 package pixelpulse.eclesiasticasbackend.dto.create;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -12,13 +13,14 @@ public class createBautizoDTO{
     private String folio;
     private String libro;
     @JsonFormat(pattern="dd-MM-yy")
-    private Date fecha;
+    private LocalDate fecha;
     private String notas;
     private String tipo;
     private String idSacerdote;
 	private String nombresSacerdote;
 	private String idDoyFe;
 	private String nombresDoyFe;
+	
 	
 	private String nombre1;
 	private String nombre2;
@@ -38,7 +40,7 @@ public class createBautizoDTO{
 
     // --- Fecha de Nacimiento ---
     @JsonFormat(pattern="dd-MM-yy")
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
     
     
     private String lugarNacimiento;
@@ -64,46 +66,7 @@ public class createBautizoDTO{
     public createBautizoDTO() {
     	
     }
-	public createBautizoDTO(int numero_formulario, String numeroActa, String folio, String libro, Date fecha,
-			String notas, String tipo, String idSacerdote, String nombresSacerdote, String idDoyFe, String nombresDoyFe,
-			String nombre1, String nombre2, String nombre3, String nombre4, String primerNombre, String segundoNombre,
-			String primerApellido, String segundoApellido, Date fechaNacimiento, String lugarNacimiento,
-			String ciudadNacimiento, String nombresPadre, String nombresMadre, String abueloPaterno,
-			String abuelaPaterna, String abueloMaterno, String abuelaMaterna, String nombrepadrinos,
-			String nombremadrinas, String notaMarginal) {
-		super();
-		this.numero_formulario = numero_formulario;
-		this.numeroActa = numeroActa;
-		this.folio = folio;
-		this.libro = libro;
-		this.fecha = fecha;
-		this.notas = notas;
-		this.tipo = tipo;
-		this.idSacerdote = idSacerdote;
-		this.nombresSacerdote = nombresSacerdote;
-		this.idDoyFe = idDoyFe;
-		this.nombresDoyFe = nombresDoyFe;
-		this.nombre1 = nombre1;
-		this.nombre2 = nombre2;
-		this.nombre3 = nombre3;
-		this.nombre4 = nombre4;
-		this.primerNombre = primerNombre;
-		this.segundoNombre = segundoNombre;
-		this.primerApellido = primerApellido;
-		this.segundoApellido = segundoApellido;
-		this.fechaNacimiento = fechaNacimiento;
-		this.lugarNacimiento = lugarNacimiento;
-		this.ciudadNacimiento = ciudadNacimiento;
-		this.nombresPadre = nombresPadre;
-		this.nombresMadre = nombresMadre;
-		this.abueloPaterno = abueloPaterno;
-		this.abuelaPaterna = abuelaPaterna;
-		this.abueloMaterno = abueloMaterno;
-		this.abuelaMaterna = abuelaMaterna;
-		this.nombrepadrinos = nombrepadrinos;
-		this.nombremadrinas = nombremadrinas;
-		this.notaMarginal = notaMarginal;
-	}
+	
 
 	public int getNumero_formulario() {
 		return numero_formulario;
@@ -137,11 +100,11 @@ public class createBautizoDTO{
 		this.libro = libro;
 	}
 
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 
@@ -257,11 +220,11 @@ public class createBautizoDTO{
 		this.segundoApellido = segundoApellido;
 	}
 
-	public Date getFechaNacimiento() {
+	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
