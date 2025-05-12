@@ -8,13 +8,13 @@ import java.util.UUID;
 
 
 public class BautizoDTO {
-    private UUID id;
-    private UUID numeroActa;
-    private UUID idBautizado;
-    private UUID idSacerdote;
-    private UUID idDoyfe;
-    private UUID idLocalidad;
-	public BautizoDTO(UUID id, UUID numeroActa, UUID idBautizado, UUID idSacerdote, UUID idDoyfe, UUID idLocalidad) {
+    private Long id;
+    private Long numeroActa;
+    private Long idBautizado;
+    private Long idSacerdote;
+    private Long idDoyfe;
+    private Long idLocalidad;
+	public BautizoDTO(Long id, Long numeroActa, Long idBautizado, Long idSacerdote, Long idDoyfe, Long idLocalidad) {
 		super();
 		this.id = id;
 		this.numeroActa = numeroActa;
@@ -23,40 +23,40 @@ public class BautizoDTO {
 		this.idDoyfe = idDoyfe;
 		this.idLocalidad = idLocalidad;
 	}
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-	public UUID getNumeroActa() {
+	public Long getNumeroActa() {
 		return numeroActa;
 	}
-	public void setNumeroActa(UUID numeroActa) {
+	public void setNumeroActa(Long numeroActa) {
 		this.numeroActa = numeroActa;
 	}
-	public UUID getIdBautizado() {
+	public Long getIdBautizado() {
 		return idBautizado;
 	}
-	public void setIdBautizado(UUID idBautizado) {
+	public void setIdBautizado(Long idBautizado) {
 		this.idBautizado = idBautizado;
 	}
-	public UUID getIdSacerdote() {
+	public Long getIdSacerdote() {
 		return idSacerdote;
 	}
-	public void setIdSacerdote(UUID idSacerdote) {
+	public void setIdSacerdote(Long idSacerdote) {
 		this.idSacerdote = idSacerdote;
 	}
-	public UUID getIdDoyfe() {
+	public Long getIdDoyfe() {
 		return idDoyfe;
 	}
-	public void setIdDoyfe(UUID idDoyfe) {
+	public void setIdDoyfe(Long idDoyfe) {
 		this.idDoyfe = idDoyfe;
 	}
-	public UUID getIdLocalidad() {
+	public Long getIdLocalidad() {
 		return idLocalidad;
 	}
-	public void setIdLocalidad(UUID idLocalidad) {
+	public void setIdLocalidad(Long idLocalidad) {
 		this.idLocalidad = idLocalidad;
 	}
     

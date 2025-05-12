@@ -9,13 +9,13 @@ import java.util.UUID;
 @Data
 
 public class MatrimonioDTO {
-    private UUID id;
-    private UUID idActa;
-    private UUID idMadrina;
-    private UUID idPadrino;
-    private UUID personaA;
-    private UUID personaB;
-	public MatrimonioDTO(UUID id, UUID idActa, UUID idMadrina, UUID idPadrino, UUID personaA, UUID personaB) {
+    private Long id;
+    private Long idActa;
+    private Long idMadrina;
+    private Long idPadrino;
+    private Long personaA;
+    private Long personaB;
+	public MatrimonioDTO(Long id, Long idActa, Long idMadrina, Long idPadrino, Long personaA, Long personaB) {
 		super();
 		this.id = id;
 		this.idActa = idActa;
@@ -24,40 +24,40 @@ public class MatrimonioDTO {
 		this.personaA = personaA;
 		this.personaB = personaB;
 	}
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-	public UUID getIdActa() {
+	public Long getIdActa() {
 		return idActa;
 	}
-	public void setIdActa(UUID idActa) {
+	public void setIdActa(Long idActa) {
 		this.idActa = idActa;
 	}
-	public UUID getIdMadrina() {
+	public Long getIdMadrina() {
 		return idMadrina;
 	}
-	public void setIdMadrina(UUID idMadrina) {
+	public void setIdMadrina(Long idMadrina) {
 		this.idMadrina = idMadrina;
 	}
-	public UUID getIdPadrino() {
+	public Long getIdPadrino() {
 		return idPadrino;
 	}
-	public void setIdPadrino(UUID idPadrino) {
+	public void setIdPadrino(Long idPadrino) {
 		this.idPadrino = idPadrino;
 	}
-	public UUID getPersonaA() {
+	public Long getPersonaA() {
 		return personaA;
 	}
-	public void setPersonaA(UUID personaA) {
+	public void setPersonaA(Long personaA) {
 		this.personaA = personaA;
 	}
-	public UUID getPersonaB() {
+	public Long getPersonaB() {
 		return personaB;
 	}
-	public void setPersonaB(UUID personaB) {
+	public void setPersonaB(Long personaB) {
 		this.personaB = personaB;
 	}
 }

@@ -82,7 +82,7 @@ public class ActasController {
 	@DeleteMapping("/")
 	public ResponseEntity<?> editProfile(
 			@PathVariable String id ){
-		UUID uuid = UUID.fromString(id);
+		Long uid = Long.getLong(id);
 		//actaService.deleteActaById(uuid);
 		return null;
 		

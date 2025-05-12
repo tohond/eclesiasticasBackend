@@ -13,9 +13,9 @@ import pixelpulse.eclesiasticasbackend.model.Acta;
 @Setter
 public class Matrimonio {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
     // --- Relación con Acta ---
     @OneToOne(cascade = CascadeType.ALL)
@@ -63,11 +63,11 @@ public class Matrimonio {
 		this.idSacerdote = idSacerdote;
 	}
 
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

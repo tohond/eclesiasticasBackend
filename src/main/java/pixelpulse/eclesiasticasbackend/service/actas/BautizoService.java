@@ -44,7 +44,7 @@ public class BautizoService {
         return bautizoMapper.toDtoList(bautizoRepository.findAll());
     }
 
-    public BautizoDTO getBautizoById(UUID id) {
+    public BautizoDTO getBautizoById(Long id) {
         Bautizo bautizo = bautizoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Bautizo no encontrado con ID: " + id));
         return bautizoMapper.toDto(bautizo);
@@ -78,7 +78,7 @@ public class BautizoService {
     		
     	}
     	else {
-    		doyfe=sacerdoteRepository.findSacerdoteById(UUID.fromString(dto.getIdDoyFe()));
+    		doyfe=sacerdoteRepository.findSacerdoteById(Long.valueOf(dto.getIdDoyFe()));
     	}
     	
     	if(dto.getIdSacerdote()==null||dto.getIdSacerdote().isBlank() ) {
@@ -89,7 +89,7 @@ public class BautizoService {
     		
     	}
     	else {
-    		s=sacerdoteRepository.findSacerdoteById(UUID.fromString(dto.getIdSacerdote()));
+    		s=sacerdoteRepository.findSacerdoteById(Long.valueOf(dto.getIdSacerdote()));
     	}
     	
     	
@@ -111,7 +111,7 @@ public class BautizoService {
         return savedbautizo;
     }
 
-    public BautizoDTO updateBautizo(UUID id, BautizoDTO bautizoDTO) {
+    public BautizoDTO updateBautizo(Long id, BautizoDTO bautizoDTO) {
         if (!bautizoRepository.existsById(id)) {
             throw new EntityNotFoundException("Bautizo no encontrado con ID: " + id);
         }
@@ -122,7 +122,7 @@ public class BautizoService {
         return bautizoMapper.toDto(updatedBautizo);
     }
 
-    public void deleteBautizo(UUID id) {
+    public void deleteBautizo(Long id) {
         if (!bautizoRepository.existsById(id)) {
             throw new EntityNotFoundException("Bautizo no encontrado con ID: " + id);
         }

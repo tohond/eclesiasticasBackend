@@ -17,8 +17,9 @@ public class Acta {
     
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "numeroacta", length = 10)
     private String numeroActa;
@@ -42,7 +43,7 @@ public class Acta {
     public Acta() {
     	
     }
-    public Acta(UUID id, String numeroActa, String folio, String libro, LocalDate fecha, String notas, String tipo) {
+    public Acta(Long  id, String numeroActa, String folio, String libro, LocalDate fecha, String notas, String tipo) {
 		super();
 		this.id = id;
 		this.numeroActa = numeroActa;
@@ -64,11 +65,11 @@ public class Acta {
 	}
     
     
-    public UUID getId() {
+    public Long  getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(Long  id) {
 		this.id = id;
 	}
 

@@ -28,7 +28,7 @@ public class PersonasController {
     @GetMapping("/{id}")
     public ResponseEntity<PersonaDTO> getPersonaById(@PathVariable String id) {
         try {
-            return ResponseEntity.ok(personaService.getPersonaById(UUID.fromString(id)));
+            return ResponseEntity.ok(personaService.getPersonaById(Long.valueOf(id)));
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
         }

@@ -9,10 +9,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PersonaRepository extends JpaRepository<Persona, UUID> {
-	Persona findPersonaById(UUID id);
-	boolean existsById(UUID id);
-	Persona deletePersonaById(UUID id);
+public interface PersonaRepository extends JpaRepository<Persona, Long> {
+	Persona findPersonaById(Long id);
+	boolean existsById(Long id);
+	Persona deletePersonaById(Long id);
 	Persona findPersonaByNombre(String nombre);
 	List<Persona> findPersonaByNombreContains(String name);
 }

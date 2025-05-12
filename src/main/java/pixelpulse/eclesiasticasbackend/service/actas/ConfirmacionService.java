@@ -84,7 +84,7 @@ public class ConfirmacionService {
 		Parroquia parroquia = null;
 		if (dto.getIdParroquia() != null) {
 			parroquia = new Parroquia();
-			parroquia.setId(UUID.fromString(dto.getIdParroquia()));
+			parroquia.setId(Long.valueOf(dto.getIdParroquia()));
 		}
 
 		if (dto.getIdDoyFe() == null || dto.getIdDoyFe().isBlank()) {
@@ -94,7 +94,7 @@ public class ConfirmacionService {
 			doyfe.setPersona(p1);
 
 		} else {
-			doyfe = sacerdoteRepository.findSacerdoteById(UUID.fromString(dto.getIdDoyFe()));
+			doyfe = sacerdoteRepository.findSacerdoteById(Long.valueOf(dto.getIdDoyFe()));
 		}
 
 		if (dto.getIdSacerdote() == null || dto.getIdSacerdote().isBlank()) {
@@ -104,7 +104,7 @@ public class ConfirmacionService {
 			s.setPersona(p2);
 
 		} else {
-			s = sacerdoteRepository.findSacerdoteById(UUID.fromString(dto.getIdSacerdote()));
+			s = sacerdoteRepository.findSacerdoteById(Long.valueOf(dto.getIdSacerdote()));
 		}
 
 		if (dto.getIdmonsr() == null || dto.getIdmonsr().isBlank()) {
@@ -114,7 +114,7 @@ public class ConfirmacionService {
 			monsr.setPersona(p3);
 
 		} else {
-			monsr = sacerdoteRepository.findSacerdoteById(UUID.fromString(dto.getIdSacerdote()));
+			monsr = sacerdoteRepository.findSacerdoteById(Long.valueOf(dto.getIdSacerdote()));
 		}
 
 		Confirmacion b = new Confirmacion();
@@ -132,7 +132,7 @@ public class ConfirmacionService {
 	}
 
 	public ConfirmacionDTO updateConfirmacion(String id, ConfirmacionDTO confirmacionDTO) {
-		if (!confirmacionRepository.existsById(UUID.fromString(id))) {
+		if (!confirmacionRepository.existsById(Long.valueOf(id))) {
 			throw new EntityNotFoundException("Confirmación no encontrada con ID: " + id);
 		}
 
@@ -143,10 +143,10 @@ public class ConfirmacionService {
 	}
 
 	public void deleteConfirmacion(String id) {
-		if (!confirmacionRepository.existsById(UUID.fromString(id))) {
+		if (!confirmacionRepository.existsById(Long.valueOf(id))) {
 			throw new EntityNotFoundException("Confirmación no encontrada con ID: " + id);
 		}
-		confirmacionRepository.deleteById(UUID.fromString(id));
+		confirmacionRepository.deleteById(Long.valueOf(id));
 	}
 
 }

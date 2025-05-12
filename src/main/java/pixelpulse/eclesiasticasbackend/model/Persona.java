@@ -19,9 +19,9 @@ import jakarta.persistence.*;
 public class Persona {
     
 	@Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-    
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
     @Column(name = "nombre", length = 100, nullable = false)
     private String nombre;
     
@@ -100,11 +100,11 @@ public class Persona {
     @OneToMany (mappedBy = "confirmante",cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Confirmacion> confirmacion;
 
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

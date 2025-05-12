@@ -10,13 +10,13 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ConfirmacionDTO {
-    private UUID id;
-    private UUID idActa;
-    private UUID idParroquia;
-    private UUID idConfirmante;
-    private UUID idMonsr;
-    private UUID idSacerdote;
-    private UUID idDoyfe;
-    private UUID idPadrino;
-    private UUID idMadrina;
+    private Long id;
+    private Long idActa;
+    private Long idParroquia;
+    private Long idConfirmante;
+    private Long idMonsr;
+    private Long idSacerdote;
+    private Long idDoyfe;
+    private Long idPadrino;
+    private Long idMadrina;
 }

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface BautizoRepository extends JpaRepository<Bautizo, UUID> {
+public interface BautizoRepository extends JpaRepository<Bautizo, Long> {
 	List<Bautizo> findByIdBautizado(Persona persona);
 	
 	@Query("SELECT b FROM Bautizo b WHERE " +

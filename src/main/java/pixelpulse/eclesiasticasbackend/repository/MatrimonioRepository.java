@@ -13,10 +13,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface MatrimonioRepository extends JpaRepository<Matrimonio, UUID> {
+public interface MatrimonioRepository extends JpaRepository<Matrimonio, Long> {
     
     @Query("SELECT m FROM Matrimonio m WHERE m.acta.id = :actaId")
-    Optional<Matrimonio> findByActaId(@Param("actaId") UUID actaId);
+    Optional<Matrimonio> findByActaId(@Param("actaId") Long actaId);
 
 	Matrimonio findByPersonaA(Persona p);
 	

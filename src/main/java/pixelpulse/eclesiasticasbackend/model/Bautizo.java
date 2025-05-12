@@ -13,9 +13,9 @@ import lombok.Setter;
 
 public class Bautizo  {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
     // --- Relación con Acta ---
     @OneToOne(cascade = CascadeType.ALL)
@@ -68,10 +68,10 @@ public class Bautizo  {
 	public void setAbuelaMaterna(String abuelaMaterna) {
 		this.abuelaMaterna = abuelaMaterna;
 	}
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public Acta getActa() {

@@ -10,6 +10,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SacerdoteDTO {
-    private UUID id;
-    private UUID idPersona;
+    private Long id;
+    private Long idPersona;
 }

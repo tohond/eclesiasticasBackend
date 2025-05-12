@@ -106,7 +106,7 @@ public class PersonaService {
     }
 
     public PersonaDTO updatePersona(String id, PersonaDTO personaDTO) {
-        if (!personaRepository.existsById(UUID.fromString(id))) {
+        if (!personaRepository.existsById(Long.valueOf(id))) {
             throw new EntityNotFoundException("Persona no encontrada con ID: " + id);
         }
         
@@ -117,16 +117,16 @@ public class PersonaService {
     }
 
     public void deletePersona(String id) {
-    	if (!personaRepository.existsById(UUID.fromString(id))) {
+    	if (!personaRepository.existsById(Long.valueOf(id))) {
             throw new EntityNotFoundException("Persona no encontrada con ID: " + id);
         }
-        personaRepository.deletePersonaById(UUID.fromString(id));
+        personaRepository.deletePersonaById(Long.valueOf(id));
     }
 
     
     
     public record PersonaSearchResult(
-    	    UUID personaId,
+    	    Long personaId,
     	    String personaName,
     	    List<Acta> actas
     	) {

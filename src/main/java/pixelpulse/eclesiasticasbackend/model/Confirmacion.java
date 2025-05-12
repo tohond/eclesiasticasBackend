@@ -14,10 +14,9 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Confirmacion {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "uuid")
-    private UUID id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idacta", referencedColumnName = "id", nullable = false)
@@ -51,11 +50,11 @@ public class Confirmacion {
     @JoinColumn(name = "idmadrina")
     private Persona madrina;
 
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

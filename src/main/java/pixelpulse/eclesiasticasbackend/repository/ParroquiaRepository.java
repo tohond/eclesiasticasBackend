@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface ParroquiaRepository extends JpaRepository<Parroquia, UUID> {
+public interface ParroquiaRepository extends JpaRepository<Parroquia, Long> {
 
 }
 

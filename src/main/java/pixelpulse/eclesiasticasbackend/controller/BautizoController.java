@@ -25,7 +25,7 @@ public class BautizoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BautizoDTO> getBautizoById(@PathVariable UUID id) {
+    public ResponseEntity<BautizoDTO> getBautizoById(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(bautizoService.getBautizoById(id));
         } catch (EntityNotFoundException e) {
@@ -40,7 +40,7 @@ public class BautizoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BautizoDTO> updateBautizo(@PathVariable UUID id, @RequestBody BautizoDTO bautizoDTO) {
+    public ResponseEntity<BautizoDTO> updateBautizo(@PathVariable Long id, @RequestBody BautizoDTO bautizoDTO) {
         try {
             return ResponseEntity.ok(bautizoService.updateBautizo(id, bautizoDTO));
         } catch (EntityNotFoundException e) {
@@ -49,7 +49,7 @@ public class BautizoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBautizo(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteBautizo(@PathVariable Long id) {
         try {
             bautizoService.deleteBautizo(id);
             return ResponseEntity.noContent().build();

@@ -34,7 +34,7 @@ public class SacerdoteService {
     }
 
     public SacerdoteDTO getSacerdoteById(String id) {
-        Sacerdote sacerdote = sacerdoteRepository.findById(UUID.fromString(id))
+        Sacerdote sacerdote = sacerdoteRepository.findById(Long.valueOf(id))
                 .orElseThrow(() -> new EntityNotFoundException("Sacerdote no encontrado con ID: " + id));
         return sacerdoteMapper.toDto(sacerdote);
     }
@@ -46,7 +46,7 @@ public class SacerdoteService {
     }
 
     public SacerdoteDTO updateSacerdote(String id, SacerdoteDTO sacerdoteDTO) {
-        if (!sacerdoteRepository.existsById(UUID.fromString(id))) {
+        if (!sacerdoteRepository.existsById(Long.valueOf(id))) {
             throw new EntityNotFoundException("Sacerdote no encontrado con ID: " + id);
         }
         
@@ -57,10 +57,10 @@ public class SacerdoteService {
     }
 
     public void deleteSacerdote(String id) {
-        if (!sacerdoteRepository.existsById(UUID.fromString(id))) {
+        if (!sacerdoteRepository.existsById(Long.valueOf(id))) {
             throw new EntityNotFoundException("Sacerdote no encontrado con ID: " + id);
         }
-        sacerdoteRepository.deleteById(UUID.fromString(id));
+        sacerdoteRepository.deleteById(Long.valueOf(id));
     }
 
     

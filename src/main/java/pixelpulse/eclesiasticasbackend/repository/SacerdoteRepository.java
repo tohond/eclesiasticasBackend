@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface SacerdoteRepository extends JpaRepository<Sacerdote, UUID> {
-	Sacerdote findSacerdoteById(UUID id);
+public interface SacerdoteRepository extends JpaRepository<Sacerdote, Long> {
+	Sacerdote findSacerdoteById(Long id);
 }

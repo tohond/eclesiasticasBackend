@@ -10,7 +10,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ParroquiaDTO {
-    private UUID id;
+    private Long id;
     private String nombre;
     private String direccion;
 }

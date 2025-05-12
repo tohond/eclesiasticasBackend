@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import pixelpulse.eclesiasticasbackend.model.Acta;
 
 @Repository
-public interface ActaRepository extends JpaRepository<Acta, UUID> {
+public interface ActaRepository extends JpaRepository<Acta, Long> {
 	
 	/*@Query(value = 
 	           "SELECT a.id, a.numero_acta, 'BAUTIZO' as tipo, b.id as related_id " +

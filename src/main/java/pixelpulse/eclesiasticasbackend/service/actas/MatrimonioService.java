@@ -75,7 +75,7 @@ public class MatrimonioService {
     		
     	}
     	else {
-    		doyfe=sacerdoteRepository.findSacerdoteById(UUID.fromString(dto.getIdDoyFe()));
+    		doyfe=sacerdoteRepository.findSacerdoteById(Long.valueOf(dto.getIdDoyFe()));
     	}
     	
     	if(dto.getIdSacerdote()==null||dto.getIdSacerdote().isBlank() ) {
@@ -86,7 +86,7 @@ public class MatrimonioService {
     		
     	}
     	else {
-    		s=sacerdoteRepository.findSacerdoteById(UUID.fromString(dto.getIdSacerdote()));
+    		s=sacerdoteRepository.findSacerdoteById(Long.valueOf(dto.getIdSacerdote()));
     	}
     	
     	
@@ -100,7 +100,7 @@ public class MatrimonioService {
     }
 
     public MatrimonioDTO updateConfirmacion(String id, MatrimonioDTO confirmacionDTO) {
-        if (!matrimonioRepository.existsById(UUID.fromString(id))) {
+        if (!matrimonioRepository.existsById(Long.valueOf(id))) {
             throw new EntityNotFoundException("Confirmación no encontrada con ID: " + id);
         }
         
@@ -111,10 +111,10 @@ public class MatrimonioService {
     }
 
     public void deleteConfirmacion(String id) {
-        if (!matrimonioRepository.existsById(UUID.fromString(id))) {
+        if (!matrimonioRepository.existsById(Long.valueOf(id))) {
             throw new EntityNotFoundException("Confirmación no encontrada con ID: " + id);
         }
-        matrimonioRepository.deleteById(UUID.fromString(id));
+        matrimonioRepository.deleteById(Long.valueOf(id));
     }
     
 }

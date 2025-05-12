@@ -15,10 +15,9 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Parroquia {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "uuid")
-    private UUID id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
     
     @Column(name = "nombre", length = 20, nullable = false)
     private String nombre;
@@ -27,11 +26,11 @@ public class Parroquia {
     private String direccion;
     
 
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
