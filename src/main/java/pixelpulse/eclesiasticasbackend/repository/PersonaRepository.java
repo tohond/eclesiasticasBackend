@@ -16,6 +16,6 @@ public interface PersonaRepository extends JpaRepository<Persona, Long> {
 	boolean existsById(Long id);
 	Persona deletePersonaById(Long id);
 	List<Persona> findPersonaByNombre1AndNombre2AndApellido1AndApellido2(String nombre1,String nombre2,String apellido1,String apellido2);
-	@Query("SELECT p FROM Persona p WHERE CONCAT(p.nombre1, ' ', p.nombre2,p.apellido1, ' ', p.apellido2) LIKE %:fullName%")
+	@Query("SELECT p FROM Persona p WHERE CONCAT(p.nombre1, ' ', p.nombre2,p.apellido1, ' ', p.apellido2) LIKE '%:fullName%'")
 	List<Persona> findByFullNameContaining(@Param("fullName") String fullName);
 }
