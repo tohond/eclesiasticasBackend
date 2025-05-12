@@ -150,4 +150,12 @@ public class ConfirmacionService {
 		confirmacionRepository.deleteById(Long.valueOf(id));
 	}
 
+	public ConfirmacionDTO getConfirmacionById(String id) {
+		// TODO Auto-generated method stub
+		Confirmacion c = confirmacionRepository.findById(Long.valueOf(id))  .orElseThrow(() -> new EntityNotFoundException("Bautizo no encontrado con ID: " + id));
+        ;
+		return mapper.toDto(c);
+				
+	}
+
 }

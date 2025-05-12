@@ -48,6 +48,7 @@ public class BautizoService {
         Bautizo bautizo = bautizoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Bautizo no encontrado con ID: " + id));
         return bautizoMapper.toDto(bautizo);
+        
     }
 
     public Bautizo createBautizo(createBautizoDTO dto) {

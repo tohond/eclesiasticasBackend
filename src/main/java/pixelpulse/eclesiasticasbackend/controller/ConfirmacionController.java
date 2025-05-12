@@ -22,7 +22,7 @@ public class ConfirmacionController {
     public ResponseEntity<List<ConfirmacionDTO>> getAllConfirmaciones() {
         return ResponseEntity.ok(confirmacionService.getAllConfirmaciones());
     }
-    /*
+    
     @GetMapping("/{id}")
     public ResponseEntity<ConfirmacionDTO> getConfirmacionById(@PathVariable String id) {
         try {
@@ -30,7 +30,7 @@ public class ConfirmacionController {
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
-    }*/
+    }
 
     @PostMapping
     public ResponseEntity<ConfirmacionDTO> createConfirmacion(@RequestBody ConfirmacionDTO confirmacionDTO) {

@@ -23,16 +23,16 @@ public class MatrimonioController {
     public ResponseEntity<List<MatrimonioDTO>> getAllMatrimonios() {
         return ResponseEntity.ok(matrimonioService.getAllMatrimonios());
     }
-    /*
+    
     @GetMapping("/{id}")
     public ResponseEntity<MatrimonioDTO> getMatrimonioById(@PathVariable String id) {
         try {
-            return ResponseEntity.ok(matrimonioService.getMatrimonioById(id));
+        	return ResponseEntity.ok(matrimonioService.getMatrimonioById(Long.valueOf(id) ));
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
     }
-
+/*
     @PostMapping
     public ResponseEntity<MatrimonioDTO> createMatrimonio(@RequestBody MatrimonioDTO matrimonioDTO) {
         return new ResponseEntity<>(matrimonioService.createMatrimonio(matrimonioDTO), HttpStatus.CREATED);

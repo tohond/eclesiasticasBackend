@@ -1,11 +1,13 @@
 package pixelpulse.eclesiasticasbackend.service.actas;
 
+import pixelpulse.eclesiasticasbackend.dto.BautizoDTO;
 import pixelpulse.eclesiasticasbackend.dto.ConfirmacionDTO;
 import pixelpulse.eclesiasticasbackend.dto.MatrimonioDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createMatrimonioDTO;
 import pixelpulse.eclesiasticasbackend.mapper.MatrimonioMapper;
 import pixelpulse.eclesiasticasbackend.mapper.PersonaMapper;
 import pixelpulse.eclesiasticasbackend.model.Acta;
+import pixelpulse.eclesiasticasbackend.model.Bautizo;
 import pixelpulse.eclesiasticasbackend.model.Confirmacion;
 import pixelpulse.eclesiasticasbackend.model.Matrimonio;
 import pixelpulse.eclesiasticasbackend.model.Persona;
@@ -56,7 +58,12 @@ public class MatrimonioService {
     }
 
    
-
+    public MatrimonioDTO getMatrimonioById(Long id) {
+        Matrimonio bautizo = matrimonioRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Bautizo no encontrado con ID: " + id));
+        return mapper.toDto(bautizo);
+        
+    }
     public MatrimonioDTO createMatrimonio(createMatrimonioDTO dto) {
     	Acta a = new Acta(null, dto.getNumeroActa(), dto.getFolio(), dto.getLibro(), dto.getFecha(), dto.getNotas(), dto.getTipo());
 		Sacerdote doyfe = new Sacerdote();
