@@ -14,4 +14,5 @@ public interface PersonaRepository extends JpaRepository<Persona, UUID> {
 	boolean existsById(UUID id);
 	Persona deletePersonaById(UUID id);
 	Persona findPersonaByNombre(String nombre);
+	List<Persona> findPersonaByNombreContains(String name);
 }

@@ -72,10 +72,10 @@ public class ActasController {
 	
 	
 	@GetMapping("/nombre")
-    public ResponseEntity<PersonaSearchResult> searchByName(
+    public ResponseEntity<?> searchByName(
         @RequestParam("nombre") String name
     ) {
-        PersonaSearchResult results = personaService.searchByName(name);
+        List<ActaDTO> results = personaService.searchByName(name);
         return ResponseEntity.ok(results);
     }
 	

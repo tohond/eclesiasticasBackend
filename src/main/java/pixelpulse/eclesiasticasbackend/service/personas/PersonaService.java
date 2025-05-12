@@ -28,6 +28,8 @@ import pixelpulse.eclesiasticasbackend.repository.PersonaRepository;
 @Service
 public class PersonaService {
 
+    private final ActaMapper actaMapper;
+
     @Autowired
     private PersonaRepository personaRepository;
     @Autowired
@@ -44,13 +46,14 @@ public class PersonaService {
     
     public PersonaService(PersonaRepository personaRepository, PersonaMapper personaMapper,
 			MatrimonioRepository matrimonioRepository, BautizoRepository bautizoRepository,
-			ConfirmacionRepository confirmacionRepository) {
+			ConfirmacionRepository confirmacionRepository, ActaMapper actaMapper) {
 		super();
 		this.personaRepository = personaRepository;
 		this.personaMapper = personaMapper;
 		this.matrimonioRepository = matrimonioRepository;
 		this.bautizoRepository = bautizoRepository;
 		this.confirmacionRepository = confirmacionRepository;
+		this.actaMapper = actaMapper;
 	}
 
 
@@ -59,17 +62,21 @@ public class PersonaService {
     }
     
     
-    public PersonaSearchResult searchByName(String name) {
+    public List<ActaDTO> searchByName(String name) {
         // Find personas by name (case-insensitive, partial match)
-        Persona p = personaRepository.findPersonaByNombre(name);
+        List<Persona> p = personaRepository.findPersonaByNombreContains(name);
 
 
         // Collect all related records for each persona
         List<Acta> actasByPerson = new ArrayList<>();
-                 matrimonioRepository.findAllByPersonaInAnyRole(p).forEach(e -> actasByPerson.add(e.getActa()) );
-                bautizoRepository.findByIdBautizado(p).forEach(e -> actasByPerson.add(e.getActa() ) ) ;
-                //confirmacionRepository.findBy(p).forEach(e -> actasByPerson.add(e.getActa() ) );
-                return new PersonaSearchResult(p, actasByPerson);
+        for (Persona persona : p) {
+        	 matrimonioRepository.findAllByPersonaInAnyRole(persona).forEach(e -> actasByPerson.add(e.getActa()) );
+             bautizoRepository.findByIdBautizado(persona).forEach(e -> actasByPerson.add(e.getActa() ) ) ;
+             confirmacionRepository.findAllByPersonaInAnyRole(persona).forEach(e -> actasByPerson.add(e.getActa() ) );
+             
+		}
+                
+                return actaMapper.toDtoList(actasByPerson);
             
     
 }
