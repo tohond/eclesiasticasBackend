@@ -120,6 +120,10 @@ public class MatrimonioService {
     	m.setIdpadrea(padrePersonaA);
     	m.setIdmadreb(madrePersonaB);
     	m.setIdpadreb(padrePersonaB);
+    	m.setTestigo1(dto.getNombrestestigo1());
+    	m.setTestigo2(dto.getNombrestestigo2());
+    	m.setTestigo3(dto.getNombrestestigo3());
+    	m.setTestigo4(dto.getNombrestestigo4());
     	
     	
     	Matrimonio savedMatrimonio = matrimonioRepository.save(m);

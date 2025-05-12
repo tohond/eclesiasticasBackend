@@ -142,5 +142,37 @@ public class Matrimonio {
 		this.idmadreb = idmadreb;
 	}
 
+	public String getTestigo1() {
+		return testigo1;
+	}
+
+	public void setTestigo1(String testigo1) {
+		this.testigo1 = testigo1;
+	}
+
+	public String getTestigo2() {
+		return testigo2;
+	}
+
+	public void setTestigo2(String testigo2) {
+		this.testigo2 = testigo2;
+	}
+
+	public String getTestigo3() {
+		return testigo3;
+	}
+
+	public void setTestigo3(String testigo3) {
+		this.testigo3 = testigo3;
+	}
+
+	public String getTestigo4() {
+		return testigo4;
+	}
+
+	public void setTestigo4(String testigo4) {
+		this.testigo4 = testigo4;
+	}
+
     
 }

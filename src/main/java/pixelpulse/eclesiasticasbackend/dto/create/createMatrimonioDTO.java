@@ -36,7 +36,24 @@ public class createMatrimonioDTO{
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonFormat(pattern="dd-MM-yy")
     private LocalDate fechaNacimientoEsposo;
+	private String lugarNacimientoEsposo;
 	
+	public String getLugarNacimientoEsposo() {
+		return lugarNacimientoEsposo;
+	}
+
+	public void setLugarNacimientoEsposo(String lugarNacimientoEsposo) {
+		this.lugarNacimientoEsposo = lugarNacimientoEsposo;
+	}
+
+	public String getLugarNacimientoEsposa() {
+		return lugarNacimientoEsposa;
+	}
+
+	public void setLugarNacimientoEsposa(String lugarNacimientoEsposa) {
+		this.lugarNacimientoEsposa = lugarNacimientoEsposa;
+	}
+
 	private String esposanombre1;
 	private String esposanombre2;
 	private String esposaapellido1;
@@ -46,13 +63,10 @@ public class createMatrimonioDTO{
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonFormat(pattern="dd-MM-yy")
     private Date fechaNacimientoEsposa;
+	private String lugarNacimientoEsposa;
 
-    private String nombreCiudad;
-    
-    private String lugarNacimiento;
     
     
-    private String ciudadNacimiento;
 
     // --- Datos Anexos ---
     private String nombresPadreEsposo;
@@ -61,10 +75,47 @@ public class createMatrimonioDTO{
     private String nombresMadreEsposa;
     
     
-    private String nombrespadrino;
-    private String nombresmadrina;
+    private String nombrestestigo1;
+    private String nombrestestigo2;
+    private String nombrestestigo3;
+    private String nombrestestigo4;
     
-    private String notaMarginal;
+    
+
+    
+    public String getNombrestestigo1() {
+		return nombrestestigo1;
+	}
+
+	public void setNombrestestigo1(String nombrestestigo1) {
+		this.nombrestestigo1 = nombrestestigo1;
+	}
+
+	public String getNombrestestigo2() {
+		return nombrestestigo2;
+	}
+
+	public void setNombrestestigo2(String nombrestestigo2) {
+		this.nombrestestigo2 = nombrestestigo2;
+	}
+
+	public String getNombrestestigo3() {
+		return nombrestestigo3;
+	}
+
+	public void setNombrestestigo3(String nombrestestigo3) {
+		this.nombrestestigo3 = nombrestestigo3;
+	}
+
+	public String getNombrestestigo4() {
+		return nombrestestigo4;
+	}
+
+	public void setNombrestestigo4(String nombrestestigo4) {
+		this.nombrestestigo4 = nombrestestigo4;
+	}
+
+	private String notaMarginal;
 
 	public int getNumero_formulario() {
 		return numero_formulario;
@@ -234,29 +285,6 @@ public class createMatrimonioDTO{
 		this.fechaNacimientoEsposa = fechaNacimientoEsposa;
 	}
 
-	public String getNombreCiudad() {
-		return nombreCiudad;
-	}
-
-	public void setNombreCiudad(String nombreCiudad) {
-		this.nombreCiudad = nombreCiudad;
-	}
-
-	public String getLugarNacimiento() {
-		return lugarNacimiento;
-	}
-
-	public void setLugarNacimiento(String lugarNacimiento) {
-		this.lugarNacimiento = lugarNacimiento;
-	}
-
-	public String getCiudadNacimiento() {
-		return ciudadNacimiento;
-	}
-
-	public void setCiudadNacimiento(String ciudadNacimiento) {
-		this.ciudadNacimiento = ciudadNacimiento;
-	}
 
 	
 	public String getNombresPadreEsposo() {
@@ -291,21 +319,6 @@ public class createMatrimonioDTO{
 		this.nombresMadreEsposa = nombresMadreEsposa.toLowerCase();
 	}
 
-	public String getNombrespadrino() {
-		return nombrespadrino;
-	}
-
-	public void setNombrespadrino(String nombrespadrino) {
-		this.nombrespadrino = nombrespadrino.toLowerCase();
-	}
-
-	public String getNombresmadrina() {
-		return nombresmadrina;
-	}
-
-	public void setNombresmadrina(String nombresmadrina) {
-		this.nombresmadrina = nombresmadrina.toLowerCase();
-	}
 
 	public String getNotaMarginal() {
 		return notaMarginal;
