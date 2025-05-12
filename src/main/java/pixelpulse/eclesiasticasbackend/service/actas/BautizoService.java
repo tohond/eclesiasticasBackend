@@ -37,12 +37,18 @@ public class BautizoService {
     @Autowired
     private BautizoMapper bautizoMapper;
 
-    BautizoService(SacerdoteRepository sacerdoteRepository, ActaExportController actaExportController) {
-        this.sacerdoteRepository = sacerdoteRepository;
-        this.actaExportController = actaExportController;
-    }
+    
+    public BautizoService(ActaExportController actaExportController, SacerdoteRepository sacerdoteRepository,
+			BautizoRepository bautizoRepository, ActaRepository actaRepository, BautizoMapper bautizoMapper) {
+		super();
+		this.actaExportController = actaExportController;
+		this.sacerdoteRepository = sacerdoteRepository;
+		this.bautizoRepository = bautizoRepository;
+		this.actaRepository = actaRepository;
+		this.bautizoMapper = bautizoMapper;
+	}
 
-    public List<BautizoDTO> getAllBautizos() {
+	public List<BautizoDTO> getAllBautizos() {
         return bautizoMapper.toDtoList(bautizoRepository.findAll());
     }
 

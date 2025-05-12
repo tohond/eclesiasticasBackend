@@ -60,5 +60,7 @@ public class BautizoDTO {
 		this.idLocalidad = idLocalidad;
 	}
     
-    
+    public BautizoDTO() {
+    	
+    }
 }

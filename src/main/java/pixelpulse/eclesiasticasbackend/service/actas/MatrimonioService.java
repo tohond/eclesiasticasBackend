@@ -48,11 +48,23 @@ public class MatrimonioService {
     @Autowired
     private MatrimonioMapper mapper;
 
-    MatrimonioService(SacerdoteRepository sacerdoteRepository) {
-        this.sacerdoteRepository = sacerdoteRepository;
-    }
+    
 
-    public List<MatrimonioDTO> getAllMatrimonios() {
+    public MatrimonioService(SacerdoteRepository sacerdoteRepository, MatrimonioRepository matrimonioRepository,
+			ActaRepository actaRepository, PersonaRepository personaRepository, PersonaService pService,
+			PersonaMapper pMapper, MatrimonioMapper mapper) {
+		super();
+		this.sacerdoteRepository = sacerdoteRepository;
+		this.matrimonioRepository = matrimonioRepository;
+		this.actaRepository = actaRepository;
+		this.personaRepository = personaRepository;
+		this.pService = pService;
+		this.pMapper = pMapper;
+		this.mapper = mapper;
+	}
+
+
+	public List<MatrimonioDTO> getAllMatrimonios() {
         return mapper.toDtoList(matrimonioRepository.findAll());
         		
     }

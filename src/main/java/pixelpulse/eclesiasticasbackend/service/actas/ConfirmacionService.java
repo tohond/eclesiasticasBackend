@@ -43,6 +43,21 @@ public class ConfirmacionService {
 
 	private ConfirmacionMapper mapper;
 
+	public ConfirmacionService(ConfirmacionRepository confirmacionRepository, ActaRepository actaRepository,
+			ParroquiaRepository parroquiaRepository, PersonaRepository personaRepository,
+			SacerdoteRepository sacerdoteRepository, PersonaService pService, PersonaMapper pMapper,
+			ConfirmacionMapper mapper) {
+		super();
+		this.confirmacionRepository = confirmacionRepository;
+		this.actaRepository = actaRepository;
+		this.parroquiaRepository = parroquiaRepository;
+		this.personaRepository = personaRepository;
+		this.sacerdoteRepository = sacerdoteRepository;
+		this.pService = pService;
+		this.pMapper = pMapper;
+		this.mapper = mapper;
+	}
+
 	public List<ConfirmacionDTO> getAllConfirmaciones() {
 		return mapper.toDtoList(confirmacionRepository.findAll());
 
