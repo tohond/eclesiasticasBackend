@@ -16,7 +16,7 @@ import java.util.UUID;
 @Repository
 public interface ConfirmacionRepository extends JpaRepository<Confirmacion, Long> {
     
-	
+
 
     @Query("SELECT c FROM Confirmacion c WHERE " +
             "c.confirmante = :persona OR " +

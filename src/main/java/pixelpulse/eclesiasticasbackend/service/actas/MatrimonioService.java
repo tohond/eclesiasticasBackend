@@ -59,8 +59,10 @@ public class MatrimonioService {
 
    
     public MatrimonioDTO getMatrimonioById(Long id) {
-        Matrimonio bautizo = matrimonioRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Bautizo no encontrado con ID: " + id));
+    	Acta acta = actaRepository.findById(id)   .orElseThrow(() -> new EntityNotFoundException("Bautizo no encontrado con ID: " + id));
+        ;
+        Matrimonio bautizo = matrimonioRepository.findByActa(acta);
+             
         return mapper.toDto(bautizo);
         
     }

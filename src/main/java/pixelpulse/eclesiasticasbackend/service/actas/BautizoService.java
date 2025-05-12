@@ -33,6 +33,8 @@ public class BautizoService {
     private BautizoRepository bautizoRepository;
     
     @Autowired
+    private ActaRepository actaRepository;
+    @Autowired
     private BautizoMapper bautizoMapper;
 
     BautizoService(SacerdoteRepository sacerdoteRepository, ActaExportController actaExportController) {
@@ -45,9 +47,10 @@ public class BautizoService {
     }
 
     public BautizoDTO getBautizoById(Long id) {
-        Bautizo bautizo = bautizoRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Bautizo no encontrado con ID: " + id));
-        return bautizoMapper.toDto(bautizo);
+    	Acta acta = actaRepository.findById(id)   .orElseThrow(() -> new EntityNotFoundException("Bautizo no encontrado con ID: " + id));
+        ;
+        Bautizo bautizo = bautizoRepository.findByActa(acta);
+                return bautizoMapper.toDto(bautizo);
         
     }
 

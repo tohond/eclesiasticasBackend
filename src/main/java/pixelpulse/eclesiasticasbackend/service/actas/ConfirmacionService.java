@@ -152,8 +152,9 @@ public class ConfirmacionService {
 
 	public ConfirmacionDTO getConfirmacionById(String id) {
 		// TODO Auto-generated method stub
-		Confirmacion c = confirmacionRepository.findById(Long.valueOf(id))  .orElseThrow(() -> new EntityNotFoundException("Bautizo no encontrado con ID: " + id));
+		Acta acta = actaRepository.findById(Long.valueOf(id)).orElseThrow(() -> new EntityNotFoundException("Bautizo no encontrado con ID: " + id) );
         ;
+		Confirmacion c = confirmacionRepository.findByActa(acta);
 		return mapper.toDto(c);
 				
 	}
