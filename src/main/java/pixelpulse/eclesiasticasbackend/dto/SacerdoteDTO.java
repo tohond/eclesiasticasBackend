@@ -11,5 +11,5 @@ import java.util.UUID;
 @AllArgsConstructor
 public class SacerdoteDTO {
     private Long id;
-    private Long idPersona;
+    private PersonaDTO persona;
 }

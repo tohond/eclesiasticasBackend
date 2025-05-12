@@ -19,7 +19,7 @@ public class SacerdoteController {
     @Autowired
     private SacerdoteService sacerdoteService;
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<SacerdoteDTO>> getAllSacerdotes() {
         return ResponseEntity.ok(sacerdoteService.getAllSacerdotes());
     }
