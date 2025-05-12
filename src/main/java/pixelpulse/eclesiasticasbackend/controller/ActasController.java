@@ -71,7 +71,7 @@ public class ActasController {
     }
 	
 	
-	@GetMapping("/busquedasimple")
+	@GetMapping("/busquedaavanzada")
     public ResponseEntity<?> searchByNames(
         @RequestParam("nombre1") String nombre1,
         @RequestParam("nombre2") String nombre2,
@@ -82,7 +82,7 @@ public class ActasController {
         return ResponseEntity.ok(results);
     }
 	
-	@GetMapping("/busquedaavanzada")
+	@GetMapping("/busquedasimple")
     public ResponseEntity<?> searchByName(
         @RequestParam("nombre") String name
     ) {
