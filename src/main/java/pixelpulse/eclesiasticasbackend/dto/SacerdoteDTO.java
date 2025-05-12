@@ -6,10 +6,23 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class SacerdoteDTO {
     private Long id;
-    private PersonaDTO persona;
+    private String nombre;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+    public SacerdoteDTO() {
+    	
+    }
 }

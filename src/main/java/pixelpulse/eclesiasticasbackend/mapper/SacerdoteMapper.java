@@ -29,8 +29,10 @@ public class SacerdoteMapper {
  
  
     public SacerdoteDTO toDto(Sacerdote persona) {
-    	SacerdoteDTO p = modelMapper.map(persona, SacerdoteDTO.class);
-    	return p;
+    	SacerdoteDTO dto = new SacerdoteDTO();
+    	dto.setId(persona.getId());
+    	dto.setNombre(persona.getPersona().getNombre1());
+    	return dto;
     }
 
     public List<SacerdoteDTO> toDtoList(List<Sacerdote> personas) {

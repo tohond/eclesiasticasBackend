@@ -25,8 +25,14 @@ public class SacerdoteService {
     private SacerdoteMapper sacerdoteMapper;
 
     
+    
+    public SacerdoteService(SacerdoteRepository sacerdoteRepository, SacerdoteMapper sacerdoteMapper) {
+		super();
+		this.sacerdoteRepository = sacerdoteRepository;
+		this.sacerdoteMapper = sacerdoteMapper;
+	}
 
-    public List<SacerdoteDTO> getAllSacerdotes() {
+	public List<SacerdoteDTO> getAllSacerdotes() {
         return sacerdoteMapper.toDtoList(sacerdoteRepository.findAll());
         		
         		
