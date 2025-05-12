@@ -33,8 +33,8 @@ public class createConfirmacionDTO{
 	
 	private String nombre1;
 	private String nombre2;
-	private String nombre3;
-	private String nombre4;
+	private String apellido1;
+	private String apellido2;
 	
 
     // --- Fecha de Nacimiento ---
@@ -77,7 +77,7 @@ public class createConfirmacionDTO{
 	}
 
 	public void setNumeroActa(String numeroActa) {
-		this.numeroActa = numeroActa;
+		this.numeroActa = numeroActa.toLowerCase();
 	}
 
 	public String getFolio() {
@@ -109,7 +109,7 @@ public class createConfirmacionDTO{
 	}
 
 	public void setTipo(String tipo) {
-		this.tipo = tipo;
+		this.tipo = tipo.toLowerCase();
 	}
 
 	public String getIdSacerdote() {
@@ -125,7 +125,7 @@ public class createConfirmacionDTO{
 	}
 
 	public void setNombresSacerdote(String nombresSacerdote) {
-		this.nombresSacerdote = nombresSacerdote;
+		this.nombresSacerdote = nombresSacerdote.toLowerCase();
 	}
 
 	public String getIdDoyFe() {
@@ -141,7 +141,7 @@ public class createConfirmacionDTO{
 	}
 
 	public void setNombresDoyFe(String nombresDoyFe) {
-		this.nombresDoyFe = nombresDoyFe;
+		this.nombresDoyFe = nombresDoyFe.toLowerCase();
 	}
 
 	public String getNombre1() {
@@ -149,7 +149,7 @@ public class createConfirmacionDTO{
 	}
 
 	public void setNombre1(String nombre1) {
-		this.nombre1 = nombre1;
+		this.nombre1 = nombre1.toLowerCase();
 	}
 
 	public String getNombre2() {
@@ -157,23 +157,23 @@ public class createConfirmacionDTO{
 	}
 
 	public void setNombre2(String nombre2) {
-		this.nombre2 = nombre2;
+		this.nombre2 = nombre2.toLowerCase();
 	}
 
-	public String getNombre3() {
-		return nombre3;
+	public String getApellido1() {
+		return apellido1;
 	}
 
-	public void setNombre3(String nombre3) {
-		this.nombre3 = nombre3;
+	public void setApellido1(String apellido1) {
+		this.apellido1 = apellido1.toLowerCase();
 	}
 
-	public String getNombre4() {
-		return nombre4;
+	public String getApellido2() {
+		return apellido2;
 	}
 
-	public void setNombre4(String nombre4) {
-		this.nombre4 = nombre4;
+	public void setApellido2(String apellido2) {
+		this.apellido2 = apellido2.toLowerCase();
 	}
 
 
@@ -206,7 +206,7 @@ public class createConfirmacionDTO{
 	}
 
 	public void setNombresPadre(String nombresPadre) {
-		this.nombresPadre = nombresPadre;
+		this.nombresPadre = nombresPadre.toLowerCase();
 	}
 
 	public String getNombresMadre() {
@@ -214,7 +214,7 @@ public class createConfirmacionDTO{
 	}
 
 	public void setNombresMadre(String nombresMadre) {
-		this.nombresMadre = nombresMadre;
+		this.nombresMadre = nombresMadre.toLowerCase();
 	}
 
 	
@@ -224,7 +224,7 @@ public class createConfirmacionDTO{
 	}
 
 	public void setNombrespadrino(String nombrespadrino) {
-		this.nombrespadrino = nombrespadrino;
+		this.nombrespadrino = nombrespadrino.toLowerCase();
 	}
 
 	public String getNombresmadrina() {
@@ -232,7 +232,7 @@ public class createConfirmacionDTO{
 	}
 
 	public void setNombresmadrina(String nombresmadrina) {
-		this.nombresmadrina = nombresmadrina;
+		this.nombresmadrina = nombresmadrina.toLowerCase();
 	}
 
 	public String getNotaMarginal() {
@@ -256,7 +256,7 @@ public class createConfirmacionDTO{
 	}
 
 	public void setNombresmonsr(String nombresmonsr) {
-		this.nombresmonsr = nombresmonsr;
+		this.nombresmonsr = nombresmonsr.toLowerCase();
 	}
 
 	public String getIdParroquia() {

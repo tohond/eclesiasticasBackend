@@ -71,7 +71,18 @@ public class ActasController {
     }
 	
 	
-	@GetMapping("/nombre")
+	@GetMapping("/busquedasimple")
+    public ResponseEntity<?> searchByNames(
+        @RequestParam("nombre1") String nombre1,
+        @RequestParam("nombre2") String nombre2,
+        @RequestParam("apellido1") String apellido1,
+        @RequestParam("apellido2") String apellido2
+    ) {
+        List<ActaDTO> results = personaService.searchByNameAvanzado(nombre1, nombre2, apellido1, apellido2);
+        return ResponseEntity.ok(results);
+    }
+	
+	@GetMapping("/busquedaavanzada")
     public ResponseEntity<?> searchByName(
         @RequestParam("nombre") String name
     ) {

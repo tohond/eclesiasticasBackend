@@ -64,7 +64,28 @@ public class PersonaService {
     
     public List<ActaDTO> searchByName(String name) {
         // Find personas by name (case-insensitive, partial match)
-        List<Persona> p = personaRepository.findPersonaByNombreContains(name);
+        List<Persona> p = personaRepository.findByFullNameContaining(name);
+
+
+        // Collect all related records for each persona
+        List<Acta> actasByPerson = new ArrayList<>();
+        for (Persona persona : p) {
+        	 matrimonioRepository.findAllByPersonaInAnyRole(persona).forEach(e -> actasByPerson.add(e.getActa()) );
+             bautizoRepository.findByIdBautizado(persona).forEach(e -> actasByPerson.add(e.getActa() ) ) ;
+             confirmacionRepository.findAllByPersonaInAnyRole(persona).forEach(e -> actasByPerson.add(e.getActa() ) );
+             
+		}
+                
+                return actaMapper.toDtoList(actasByPerson);
+            
+    
+}
+    
+    
+    public List<ActaDTO> searchByNameAvanzado(String nombre1,String nombre2,String apellido1, String apellido2) {
+        // Find personas by name (case-insensitive, partial match)
+        List<Persona> p = personaRepository.findPersonaByNombre1AndNombre2AndApellido1AndApellido2
+        		(nombre1, nombre2, apellido1, apellido2);
 
 
         // Collect all related records for each persona
@@ -94,9 +115,13 @@ public class PersonaService {
     }
     
 
-    public PersonaDTO getPersonaByNombre(String nombre) {
-        Persona persona = personaRepository.findPersonaByNombre(nombre);
-                return personaMapper.toDto(persona);
+    public List<PersonaDTO> getPersonaByNombreSimple(String nombre) {
+    	List<PersonaDTO> list = new ArrayList<>();
+    	List<Persona> personas = personaRepository.findByFullNameContaining(nombre);
+    	for (Persona persona : personas) {
+    		list.add(personaMapper.toDto(persona)); 
+		}
+                return list;
     }
 
     public PersonaDTO createPersona(PersonaDTO personaDTO) {
@@ -133,7 +158,7 @@ public class PersonaService {
     	    public PersonaSearchResult(Persona persona, List<Acta> actas) {
     	        this(
     	            persona.getId(),
-    	            persona.getNombre(),
+    	            persona.getNombre1(),
     	            actas
     	        );
     	    }

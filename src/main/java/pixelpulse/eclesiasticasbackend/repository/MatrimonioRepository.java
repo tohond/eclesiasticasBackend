@@ -23,8 +23,6 @@ public interface MatrimonioRepository extends JpaRepository<Matrimonio, Long> {
 	
 	@Query("SELECT m FROM Matrimonio m WHERE " +
 	           "m.personaA = :persona OR " +
-	           "m.personaB = :persona OR " +
-	           "m.idMadrina = :persona OR " +
-	           "m.idPadrino = :persona")
+	           "m.personaB = :persona " )
 	    List<Matrimonio> findAllByPersonaInAnyRole(@Param("persona") Persona persona);
 }

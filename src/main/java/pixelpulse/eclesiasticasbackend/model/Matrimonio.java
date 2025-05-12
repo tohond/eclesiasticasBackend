@@ -31,11 +31,26 @@ public class Matrimonio {
     @JoinColumn(name = "personab", nullable = false)
     private Persona personaB;
     @ManyToOne
-    @JoinColumn(name = "idmadrina", nullable = false)
-    private Persona idMadrina;
+    @JoinColumn(name = "idpadrea", nullable = false)
+    private Persona idpadrea;
     @ManyToOne
-    @JoinColumn(name = "idpadrino", nullable = false)
-    private Persona idPadrino;
+    @JoinColumn(name = "idmadrea", nullable = false)
+    private Persona idmadrea;
+    @ManyToOne
+    @JoinColumn(name = "idpadreb", nullable = false)
+    private Persona idpadreb;
+    @ManyToOne
+    @JoinColumn(name = "idmadreb", nullable = false)
+    private Persona idmadreb;
+    
+    @Column(name = "testigo1", length = 100)
+    private String testigo1;
+    @Column(name = "testigo2", length = 100)
+    private String testigo2;
+    @Column(name = "testigo3", length = 100)
+    private String testigo3;
+    @Column(name = "testigo4", length = 100)
+    private String testigo4;
     
     @ManyToOne
     @JoinColumn(name = "iddoyfe", nullable = false)
@@ -95,20 +110,37 @@ public class Matrimonio {
 		this.personaB = personaB;
 	}
 
-	public Persona getIdMadrina() {
-		return idMadrina;
+	public Persona getIdpadrea() {
+		return idpadrea;
 	}
 
-	public void setIdMadrina(Persona idMadrina) {
-		this.idMadrina = idMadrina;
+	public void setIdpadrea(Persona idpadrea) {
+		this.idpadrea = idpadrea;
 	}
 
-	public Persona getIdPadrino() {
-		return idPadrino;
+	public Persona getIdmadrea() {
+		return idmadrea;
 	}
 
-	public void setIdPadrino(Persona idPadrino) {
-		this.idPadrino = idPadrino;
+	public void setIdmadrea(Persona idmadrea) {
+		this.idmadrea = idmadrea;
 	}
+
+	public Persona getIdpadreb() {
+		return idpadreb;
+	}
+
+	public void setIdpadreb(Persona idpadreb) {
+		this.idpadreb = idpadreb;
+	}
+
+	public Persona getIdmadreb() {
+		return idmadreb;
+	}
+
+	public void setIdmadreb(Persona idmadreb) {
+		this.idmadreb = idmadreb;
+	}
+
     
 }

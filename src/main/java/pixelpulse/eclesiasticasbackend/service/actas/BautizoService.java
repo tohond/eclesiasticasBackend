@@ -55,25 +55,25 @@ public class BautizoService {
 		
 		Persona padre = new Persona();
 		
-		padre.setNombre(dto.getNombresPadre());
+		padre.setNombre1(dto.getNombresPadre());
 		Persona madre = new Persona();
-		madre.setNombre(dto.getNombresMadre());
+		madre.setNombre1(dto.getNombresMadre());
 		
 		Persona bautizado = new Persona();
 		bautizado.setMadre(madre);
 		bautizado.setPadre(padre);
 		bautizado.setCiudadnacimiento(dto.getCiudadNacimiento());
-		bautizado.setNombre(dto.getNombre1()+" "+dto.getNombre2()+" "+dto.getNombre3()+" "+dto.getNombre4()+" ");
-		
-		
-		
+		bautizado.setNombre1(dto.getNombre1());
+		bautizado.setNombre2(dto.getNombre2());
+		bautizado.setApellido1(dto.getApellido1());
+		bautizado.setApellido2(dto.getApellido2());
 		Sacerdote doyfe = new Sacerdote();
 		Sacerdote s = new Sacerdote();
 		
     	if(dto.getIdDoyFe()==null||dto.getIdDoyFe().isBlank() ) {
     		
     		Persona p1 = new Persona();
-    		p1.setNombre(dto.getNombresDoyFe());
+    		p1.setNombre1(dto.getNombresDoyFe());
     		doyfe.setPersona(p1);
     		
     	}
@@ -84,7 +84,7 @@ public class BautizoService {
     	if(dto.getIdSacerdote()==null||dto.getIdSacerdote().isBlank() ) {
     		
     		Persona p2 = new Persona();
-    		p2.setNombre(dto.getNombresSacerdote());
+    		p2.setNombre1(dto.getNombresSacerdote());
     		s.setPersona(p2);
     		
     	}

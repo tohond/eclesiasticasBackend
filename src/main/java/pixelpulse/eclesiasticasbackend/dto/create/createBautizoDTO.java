@@ -31,19 +31,12 @@ public class createBautizoDTO{
 	
 	private String nombre1;
 	private String nombre2;
-	private String nombre3;
-	private String nombre4;
+	private String apellido1;
+	private String apellido2;
 	
 	// --- Datos del Bautizado ---
     
-    private String primerNombre;
-    
-    private String segundoNombre;
-    
-    
-    private String primerApellido;
-    
-    private String segundoApellido;
+  
 
     // --- Fecha de Nacimiento ---
     @JsonDeserialize(using = LocalDateDeserializer.class)
@@ -165,69 +158,50 @@ public class createBautizoDTO{
 		this.nombresDoyFe = nombresDoyFe;
 	}
 
+	
+
+
+	
+
 	public String getNombre1() {
 		return nombre1;
 	}
 
+
 	public void setNombre1(String nombre1) {
-		this.nombre1 = nombre1;
+		this.nombre1 = nombre1.toLowerCase();
 	}
+
 
 	public String getNombre2() {
 		return nombre2;
 	}
 
+
 	public void setNombre2(String nombre2) {
-		this.nombre2 = nombre2;
+		this.nombre2 = nombre2.toLowerCase();
 	}
 
-	public String getNombre3() {
-		return nombre3;
+
+	public String getApellido1() {
+		return apellido1;
 	}
 
-	public void setNombre3(String nombre3) {
-		this.nombre3 = nombre3;
+
+	public void setApellido1(String apellido1) {
+		this.apellido1 = apellido1.toLowerCase();
 	}
 
-	public String getNombre4() {
-		return nombre4;
+
+	public String getApellido2() {
+		return apellido2;
 	}
 
-	public void setNombre4(String nombre4) {
-		this.nombre4 = nombre4;
+
+	public void setApellido2(String apellido2) {
+		this.apellido2 = apellido2.toLowerCase();
 	}
 
-	public String getPrimerNombre() {
-		return primerNombre;
-	}
-
-	public void setPrimerNombre(String primerNombre) {
-		this.primerNombre = primerNombre;
-	}
-
-	public String getSegundoNombre() {
-		return segundoNombre;
-	}
-
-	public void setSegundoNombre(String segundoNombre) {
-		this.segundoNombre = segundoNombre;
-	}
-
-	public String getPrimerApellido() {
-		return primerApellido;
-	}
-
-	public void setPrimerApellido(String primerApellido) {
-		this.primerApellido = primerApellido;
-	}
-
-	public String getSegundoApellido() {
-		return segundoApellido;
-	}
-
-	public void setSegundoApellido(String segundoApellido) {
-		this.segundoApellido = segundoApellido;
-	}
 
 	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
@@ -258,7 +232,7 @@ public class createBautizoDTO{
 	}
 
 	public void setNombresPadre(String nombresPadre) {
-		this.nombresPadre = nombresPadre;
+		this.nombresPadre = nombresPadre.toLowerCase();
 	}
 
 	public String getNombresMadre() {
@@ -266,7 +240,7 @@ public class createBautizoDTO{
 	}
 
 	public void setNombresMadre(String nombresMadre) {
-		this.nombresMadre = nombresMadre;
+		this.nombresMadre = nombresMadre.toLowerCase();
 	}
 
 	public String getAbueloPaterno() {
@@ -274,7 +248,7 @@ public class createBautizoDTO{
 	}
 
 	public void setAbueloPaterno(String abueloPaterno) {
-		this.abueloPaterno = abueloPaterno;
+		this.abueloPaterno = abueloPaterno.toLowerCase();
 	}
 
 	public String getAbuelaPaterna() {
@@ -282,7 +256,7 @@ public class createBautizoDTO{
 	}
 
 	public void setAbuelaPaterna(String abuelaPaterna) {
-		this.abuelaPaterna = abuelaPaterna;
+		this.abuelaPaterna = abuelaPaterna.toLowerCase();
 	}
 
 	public String getAbueloMaterno() {
@@ -290,7 +264,7 @@ public class createBautizoDTO{
 	}
 
 	public void setAbueloMaterno(String abueloMaterno) {
-		this.abueloMaterno = abueloMaterno;
+		this.abueloMaterno = abueloMaterno.toLowerCase();
 	}
 
 	public String getAbuelaMaterna() {
@@ -298,7 +272,7 @@ public class createBautizoDTO{
 	}
 
 	public void setAbuelaMaterna(String abuelaMaterna) {
-		this.abuelaMaterna = abuelaMaterna;
+		this.abuelaMaterna = abuelaMaterna.toLowerCase();
 	}
 
 	public String getNombrepadrinos() {
@@ -306,7 +280,7 @@ public class createBautizoDTO{
 	}
 
 	public void setNombrepadrinos(String nombrepadrinos) {
-		this.nombrepadrinos = nombrepadrinos;
+		this.nombrepadrinos = nombrepadrinos.toLowerCase();
 	}
 
 	public String getNombremadrinas() {
@@ -314,7 +288,7 @@ public class createBautizoDTO{
 	}
 
 	public void setNombremadrinas(String nombremadrinas) {
-		this.nombremadrinas = nombremadrinas;
+		this.nombremadrinas = nombremadrinas.toLowerCase();
 	}
 
 	public String getNotaMarginal() {

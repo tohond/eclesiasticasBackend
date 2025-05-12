@@ -60,22 +60,23 @@ public class ConfirmacionService {
 
 		Persona padre = new Persona();
 
-		padre.setNombre(dto.getNombresPadre());
+		padre.setNombre1(dto.getNombresPadre());
 		Persona madre = new Persona();
-		madre.setNombre(dto.getNombresMadre());
+		madre.setNombre1(dto.getNombresMadre());
 		Persona madrina = new Persona();
 
-		madrina.setNombre(dto.getNombresmadrina());
+		madrina.setNombre1(dto.getNombresmadrina());
 
 		Persona padrino = new Persona();
-		padrino.setNombre(dto.getNombrespadrino());
+		padrino.setNombre1(dto.getNombrespadrino());
 		Persona confirmado = new Persona();
 		confirmado.setMadre(madre);
 		confirmado.setPadre(padre);
 		confirmado.setCiudadnacimiento(dto.getCiudadNacimiento());
-		confirmado.setNombre(
-				dto.getNombre1() + " " + dto.getNombre2() + " " + dto.getNombre3() + " " + dto.getNombre4() + " ");
-
+		confirmado.setNombre1(dto.getNombre1());
+		confirmado.setNombre2(dto.getNombre2());
+		confirmado.setApellido1(dto.getApellido1());
+		confirmado.setApellido2(dto.getApellido2());
 		Sacerdote monsr = new Sacerdote();
 		// s, el parroco de la confirmacion
 		Sacerdote s = new Sacerdote();
@@ -90,7 +91,7 @@ public class ConfirmacionService {
 		if (dto.getIdDoyFe() == null || dto.getIdDoyFe().isBlank()) {
 
 			Persona p1 = new Persona();
-			p1.setNombre(dto.getNombresDoyFe());
+			p1.setNombre1(dto.getNombresDoyFe());
 			doyfe.setPersona(p1);
 
 		} else {
@@ -100,7 +101,7 @@ public class ConfirmacionService {
 		if (dto.getIdSacerdote() == null || dto.getIdSacerdote().isBlank()) {
 
 			Persona p2 = new Persona();
-			p2.setNombre(dto.getNombresSacerdote());
+			p2.setNombre1(dto.getNombresSacerdote());
 			s.setPersona(p2);
 
 		} else {
@@ -110,7 +111,7 @@ public class ConfirmacionService {
 		if (dto.getIdmonsr() == null || dto.getIdmonsr().isBlank()) {
 
 			Persona p3 = new Persona();
-			p3.setNombre(dto.getNombresSacerdote());
+			p3.setNombre1(dto.getNombresSacerdote());
 			monsr.setPersona(p3);
 
 		} else {

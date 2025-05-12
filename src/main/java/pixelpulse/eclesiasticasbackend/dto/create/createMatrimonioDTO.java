@@ -29,8 +29,8 @@ public class createMatrimonioDTO{
 	
 	private String esposonombre1;
 	private String esposonombre2;
-	private String esposonombre3;
-	private String esposonombre4;
+	private String esposoapellido1;
+	private String esposoapellido2;
 	
 	@JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
@@ -39,8 +39,8 @@ public class createMatrimonioDTO{
 	
 	private String esposanombre1;
 	private String esposanombre2;
-	private String esposanombre3;
-	private String esposanombre4;
+	private String esposaapellido1;
+	private String esposaapellido2;
 	
 	@JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
@@ -55,12 +55,10 @@ public class createMatrimonioDTO{
     private String ciudadNacimiento;
 
     // --- Datos Anexos ---
-    private String nombresPadre;
-    private String nombresMadre;
-    private String abueloPaterno;
-    private String abuelaPaterna;
-    private String abueloMaterno;
-    private String abuelaMaterna;
+    private String nombresPadreEsposo;
+    private String nombresMadreEsposo;
+    private String nombresPadreEsposa;
+    private String nombresMadreEsposa;
     
     
     private String nombrespadrino;
@@ -137,7 +135,7 @@ public class createMatrimonioDTO{
 	}
 
 	public void setNombresSacerdote(String nombresSacerdote) {
-		this.nombresSacerdote = nombresSacerdote;
+		this.nombresSacerdote = nombresSacerdote.toLowerCase();
 	}
 
 	public String getIdDoyFe() {
@@ -153,7 +151,7 @@ public class createMatrimonioDTO{
 	}
 
 	public void setNombresDoyFe(String nombresDoyFe) {
-		this.nombresDoyFe = nombresDoyFe;
+		this.nombresDoyFe = nombresDoyFe.toLowerCase();
 	}
 
 	public String getEsposonombre1() {
@@ -161,7 +159,7 @@ public class createMatrimonioDTO{
 	}
 
 	public void setEsposonombre1(String esposonombre1) {
-		this.esposonombre1 = esposonombre1;
+		this.esposonombre1 = esposonombre1.toLowerCase();
 	}
 
 	public String getEsposonombre2() {
@@ -169,23 +167,23 @@ public class createMatrimonioDTO{
 	}
 
 	public void setEsposonombre2(String esposonombre2) {
-		this.esposonombre2 = esposonombre2;
+		this.esposonombre2 = esposonombre2.toLowerCase();
 	}
 
-	public String getEsposonombre3() {
-		return esposonombre3;
+	public String getEsposoapellido1() {
+		return esposoapellido1;
 	}
 
-	public void setEsposonombre3(String esposonombre3) {
-		this.esposonombre3 = esposonombre3;
+	public void setEsposoapellido1(String esposoapellido1) {
+		this.esposoapellido1 = esposoapellido1.toLowerCase();
 	}
 
-	public String getEsposonombre4() {
-		return esposonombre4;
+	public String getEsposoapellido2() {
+		return esposoapellido2;
 	}
 
-	public void setEsposonombre4(String esposonombre4) {
-		this.esposonombre4 = esposonombre4;
+	public void setEsposoapellido2(String esposoapellido2) {
+		this.esposoapellido2 = esposoapellido2.toLowerCase();
 	}
 
 	public LocalDate getFechaNacimientoEsposo() {
@@ -201,7 +199,7 @@ public class createMatrimonioDTO{
 	}
 
 	public void setEsposanombre1(String esposanombre1) {
-		this.esposanombre1 = esposanombre1;
+		this.esposanombre1 = esposanombre1.toLowerCase();
 	}
 
 	public String getEsposanombre2() {
@@ -209,23 +207,23 @@ public class createMatrimonioDTO{
 	}
 
 	public void setEsposanombre2(String esposanombre2) {
-		this.esposanombre2 = esposanombre2;
+		this.esposanombre2 = esposanombre2.toLowerCase();
 	}
 
-	public String getEsposanombre3() {
-		return esposanombre3;
+	public String getEsposaapellido1() {
+		return esposaapellido1;
 	}
 
-	public void setEsposanombre3(String esposanombre3) {
-		this.esposanombre3 = esposanombre3;
+	public void setEsposaapellido1(String esposaapellido1) {
+		this.esposaapellido1 = esposaapellido1.toLowerCase();
 	}
 
-	public String getEsposanombre4() {
-		return esposanombre4;
+	public String getEsposaapellido2() {
+		return esposaapellido2;
 	}
 
-	public void setEsposanombre4(String esposanombre4) {
-		this.esposanombre4 = esposanombre4;
+	public void setEsposaapellido2(String esposaapellido2) {
+		this.esposaapellido2 = esposaapellido2.toLowerCase();
 	}
 
 	public Date getFechaNacimientoEsposa() {
@@ -260,68 +258,53 @@ public class createMatrimonioDTO{
 		this.ciudadNacimiento = ciudadNacimiento;
 	}
 
-	public String getNombresPadre() {
-		return nombresPadre;
+	
+	public String getNombresPadreEsposo() {
+		return nombresPadreEsposo;
 	}
 
-	public void setNombresPadre(String nombresPadre) {
-		this.nombresPadre = nombresPadre;
+	public void setNombresPadreEsposo(String nombresPadreEsposo) {
+		this.nombresPadreEsposo = nombresPadreEsposo.toLowerCase();
 	}
 
-	public String getNombresMadre() {
-		return nombresMadre;
+	public String getNombresMadreEsposo() {
+		return nombresMadreEsposo;
 	}
 
-	public void setNombresMadre(String nombresMadre) {
-		this.nombresMadre = nombresMadre;
+	public void setNombresMadreEsposo(String nombresMadreEsposo) {
+		this.nombresMadreEsposo = nombresMadreEsposo.toLowerCase();
 	}
 
-	public String getAbueloPaterno() {
-		return abueloPaterno;
+	public String getNombresPadreEsposa() {
+		return nombresPadreEsposa;
 	}
 
-	public void setAbueloPaterno(String abueloPaterno) {
-		this.abueloPaterno = abueloPaterno;
+	public void setNombresPadreEsposa(String nombresPadreEsposa) {
+		this.nombresPadreEsposa = nombresPadreEsposa.toLowerCase();
 	}
 
-	public String getAbuelaPaterna() {
-		return abuelaPaterna;
+	public String getNombresMadreEsposa() {
+		return nombresMadreEsposa;
 	}
 
-	public void setAbuelaPaterna(String abuelaPaterna) {
-		this.abuelaPaterna = abuelaPaterna;
+	public void setNombresMadreEsposa(String nombresMadreEsposa) {
+		this.nombresMadreEsposa = nombresMadreEsposa.toLowerCase();
 	}
 
-	public String getAbueloMaterno() {
-		return abueloMaterno;
-	}
-
-	public void setAbueloMaterno(String abueloMaterno) {
-		this.abueloMaterno = abueloMaterno;
-	}
-
-	public String getAbuelaMaterna() {
-		return abuelaMaterna;
-	}
-
-	public void setAbuelaMaterna(String abuelaMaterna) {
-		this.abuelaMaterna = abuelaMaterna;
-	}
-
-	public String getNombrepadrinos() {
+	public String getNombrespadrino() {
 		return nombrespadrino;
 	}
 
-	public void setNombrepadrinos(String nombrepadrinos) {
-		this.nombrespadrino = nombrepadrinos;
+	public void setNombrespadrino(String nombrespadrino) {
+		this.nombrespadrino = nombrespadrino.toLowerCase();
 	}
 
-	public String getNombremadrinas() {
+	public String getNombresmadrina() {
 		return nombresmadrina;
 	}
 
-	public void setNombremadrinas(String nombremadrinas) {
-		this.nombresmadrina = nombremadrinas;
+	public void setNombresmadrina(String nombresmadrina) {
+		this.nombresmadrina = nombresmadrina.toLowerCase();
 	}
 
 	public String getNotaMarginal() {
