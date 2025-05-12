@@ -1,5 +1,6 @@
 package pixelpulse.eclesiasticasbackend.repository;
 
+import pixelpulse.eclesiasticasbackend.model.Acta;
 import pixelpulse.eclesiasticasbackend.model.Confirmacion;
 import pixelpulse.eclesiasticasbackend.model.Persona;
 
@@ -23,6 +24,8 @@ public interface ConfirmacionRepository extends JpaRepository<Confirmacion, Long
             "c.padrino = :persona OR " +
             "c.madrina = :persona")
      List<Confirmacion> findAllByPersonaInAnyRole(@Param("persona") Persona persona);
+
+	 Confirmacion findByActa(Acta acta);
 	
 	
 }

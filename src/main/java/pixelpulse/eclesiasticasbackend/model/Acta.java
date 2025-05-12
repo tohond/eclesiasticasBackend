@@ -69,7 +69,7 @@ public class Acta {
 		return id;
 	}
 
-	public void setId(Long  id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -114,5 +114,5 @@ public class Acta {
 	}
 
 	
-
+	
 }

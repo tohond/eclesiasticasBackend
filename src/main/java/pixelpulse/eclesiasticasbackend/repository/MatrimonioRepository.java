@@ -1,5 +1,6 @@
 package pixelpulse.eclesiasticasbackend.repository;
 
+import pixelpulse.eclesiasticasbackend.model.Acta;
 import pixelpulse.eclesiasticasbackend.model.Matrimonio;
 import pixelpulse.eclesiasticasbackend.model.Persona;
 
@@ -20,6 +21,7 @@ public interface MatrimonioRepository extends JpaRepository<Matrimonio, Long> {
 
 	Matrimonio findByPersonaA(Persona p);
 	
+	Matrimonio findByActa(Acta acta);
 	
 	@Query("SELECT m FROM Matrimonio m WHERE " +
 	           "m.personaA = :persona OR " +

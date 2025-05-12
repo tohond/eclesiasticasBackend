@@ -1,5 +1,6 @@
 package pixelpulse.eclesiasticasbackend.repository;
 
+import pixelpulse.eclesiasticasbackend.model.Acta;
 import pixelpulse.eclesiasticasbackend.model.Bautizo;
 import pixelpulse.eclesiasticasbackend.model.Persona;
 
@@ -17,4 +18,6 @@ public interface BautizoRepository extends JpaRepository<Bautizo, Long> {
 	@Query("SELECT b FROM Bautizo b WHERE " +
             "b.idBautizado = :persona")
 	List<Bautizo> findAllByIdPersonaInAnyRole (Persona persona);
+
+	Bautizo findByActa(Acta acta);
 }
