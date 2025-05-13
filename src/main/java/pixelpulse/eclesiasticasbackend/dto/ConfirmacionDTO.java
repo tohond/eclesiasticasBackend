@@ -6,17 +6,73 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class ConfirmacionDTO {
     private Long id;
-    private Long idActa;
+    private ActaDTO idActa;
     private Long idParroquia;
-    private Long idConfirmante;
-    private Long idMonsr;
-    private Long idSacerdote;
-    private Long idDoyfe;
-    private Long idPadrino;
-    private Long idMadrina;
+    private PersonaDTO idConfirmante;
+    private SacerdoteDTO idMonsr;
+    private SacerdoteDTO idSacerdote;
+    private SacerdoteDTO idDoyfe;
+    private PersonaDTO idPadrino;
+    private PersonaDTO idMadrina;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public ActaDTO getIdActa() {
+		return idActa;
+	}
+	public void setIdActa(ActaDTO idActa) {
+		this.idActa = idActa;
+	}
+	public Long getIdParroquia() {
+		return idParroquia;
+	}
+	public void setIdParroquia(Long idParroquia) {
+		this.idParroquia = idParroquia;
+	}
+	public PersonaDTO getIdConfirmante() {
+		return idConfirmante;
+	}
+	public void setIdConfirmante(PersonaDTO idConfirmante) {
+		this.idConfirmante = idConfirmante;
+	}
+	public SacerdoteDTO getIdMonsr() {
+		return idMonsr;
+	}
+	public void setIdMonsr(SacerdoteDTO idMonsr) {
+		this.idMonsr = idMonsr;
+	}
+	public SacerdoteDTO getIdSacerdote() {
+		return idSacerdote;
+	}
+	public void setIdSacerdote(SacerdoteDTO idSacerdote) {
+		this.idSacerdote = idSacerdote;
+	}
+	public SacerdoteDTO getIdDoyfe() {
+		return idDoyfe;
+	}
+	public void setIdDoyfe(SacerdoteDTO idDoyfe) {
+		this.idDoyfe = idDoyfe;
+	}
+	public PersonaDTO getIdPadrino() {
+		return idPadrino;
+	}
+	public void setIdPadrino(PersonaDTO idPadrino) {
+		this.idPadrino = idPadrino;
+	}
+	public PersonaDTO getIdMadrina() {
+		return idMadrina;
+	}
+	public void setIdMadrina(PersonaDTO idMadrina) {
+		this.idMadrina = idMadrina;
+	}
+    
+    public ConfirmacionDTO() {
+    	
+    }
 }

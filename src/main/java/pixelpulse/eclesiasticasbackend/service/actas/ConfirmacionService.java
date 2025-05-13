@@ -2,9 +2,11 @@ package pixelpulse.eclesiasticasbackend.service.actas;
 
 import pixelpulse.eclesiasticasbackend.dto.BautizoDTO;
 import pixelpulse.eclesiasticasbackend.dto.ConfirmacionDTO;
+import pixelpulse.eclesiasticasbackend.dto.SacerdoteDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createBautizoDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createConfirmacionDTO;
 import pixelpulse.eclesiasticasbackend.mapper.ConfirmacionMapper;
+import pixelpulse.eclesiasticasbackend.mapper.MapStructMapper;
 import pixelpulse.eclesiasticasbackend.mapper.PersonaMapper;
 import pixelpulse.eclesiasticasbackend.model.*;
 import pixelpulse.eclesiasticasbackend.repository.*;
@@ -14,6 +16,7 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -59,8 +62,13 @@ public class ConfirmacionService {
 	}
 
 	public List<ConfirmacionDTO> getAllConfirmaciones() {
-		return mapper.toDtoList(confirmacionRepository.findAll());
-
+		List<Confirmacion> confs = confirmacionRepository.findAll();
+		List<ConfirmacionDTO> dtos = new ArrayList<>();
+		for (Confirmacion c : confs) {
+			ConfirmacionDTO dto = MapStructMapper.INSTANCE.confirmacionToConfirmacionDTO(c);
+			dtos.add(dto);
+		}
+		return dtos;
 	}
 	/*
 	 * public ConfirmacionDTO getConfirmacionByNombre(String nombre) { Persona p =
@@ -170,7 +178,9 @@ public class ConfirmacionService {
 		Acta acta = actaRepository.findById(Long.valueOf(id)).orElseThrow(() -> new EntityNotFoundException("Bautizo no encontrado con ID: " + id) );
         ;
 		Confirmacion c = confirmacionRepository.findByActa(acta);
-		return mapper.toDto(c);
+		ConfirmacionDTO dto = MapStructMapper.INSTANCE.confirmacionToConfirmacionDTO(c);
+			
+		return dto;
 				
 	}
 

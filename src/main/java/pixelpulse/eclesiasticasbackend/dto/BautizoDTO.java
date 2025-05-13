@@ -9,58 +9,61 @@ import java.util.UUID;
 
 public class BautizoDTO {
     private Long id;
-    private Long numeroActa;
-    private Long idBautizado;
-    private Long idSacerdote;
-    private Long idDoyfe;
+    private ActaDTO idActa;
+    private PersonaDTO idBautizado;
+    private SacerdoteDTO idSacerdote;
+    private SacerdoteDTO idDoyfe;
     private Long idLocalidad;
-	public BautizoDTO(Long id, Long numeroActa, Long idBautizado, Long idSacerdote, Long idDoyfe, Long idLocalidad) {
-		super();
-		this.id = id;
-		this.numeroActa = numeroActa;
-		this.idBautizado = idBautizado;
-		this.idSacerdote = idSacerdote;
-		this.idDoyfe = idDoyfe;
-		this.idLocalidad = idLocalidad;
-	}
-	public Long getId() {
+	
+    public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getNumeroActa() {
-		return numeroActa;
+
+	public ActaDTO getIdActa() {
+		return idActa;
 	}
-	public void setNumeroActa(Long numeroActa) {
-		this.numeroActa = numeroActa;
+
+	public void setIdActa(ActaDTO idActa) {
+		this.idActa = idActa;
 	}
-	public Long getIdBautizado() {
+
+	public PersonaDTO getIdBautizado() {
 		return idBautizado;
 	}
-	public void setIdBautizado(Long idBautizado) {
+
+	public void setIdBautizado(PersonaDTO idBautizado) {
 		this.idBautizado = idBautizado;
 	}
-	public Long getIdSacerdote() {
+
+	public SacerdoteDTO getIdSacerdote() {
 		return idSacerdote;
 	}
-	public void setIdSacerdote(Long idSacerdote) {
+
+	public void setIdSacerdote(SacerdoteDTO idSacerdote) {
 		this.idSacerdote = idSacerdote;
 	}
-	public Long getIdDoyfe() {
+
+	public SacerdoteDTO getIdDoyfe() {
 		return idDoyfe;
 	}
-	public void setIdDoyfe(Long idDoyfe) {
+
+	public void setIdDoyfe(SacerdoteDTO idDoyfe) {
 		this.idDoyfe = idDoyfe;
 	}
+
 	public Long getIdLocalidad() {
 		return idLocalidad;
 	}
+
 	public void setIdLocalidad(Long idLocalidad) {
 		this.idLocalidad = idLocalidad;
 	}
-    
-    public BautizoDTO() {
+
+	public BautizoDTO() {
     	
     }
 }

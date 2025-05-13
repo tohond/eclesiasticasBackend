@@ -4,6 +4,7 @@ import pixelpulse.eclesiasticasbackend.dto.BautizoDTO;
 import pixelpulse.eclesiasticasbackend.dto.ConfirmacionDTO;
 import pixelpulse.eclesiasticasbackend.dto.MatrimonioDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createMatrimonioDTO;
+import pixelpulse.eclesiasticasbackend.mapper.MapStructMapper;
 import pixelpulse.eclesiasticasbackend.mapper.MatrimonioMapper;
 import pixelpulse.eclesiasticasbackend.mapper.PersonaMapper;
 import pixelpulse.eclesiasticasbackend.model.Acta;
@@ -74,8 +75,11 @@ public class MatrimonioService {
     	Acta acta = actaRepository.findById(id)   .orElseThrow(() -> new EntityNotFoundException("Bautizo no encontrado con ID: " + id));
         ;
         Matrimonio bautizo = matrimonioRepository.findByActa(acta);
+        
+        MatrimonioDTO dto = MapStructMapper.INSTANCE.matrimoniooToMatrimonioDTO(bautizo);
+		
              
-        return mapper.toDto(bautizo);
+        return dto;
         
     }
     public MatrimonioDTO createMatrimonio(createMatrimonioDTO dto) {

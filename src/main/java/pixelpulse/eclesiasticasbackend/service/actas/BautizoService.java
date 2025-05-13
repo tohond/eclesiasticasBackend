@@ -6,17 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pixelpulse.eclesiasticasbackend.controller.ActaExportController;
 import pixelpulse.eclesiasticasbackend.dto.BautizoDTO;
+import pixelpulse.eclesiasticasbackend.dto.ConfirmacionDTO;
 import pixelpulse.eclesiasticasbackend.dto.MatrimonioDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createBautizoDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createMatrimonioDTO;
 import pixelpulse.eclesiasticasbackend.mapper.BautizoMapper;
+import pixelpulse.eclesiasticasbackend.mapper.MapStructMapper;
 import pixelpulse.eclesiasticasbackend.model.Acta;
 import pixelpulse.eclesiasticasbackend.model.Bautizo;
+import pixelpulse.eclesiasticasbackend.model.Confirmacion;
 import pixelpulse.eclesiasticasbackend.model.Matrimonio;
 import pixelpulse.eclesiasticasbackend.model.Persona;
 import pixelpulse.eclesiasticasbackend.model.Sacerdote;
 import pixelpulse.eclesiasticasbackend.repository.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -49,14 +53,22 @@ public class BautizoService {
 	}
 
 	public List<BautizoDTO> getAllBautizos() {
-        return bautizoMapper.toDtoList(bautizoRepository.findAll());
+		List<Bautizo> confs = bautizoRepository.findAll();
+		List<BautizoDTO> dtos = new ArrayList<>();
+		for (Bautizo c : confs) {
+			BautizoDTO dto = MapStructMapper.INSTANCE.bautizoToBautizoDTO(c);
+			dtos.add(dto);
+		}
+		return dtos;
     }
 
     public BautizoDTO getBautizoById(Long id) {
     	Acta acta = actaRepository.findById(id)   .orElseThrow(() -> new EntityNotFoundException("Bautizo no encontrado con ID: " + id));
         ;
         Bautizo bautizo = bautizoRepository.findByActa(acta);
-                return bautizoMapper.toDto(bautizo);
+        BautizoDTO dto = MapStructMapper.INSTANCE.bautizoToBautizoDTO(bautizo);
+		
+                return dto;
         
     }
 

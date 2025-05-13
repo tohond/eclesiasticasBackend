@@ -1,7 +1,9 @@
 package pixelpulse.eclesiasticasbackend.service.personas;
 
+import pixelpulse.eclesiasticasbackend.dto.PersonaDTO;
 import pixelpulse.eclesiasticasbackend.dto.SacerdoteDTO;
 import pixelpulse.eclesiasticasbackend.dto.SacerdotePersonaDTO;
+import pixelpulse.eclesiasticasbackend.mapper.MapStructMapper;
 import pixelpulse.eclesiasticasbackend.mapper.SacerdoteMapper;
 import pixelpulse.eclesiasticasbackend.model.Persona;
 import pixelpulse.eclesiasticasbackend.model.Sacerdote;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -33,8 +36,13 @@ public class SacerdoteService {
 	}
 
 	public List<SacerdoteDTO> getAllSacerdotes() {
-        return sacerdoteMapper.toDtoList(sacerdoteRepository.findAll());
-        		
+		List<Sacerdote> sacer = sacerdoteRepository.findAll();
+		List<SacerdoteDTO> dtos = new ArrayList<>();
+		for (Sacerdote s : sacer) {
+			SacerdoteDTO dto = MapStructMapper.INSTANCE.sacerdoteToSacerdoteDTO(s);
+			dtos.add(dto);
+		}
+		return dtos;
         		
         		
     }

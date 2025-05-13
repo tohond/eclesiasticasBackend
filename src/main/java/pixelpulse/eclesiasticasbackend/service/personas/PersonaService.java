@@ -13,6 +13,7 @@ import jakarta.persistence.EntityNotFoundException;
 import pixelpulse.eclesiasticasbackend.dto.ActaDTO;
 import pixelpulse.eclesiasticasbackend.dto.PersonaDTO;
 import pixelpulse.eclesiasticasbackend.mapper.ActaMapper;
+import pixelpulse.eclesiasticasbackend.mapper.MapStructMapper;
 import pixelpulse.eclesiasticasbackend.mapper.PersonaMapper;
 import pixelpulse.eclesiasticasbackend.model.Acta;
 import pixelpulse.eclesiasticasbackend.model.Bautizo;
@@ -58,7 +59,13 @@ public class PersonaService {
 
 
 	public List<PersonaDTO> getAllPersonas() {
-        return personaMapper.toDtoList(personaRepository.findAll());
+		List<Persona> personas = personaRepository.findAll();
+		List<PersonaDTO> dtos = new ArrayList<>();
+		for (Persona persona : personas) {
+			PersonaDTO dto = MapStructMapper.INSTANCE.personaToPersonaDTO(persona);
+			dtos.add(dto);
+		}
+		return dtos;
     }
     
     

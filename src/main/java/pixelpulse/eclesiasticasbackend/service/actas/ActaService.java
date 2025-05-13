@@ -64,6 +64,8 @@ public class ActaService {
 
 
 	public List<ActaDTO> getAllActas() {
+		
+		
 		List<Acta> actas = actaRepository.findAll();
 		List<ActaDTO> dtos = new ArrayList<>();
 		for (Acta acta : actas) {
