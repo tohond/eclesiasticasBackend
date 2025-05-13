@@ -16,7 +16,39 @@ public class BautizoDTO {
     private Long idLocalidad;
     private String abueloPaterno;
     private String abueloMaterno;
-    private String abuelaPaterna;
+    public String getAbueloPaterno() {
+		return abueloPaterno;
+	}
+
+	public void setAbueloPaterno(String abueloPaterno) {
+		this.abueloPaterno = abueloPaterno;
+	}
+
+	public String getAbueloMaterno() {
+		return abueloMaterno;
+	}
+
+	public void setAbueloMaterno(String abueloMaterno) {
+		this.abueloMaterno = abueloMaterno;
+	}
+
+	public String getAbuelaPaterna() {
+		return abuelaPaterna;
+	}
+
+	public void setAbuelaPaterna(String abuelaPaterna) {
+		this.abuelaPaterna = abuelaPaterna;
+	}
+
+	public String getAbuelaMaterna() {
+		return abuelaMaterna;
+	}
+
+	public void setAbuelaMaterna(String abuelaMaterna) {
+		this.abuelaMaterna = abuelaMaterna;
+	}
+
+	private String abuelaPaterna;
     private String abuelaMaterna;
 	
     public Long getId() {
