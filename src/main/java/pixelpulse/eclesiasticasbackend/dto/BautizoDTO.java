@@ -14,6 +14,10 @@ public class BautizoDTO {
     private SacerdoteDTO idSacerdote;
     private SacerdoteDTO idDoyfe;
     private Long idLocalidad;
+    private String abueloPaterno;
+    private String abueloMaterno;
+    private String abuelaPaterna;
+    private String abuelaMaterna;
 	
     public Long getId() {
 		return id;
