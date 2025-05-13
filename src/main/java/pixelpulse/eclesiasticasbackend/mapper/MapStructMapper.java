@@ -35,6 +35,7 @@ public interface MapStructMapper {
 	@Mapping(source = "conf.acta", target = "idActa")
 	@Mapping(source = "conf.confirmante", target = "idConfirmante")
 	@Mapping(source = "conf.sacerdote", target = "idSacerdote")
+	@Mapping(source = "conf.monsr", target = "idMonsr")
 	@Mapping(source = "conf.doyfe", target = "idDoyfe")
 	@Mapping(source = "conf.padrino", target = "idPadrino")
 	@Mapping(source = "conf.madrina", target = "idMadrina")
