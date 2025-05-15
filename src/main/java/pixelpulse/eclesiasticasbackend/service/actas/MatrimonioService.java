@@ -83,7 +83,7 @@ public class MatrimonioService {
         
     }
     public MatrimonioDTO createMatrimonio(createMatrimonioDTO dto) {
-    	Acta a = new Acta(null, dto.getNumeroActa(), dto.getFolio(), dto.getLibro(), dto.getFecha(), dto.getNotas(), dto.getTipo());
+    	Acta a = new Acta(null, dto.getNumeroActa(), dto.getFolio(), dto.getLibro(), dto.getFecha(), dto.getNotaMarginal(), dto.getTipo());
 		Sacerdote doyfe = new Sacerdote();
 		Sacerdote s = new Sacerdote();
 		Persona personaA = new Persona();
@@ -93,11 +93,15 @@ public class MatrimonioService {
 		personaA.setNombre2(dto.getEsposanombre2());
 		personaA.setApellido1(dto.getEsposaapellido1());
 		personaA.setApellido2(dto.getEsposaapellido2());
+		personaA.setFechaNacimiento(dto.getFechaNacimientoEsposa());
+		
 		
 		personaB.setNombre1(dto.getEsposonombre1());
 		personaB.setNombre2(dto.getEsposonombre2());
 		personaB.setApellido1(dto.getEsposoapellido1());
 		personaB.setApellido2(dto.getEsposoapellido2());
+		personaB.setFechaNacimiento(dto.getFechaNacimientoEsposo());
+		
 		
 		Persona madrePersonaA = new Persona();
 		madrePersonaA.setNombre1(dto.getNombresMadreEsposa());
@@ -105,9 +109,9 @@ public class MatrimonioService {
 		padrePersonaA.setNombre1(dto.getNombresPadreEsposa());
 		
 		Persona madrePersonaB = new Persona();
-		madrePersonaA.setNombre1(dto.getNombresMadreEsposo());
+		madrePersonaB.setNombre1(dto.getNombresMadreEsposo());
 		Persona padrePersonaB = new Persona();
-		padrePersonaA.setNombre1(dto.getNombresPadreEsposo());
+		padrePersonaB.setNombre1(dto.getNombresPadreEsposo());
 
 		
 		

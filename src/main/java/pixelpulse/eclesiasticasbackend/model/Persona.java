@@ -1,5 +1,6 @@
 package pixelpulse.eclesiasticasbackend.model;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,7 +35,18 @@ public class Persona {
     @Column(name = "apellido2", length = 100)
     private String apellido2;
     
-    public String getNombre1() {
+    @Column(name = "fechanacimiento")
+    private LocalDate fechaNacimiento;
+    
+    public LocalDate getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(LocalDate fechanacimiento) {
+		this.fechaNacimiento = fechanacimiento;
+	}
+
+	public String getNombre1() {
 		return nombre1;
 	}
 

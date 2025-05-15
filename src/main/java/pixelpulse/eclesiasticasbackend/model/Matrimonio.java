@@ -23,23 +23,23 @@ public class Matrimonio {
     private Acta acta;
     
     // --- Campos específicos ---
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "personaa", nullable = false)
     private Persona personaA;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "personab", nullable = false)
     private Persona personaB;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idpadrea", nullable = false)
     private Persona idpadrea;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idmadrea", nullable = false)
     private Persona idmadrea;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idpadreb", nullable = false)
     private Persona idpadreb;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idmadreb", nullable = false)
     private Persona idmadreb;
     
@@ -52,11 +52,11 @@ public class Matrimonio {
     @Column(name = "testigo4", length = 100)
     private String testigo4;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "iddoyfe", nullable = false)
     private Sacerdote idDoyFe;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idsacerdote", nullable = false)
     private Sacerdote idSacerdote;
     

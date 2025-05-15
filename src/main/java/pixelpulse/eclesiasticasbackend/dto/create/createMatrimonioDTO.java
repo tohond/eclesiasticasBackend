@@ -18,7 +18,7 @@ public class createMatrimonioDTO{
     private String libro;
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    @JsonFormat(pattern="dd-MM-yy")
+    @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate fecha;
     private String notas;
     private String tipo;
@@ -34,7 +34,7 @@ public class createMatrimonioDTO{
 	
 	@JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    @JsonFormat(pattern="dd-MM-yy")
+    @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate fechaNacimientoEsposo;
 	private String lugarNacimientoEsposo;
 	
@@ -61,8 +61,8 @@ public class createMatrimonioDTO{
 	
 	@JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    @JsonFormat(pattern="dd-MM-yy")
-    private Date fechaNacimientoEsposa;
+    @JsonFormat(pattern="dd-MM-yyyy")
+    private LocalDate fechaNacimientoEsposa;
 	private String lugarNacimientoEsposa;
 
     
@@ -277,11 +277,11 @@ public class createMatrimonioDTO{
 		this.esposaapellido2 = esposaapellido2.toLowerCase();
 	}
 
-	public Date getFechaNacimientoEsposa() {
+	public LocalDate getFechaNacimientoEsposa() {
 		return fechaNacimientoEsposa;
 	}
 
-	public void setFechaNacimientoEsposa(Date fechaNacimientoEsposa) {
+	public void setFechaNacimientoEsposa(LocalDate fechaNacimientoEsposa) {
 		this.fechaNacimientoEsposa = fechaNacimientoEsposa;
 	}
 

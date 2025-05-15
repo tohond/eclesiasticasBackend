@@ -16,7 +16,7 @@ public class ActaDTO {
     private String libro;
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    @JsonFormat(pattern="dd-MM-yy")
+    @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate fecha;
     private String notas;
     private String tipo;

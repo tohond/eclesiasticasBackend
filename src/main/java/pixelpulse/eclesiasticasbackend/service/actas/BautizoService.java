@@ -89,6 +89,7 @@ public class BautizoService {
 		bautizado.setNombre2(dto.getNombre2());
 		bautizado.setApellido1(dto.getApellido1());
 		bautizado.setApellido2(dto.getApellido2());
+		bautizado.setFechaNacimiento(dto.getFechaNacimiento());
 		Sacerdote doyfe = new Sacerdote();
 		Sacerdote s = new Sacerdote();
 		
@@ -124,7 +125,8 @@ public class BautizoService {
     	b.setAbueloMaterno(dto.getAbueloMaterno());
     	b.setAbuelaMaterna(dto.getAbuelaMaterna());
     	b.setAbuelaPaterna(dto.getAbuelaPaterna());
-    	
+    	b.setNombresmadrina(dto.getNombremadrinas());
+    	b.setNombrespadrino(dto.getNombrepadrinos());
     	
     	
     	

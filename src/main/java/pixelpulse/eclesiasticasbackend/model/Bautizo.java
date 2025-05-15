@@ -44,6 +44,24 @@ public class Bautizo  {
     @Column (name = "abuelamaterna", length = 100)
     private String abuelaMaterna;
     
+    @Column (name = "nombresmadrina", length = 100)
+    private String nombresmadrina;
+    
+    @Column (name = "nombrespadrino", length = 100)
+    private String nombrespadrino;
+    
+	public String getNombresmadrina() {
+		return nombresmadrina;
+	}
+	public void setNombresmadrina(String nombresmadrina) {
+		this.nombresmadrina = nombresmadrina;
+	}
+	public String getNombrespadrino() {
+		return nombrespadrino;
+	}
+	public void setNombrespadrino(String nombrespadrino) {
+		this.nombrespadrino = nombrespadrino;
+	}
 	public String getAbueloPaterno() {
 		return abueloPaterno;
 	}

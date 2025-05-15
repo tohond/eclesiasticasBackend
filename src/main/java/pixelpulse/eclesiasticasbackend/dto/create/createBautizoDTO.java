@@ -19,7 +19,7 @@ public class createBautizoDTO{
     
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    @JsonFormat(pattern="dd-MM-yy")
+    @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate fecha;
     private String notas;
     private String tipo;
@@ -41,7 +41,7 @@ public class createBautizoDTO{
     // --- Fecha de Nacimiento ---
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    @JsonFormat(pattern="dd-MM-yy")
+    @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate fechaNacimiento;
     
     
