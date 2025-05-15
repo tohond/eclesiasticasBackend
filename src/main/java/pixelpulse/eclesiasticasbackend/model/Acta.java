@@ -39,6 +39,16 @@ public class Acta {
     @Column (name = "tipo", length = 20)
     private String tipo;
     
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "acta")
+    private Matrimonio matrimonio;
+    
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "acta")
+    private Confirmacion confirmacion;
+    
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "acta")
+    private Bautizo bautizo;
+    
+    
     
     public Acta() {
     	
