@@ -17,6 +17,7 @@ public class BautizoDTO {
     private String abueloPaterno;
     private String abueloMaterno;
     private String nombrespadrino;
+	private String nombresmadrina;
     public String getNombrespadrino() {
 		return nombrespadrino;
 	}
@@ -33,7 +34,7 @@ public class BautizoDTO {
 		this.nombresmadrina = nombresmadrina;
 	}
 
-	private String nombresmadrina;
+
     public String getAbueloPaterno() {
 		return abueloPaterno;
 	}
