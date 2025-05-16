@@ -22,7 +22,8 @@ public interface MapStructMapper {
 	
 	MapStructMapper INSTANCE = Mappers.getMapper(MapStructMapper.class);
     
-	
+
+	@Mapping(source = "persona.ciudadnacimiento", target = "lugarNacimiento")
 	PersonaDTO personaToPersonaDTO(Persona persona);
 	
 	@Mapping(source = "persona.nombre1", target = "nombre")
