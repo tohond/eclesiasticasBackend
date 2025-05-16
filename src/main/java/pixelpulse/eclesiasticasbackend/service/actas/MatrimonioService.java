@@ -94,7 +94,7 @@ public class MatrimonioService {
 		personaA.setApellido1(dto.getEsposaapellido1());
 		personaA.setApellido2(dto.getEsposaapellido2());
 		personaA.setFechaNacimiento(dto.getFechaNacimientoEsposa());
-		
+		personaA.setCiudadnacimiento(dto.getLugarNacimientoEsposa());
 		
 		
 		personaB.setNombre1(dto.getEsposonombre1());
@@ -102,6 +102,7 @@ public class MatrimonioService {
 		personaB.setApellido1(dto.getEsposoapellido1());
 		personaB.setApellido2(dto.getEsposoapellido2());
 		personaB.setFechaNacimiento(dto.getFechaNacimientoEsposo());
+		personaB.setCiudadnacimiento(dto.getLugarNacimientoEsposo());
 		
 		
 		Persona madrePersonaA = new Persona();
@@ -149,10 +150,7 @@ public class MatrimonioService {
     	m.setPersonaA(personaA);
     	m.setPersonaB(personaB);
     	m.setIdSacerdote(s);
-    	m.setIdmadrea(madrePersonaA);
-    	m.setIdpadrea(padrePersonaA);
-    	m.setIdmadreb(madrePersonaB);
-    	m.setIdpadreb(padrePersonaB);
+    	
     	m.setTestigo1(dto.getNombrestestigo1());
     	m.setTestigo2(dto.getNombrestestigo2());
     	m.setTestigo3(dto.getNombrestestigo3());

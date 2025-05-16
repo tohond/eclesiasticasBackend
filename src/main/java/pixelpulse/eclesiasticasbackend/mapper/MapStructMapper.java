@@ -22,9 +22,7 @@ public interface MapStructMapper {
 	
 	MapStructMapper INSTANCE = Mappers.getMapper(MapStructMapper.class);
     
-	@Mapping(source = "padre.nombre1", target = "nombresPadre")
-    @Mapping(source = "madre.nombre1", target = "nombresMadre")
-
+	
 	PersonaDTO personaToPersonaDTO(Persona persona);
 	
 	@Mapping(source = "persona.nombre1", target = "nombre")
@@ -51,9 +49,6 @@ public interface MapStructMapper {
 	@Mapping(source = "mat.acta", target = "idActa")
 	@Mapping(source = "mat.personaA", target = "personaA")
 	@Mapping(source = "mat.personaB", target = "personaB")
-	@Mapping(source = "mat.idpadrea", target = "idpadrea")
-	@Mapping(source = "mat.idmadrea", target = "idmadrea")
-	@Mapping(source = "mat.idpadreb", target = "idpadreb")
-	@Mapping(source = "mat.idmadreb", target = "idmadreb")
+	
 	MatrimonioDTO matrimoniooToMatrimonioDTO (Matrimonio mat);
 }

@@ -18,11 +18,21 @@ public class MatrimonioDTO {
     private ActaDTO idActa;
     private PersonaDTO personaA;
     private PersonaDTO personaB;
-    private PersonaDTO idpadrea;
-    private PersonaDTO idmadrea;
-   private PersonaDTO idpadreb;
-   private PersonaDTO idmadreb;
-    private String testigo1;
+    private SacerdoteDTO idSacerdote;
+    public SacerdoteDTO getIdSacerdote() {
+		return idSacerdote;
+	}
+	public void setIdSacerdote(SacerdoteDTO idSacerdote) {
+		this.idSacerdote = idSacerdote;
+	}
+	private SacerdoteDTO idDoyFe;
+    public SacerdoteDTO getIdDoyfe() {
+		return idDoyFe;
+	}
+	public void setIdDoyFe(SacerdoteDTO idDoyfe) {
+		this.idDoyFe = idDoyfe;
+	}
+	private String testigo1;
      private String testigo2;
     private String testigo3;
     private String testigo4;
@@ -54,30 +64,7 @@ public class MatrimonioDTO {
 	public void setPersonaB(PersonaDTO personaB) {
 		this.personaB = personaB;
 	}
-	public PersonaDTO getIdpadrea() {
-		return idpadrea;
-	}
-	public void setIdpadrea(PersonaDTO idpadrea) {
-		this.idpadrea = idpadrea;
-	}
-	public PersonaDTO getIdmadrea() {
-		return idmadrea;
-	}
-	public void setIdmadrea(PersonaDTO idmadrea) {
-		this.idmadrea = idmadrea;
-	}
-	public PersonaDTO getIdpadreb() {
-		return idpadreb;
-	}
-	public void setIdpadreb(PersonaDTO idpadreb) {
-		this.idpadreb = idpadreb;
-	}
-	public PersonaDTO getIdmadreb() {
-		return idmadreb;
-	}
-	public void setIdmadreb(PersonaDTO idmadreb) {
-		this.idmadreb = idmadreb;
-	}
+	
 	public String getTestigo1() {
 		return testigo1;
 	}

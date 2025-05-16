@@ -30,18 +30,7 @@ public class Matrimonio {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "personab", nullable = false)
     private Persona personaB;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "idpadrea", nullable = false)
-    private Persona idpadrea;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "idmadrea", nullable = false)
-    private Persona idmadrea;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "idpadreb", nullable = false)
-    private Persona idpadreb;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "idmadreb", nullable = false)
-    private Persona idmadreb;
+    
     
     @Column(name = "testigo1", length = 100)
     private String testigo1;
@@ -110,37 +99,7 @@ public class Matrimonio {
 		this.personaB = personaB;
 	}
 
-	public Persona getIdpadrea() {
-		return idpadrea;
-	}
-
-	public void setIdpadrea(Persona idpadrea) {
-		this.idpadrea = idpadrea;
-	}
-
-	public Persona getIdmadrea() {
-		return idmadrea;
-	}
-
-	public void setIdmadrea(Persona idmadrea) {
-		this.idmadrea = idmadrea;
-	}
-
-	public Persona getIdpadreb() {
-		return idpadreb;
-	}
-
-	public void setIdpadreb(Persona idpadreb) {
-		this.idpadreb = idpadreb;
-	}
-
-	public Persona getIdmadreb() {
-		return idmadreb;
-	}
-
-	public void setIdmadreb(Persona idmadreb) {
-		this.idmadreb = idmadreb;
-	}
+	
 
 	public String getTestigo1() {
 		return testigo1;

@@ -28,14 +28,34 @@ public class PersonaDTO {
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate fechaNacimiento;
-    public LocalDate getFechaNacimiento() {
+    private String lugarNacimiento;
+    
+    public String getLugarNacimiento() {
+		return lugarNacimiento;
+	}
+	public void setLugarNacimiento(String lugarNacimiento) {
+		this.lugarNacimiento = lugarNacimiento;
+	}
+	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-	private String nombresPadre;
-    private String nombresMadre;
+	private PersonaDTO padre;
+	private PersonaDTO madre;
+	public PersonaDTO getPadre() {
+		return padre;
+	}
+	public void setPadre(PersonaDTO padre) {
+		this.padre = padre;
+	}
+	public PersonaDTO getMadre() {
+		return madre;
+	}
+	public void setMadre(PersonaDTO madre) {
+		this.madre = madre;
+	}
 	public String getId() {
 		return id;
 	}
@@ -78,18 +98,7 @@ public class PersonaDTO {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	public String getNombresPadre() {
-		return nombresPadre;
-	}
-	public void setNombresPadre(String nombresPadre) {
-		this.nombresPadre = nombresPadre;
-	}
-	public String getNombresMadre() {
-		return nombresMadre;
-	}
-	public void setNombresMadre(String nombresMadre) {
-		this.nombresMadre = nombresMadre;
-	}
+	
     public PersonaDTO() {
     	
     }
