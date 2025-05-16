@@ -30,7 +30,7 @@ public class Matrimonio {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "personab", nullable = false)
     private Persona personaB;
-    
+   
     
     @Column(name = "testigo1", length = 100)
     private String testigo1;
@@ -98,8 +98,6 @@ public class Matrimonio {
 	public void setPersonaB(Persona personaB) {
 		this.personaB = personaB;
 	}
-
-	
 
 	public String getTestigo1() {
 		return testigo1;
