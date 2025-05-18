@@ -19,7 +19,9 @@ public interface PersonaRepository extends JpaRepository<Persona, Long> {
 	@Query("SELECT p FROM Persona p WHERE (p.nombre1 || ' ' || p.nombre2 ||' ' || p.apellido1 || ' ' || p.apellido2) ILIKE %:fullName%")
 	List<Persona> findByFullNameContaining(@Param("fullName") String fullName);
 
-	@Query("SELECT * FROM persona p WHERE CONCAT(p.nombre1, p.nombre2, p.apellido1, p.apellido2) LIKE '%'"+fullname.replace(" ","%")+"'%'" )
-	List<Persona> findByFullNameContaining2(@Param("fullName") String fullName);
+	@Query("SELECT p FROM Persona p WHERE " +
+       "LOWER(CONCAT(COALESCE(p.nombre1, ''), ' ', COALESCE(p.nombre2, ''), ' ', COALESCE(p.apellido1, ''), ' ', COALESCE(p.apellido2, ''))) " +
+       "LIKE LOWER(CONCAT('%', REPLACE(:fullName, ' ', '%'), '%'))")
+	List<Persona> findByFullNameContaining2(@Param("fullName") String fullName);
 }
 
