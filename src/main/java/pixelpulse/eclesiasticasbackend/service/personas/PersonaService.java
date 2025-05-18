@@ -71,7 +71,7 @@ public class PersonaService {
     
     public List<ActaDTO> searchByName(String name) {
         // Find personas by name (case-insensitive, partial match)
-        List<Persona> p = personaRepository.findByFullNameContaining2(name);
+        List<Persona> p = personaRepository.findByFullNameContaining(name);
 
 
         // Collect all related records for each persona
