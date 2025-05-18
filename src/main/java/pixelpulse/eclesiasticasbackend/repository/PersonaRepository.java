@@ -15,10 +15,8 @@ public interface PersonaRepository extends JpaRepository<Persona, Long> {
 	Persona findPersonaById(Long id);
 	boolean existsById(Long id);
 	Persona deletePersonaById(Long id);
+	
 	List<Persona> findPersonaByNombre1AndNombre2AndApellido1AndApellido2(String nombre1,String nombre2,String apellido1,String apellido2);
-	@Query("SELECT p FROM Persona p WHERE (p.nombre1 || ' ' || p.nombre2 ||' ' || p.apellido1 || ' ' || p.apellido2) ILIKE %:fullName%")
-	List<Persona> findByFullNameContaining(@Param("fullName") String fullName);
-
 	@Query("SELECT p FROM Persona p WHERE " +
        "LOWER(CONCAT(COALESCE(p.nombre1, ''), ' ', COALESCE(p.nombre2, ''), ' ', COALESCE(p.apellido1, ''), ' ', COALESCE(p.apellido2, ''))) " +
        "LIKE LOWER(CONCAT('%', REPLACE(:fullName, ' ', '%'), '%'))")
