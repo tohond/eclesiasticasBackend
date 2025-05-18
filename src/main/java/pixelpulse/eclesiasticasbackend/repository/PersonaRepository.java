@@ -22,4 +22,4 @@ public interface PersonaRepository extends JpaRepository<Persona, Long> {
 	@Query("SELECT * FROM persona p WHERE CONCATCONCAT(p.nombre1, p.nombre2, p.apellido1, p.apellido2) LIKE '%'"+fullname.replace(" ","%")+"'%'" )
 	List<Persona> findByFullNameContaining2(@Param("fullName") String fullName);
 }
-}
+
