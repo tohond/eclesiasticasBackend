@@ -72,18 +72,46 @@ public class PersonaService {
     public List<ActaDTO> searchByName(String name) {
         // Find personas by name (case-insensitive, partial match)
         List<Persona> p = personaRepository.findByFullNameContaining(name);
-
+        MapStructMapper mapper = MapStructMapper.INSTANCE;
 
         // Collect all related records for each persona
-        List<Acta> actasByPerson = new ArrayList<>();
+        List<ActaDTO> actasByPerson = new ArrayList<>();
         for (Persona persona : p) {
-        	 matrimonioRepository.findAllByPersonaInAnyRole(persona).forEach(e -> actasByPerson.add(e.getActa()) );
-             bautizoRepository.findByIdBautizado(persona).forEach(e -> actasByPerson.add(e.getActa() ) ) ;
-             confirmacionRepository.findAllByPersonaInAnyRole(persona).forEach(e -> actasByPerson.add(e.getActa() ) );
+        	 matrimonioRepository.findAllByPersonaInAnyRole(persona).forEach(e -> {
+        		 Acta a = e.getActa();
+        		 ActaDTO dto=mapper.actaToActaDTO(a);
+        		 dto.setNombre1(e.getPersonaA().getNombre1());
+        		 dto.setNombre2(e.getPersonaA().getNombre2());
+        		 dto.setApellido1(e.getPersonaA().getApellido1());
+        		 dto.setApellido2(e.getPersonaA().getApellido2());
+        		 actasByPerson.add(dto);
+        		 } );
+             bautizoRepository.findByIdBautizado(persona).forEach(e -> 
+             {
+            	 
+            	 Acta a = e.getActa();
+        		 ActaDTO dto=mapper.actaToActaDTO(a);
+        		 dto.setNombre1(e.getIdBautizado().getNombre1());
+        		 dto.setNombre2(e.getIdBautizado().getNombre2());
+        		 dto.setApellido1(e.getIdBautizado().getApellido1());
+        		 dto.setApellido2(e.getIdBautizado().getApellido2());
+        		 actasByPerson.add(dto);
+             } )  ;
+             confirmacionRepository.findAllByPersonaInAnyRole(persona).forEach(e -> {
+            	 Acta a = e.getActa();
+        		 ActaDTO dto=mapper.actaToActaDTO(a);
+        		 dto.setNombre1(e.getConfirmante().getNombre1());
+        		 dto.setNombre2(e.getConfirmante().getNombre2());
+        		 dto.setApellido1(e.getConfirmante().getApellido1());
+        		 dto.setApellido2(e.getConfirmante().getApellido2());
+        		 actasByPerson.add(dto);
+            	 
+            	 
+             } );
              
 		}
                 
-                return actaMapper.toDtoList(actasByPerson);
+                return actasByPerson;
             
     
 }
@@ -91,20 +119,50 @@ public class PersonaService {
     
     public List<ActaDTO> searchByNameAvanzado(String nombre1,String nombre2,String apellido1, String apellido2) {
         // Find personas by name (case-insensitive, partial match)
-        List<Persona> p = personaRepository.findPersonaByNombre1AndNombre2AndApellido1AndApellido2
+    	MapStructMapper mapper = MapStructMapper.INSTANCE;
+    	
+    	List<Persona> p = personaRepository.findPersonaByNombre1AndNombre2AndApellido1AndApellido2
         		(nombre1, nombre2, apellido1, apellido2);
 
 
         // Collect all related records for each persona
-        List<Acta> actasByPerson = new ArrayList<>();
+        List<ActaDTO> actasByPerson = new ArrayList<>();
         for (Persona persona : p) {
-        	 matrimonioRepository.findAllByPersonaInAnyRole(persona).forEach(e -> actasByPerson.add(e.getActa()) );
-             bautizoRepository.findByIdBautizado(persona).forEach(e -> actasByPerson.add(e.getActa() ) ) ;
-             confirmacionRepository.findAllByPersonaInAnyRole(persona).forEach(e -> actasByPerson.add(e.getActa() ) );
-             
+       	 matrimonioRepository.findAllByPersonaInAnyRole(persona).forEach(e -> {
+       		 Acta a = e.getActa();
+       		 ActaDTO dto=mapper.actaToActaDTO(a);
+       		 dto.setNombre1(e.getPersonaA().getNombre1());
+       		 dto.setNombre2(e.getPersonaA().getNombre2());
+       		 dto.setApellido1(e.getPersonaA().getApellido1());
+       		 dto.setApellido2(e.getPersonaA().getApellido2());
+       		 actasByPerson.add(dto);
+       		 } );
+            bautizoRepository.findByIdBautizado(persona).forEach(e -> 
+            {
+           	 
+           	 Acta a = e.getActa();
+       		 ActaDTO dto=mapper.actaToActaDTO(a);
+       		 dto.setNombre1(e.getIdBautizado().getNombre1());
+       		 dto.setNombre2(e.getIdBautizado().getNombre2());
+       		 dto.setApellido1(e.getIdBautizado().getApellido1());
+       		 dto.setApellido2(e.getIdBautizado().getApellido2());
+       		 actasByPerson.add(dto);
+            } )  ;
+            confirmacionRepository.findAllByPersonaInAnyRole(persona).forEach(e -> {
+           	 Acta a = e.getActa();
+       		 ActaDTO dto=mapper.actaToActaDTO(a);
+       		 dto.setNombre1(e.getConfirmante().getNombre1());
+       		 dto.setNombre2(e.getConfirmante().getNombre2());
+       		 dto.setApellido1(e.getConfirmante().getApellido1());
+       		 dto.setApellido2(e.getConfirmante().getApellido2());
+       		 actasByPerson.add(dto);
+           	 
+           	 
+            } );
+            
 		}
                 
-                return actaMapper.toDtoList(actasByPerson);
+                return actasByPerson;
             
     
 }
