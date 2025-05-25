@@ -43,7 +43,7 @@ public class AuthController {
 	record FirebaseSignInRequest(String email, String password, boolean returnSecureToken) {
 	}
 
-	record FirebaseSignInResponse(String idToken, String refreshToken) {
+	record FirebaseSignInResponse(String idToken, String refreshToken, String localId) {
 	}
 	record FirebaseRegisterResponse(String code, String message ) {}
 
@@ -147,6 +147,7 @@ public class AuthController {
 		response.put("displayName", user.getDisplayName());
 		response.put("idToken",sResponse.idToken());
 		response.put("refreshToken", sResponse.refreshToken());
+		response.put("localId", sResponse.localId());
 
 		try{
 			return ResponseEntity.ok(response);
