@@ -4,7 +4,6 @@ package pixelpulse.eclesiasticasbackend.service.actas;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pixelpulse.eclesiasticasbackend.controller.ActaExportController;
 import pixelpulse.eclesiasticasbackend.dto.BautizoDTO;
 import pixelpulse.eclesiasticasbackend.dto.ConfirmacionDTO;
 import pixelpulse.eclesiasticasbackend.dto.MatrimonioDTO;
@@ -28,7 +27,7 @@ import java.util.stream.Collectors;
 @Service
 public class BautizoService {
 
-    private final ActaExportController actaExportController;
+   
 	
 	 @Autowired
     private final SacerdoteRepository sacerdoteRepository;
@@ -42,10 +41,10 @@ public class BautizoService {
     private BautizoMapper bautizoMapper;
 
     
-    public BautizoService(ActaExportController actaExportController, SacerdoteRepository sacerdoteRepository,
+    public BautizoService( SacerdoteRepository sacerdoteRepository,
 			BautizoRepository bautizoRepository, ActaRepository actaRepository, BautizoMapper bautizoMapper) {
 		super();
-		this.actaExportController = actaExportController;
+		
 		this.sacerdoteRepository = sacerdoteRepository;
 		this.bautizoRepository = bautizoRepository;
 		this.actaRepository = actaRepository;

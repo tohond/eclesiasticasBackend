@@ -1,12 +1,18 @@
 package pixelpulse.eclesiasticasbackend.controller;
 
+import java.awt.PageAttributes.MediaType;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.http.HttpHeaders;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ContentDisposition;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.auth.FirebaseAuth;
 
 import pixelpulse.eclesiasticasbackend.dto.ActaDTO;
+import pixelpulse.eclesiasticasbackend.dto.PdfRequestDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createActaDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createBautizoDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createConfirmacionDTO;
@@ -32,6 +39,7 @@ import pixelpulse.eclesiasticasbackend.service.actas.ConfirmacionService;
 import pixelpulse.eclesiasticasbackend.service.actas.MatrimonioService;
 import pixelpulse.eclesiasticasbackend.service.auth.FirebaseTokenService;
 import pixelpulse.eclesiasticasbackend.service.others.EmailService;
+import pixelpulse.eclesiasticasbackend.service.others.PdfService;
 import pixelpulse.eclesiasticasbackend.service.personas.PersonaService;
 import pixelpulse.eclesiasticasbackend.service.personas.PersonaService.PersonaSearchResult;
 import pixelpulse.eclesiasticasbackend.service.users.UserService;
@@ -43,6 +51,7 @@ public class ActasController {
     private final ConfirmacionService confirmacionService;
 
     private final BautizoService bautizoService;
+   
 
     
 	
@@ -52,9 +61,11 @@ public class ActasController {
 	private final PersonaService personaService;
 	private final MatrimonioService matrimonioService;
 	
+	private final PdfService pdfservice;
 	
 	
-	public ActasController(FirebaseAuth firebaseAuth, ActaService actaservice,PersonaService personaService, MatrimonioService matrimonioService, BautizoService bautizoService, ConfirmacionService confirmacionService) {
+	
+	public ActasController(PdfService pdf,FirebaseAuth firebaseAuth, ActaService actaservice,PersonaService personaService, MatrimonioService matrimonioService, BautizoService bautizoService, ConfirmacionService confirmacionService) {
 		
 		this.firebaseAuth = firebaseAuth;
 		this.actaService = actaservice;
@@ -62,6 +73,7 @@ public class ActasController {
 		this.matrimonioService = matrimonioService;
 		this.bautizoService = bautizoService;
 		this.confirmacionService = confirmacionService;
+		this.pdfservice = pdf;
 	}
 	
 	
@@ -88,6 +100,27 @@ public class ActasController {
     ) {
         List<ActaDTO> results = personaService.searchByName(name);
         return ResponseEntity.ok(results);
+    }
+	
+	@GetMapping("/pdf")
+	public ResponseEntity<byte[]> generarPdf(@RequestBody PdfRequestDTO request) {
+        try {
+            byte[] pdf = pdfservice.generarPdfDesdePlantilla(request);
+
+            // Configurar headers para forzar descarga
+            org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
+            headers.setContentType(org.springframework.http.MediaType.APPLICATION_PDF);
+            headers.setContentDisposition(ContentDisposition.attachment()
+                .filename("documento_generado.pdf")
+                .build());
+
+            return new ResponseEntity<>(pdf, headers, HttpStatus.SC_ACCEPTED);
+
+        } catch (FileNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.SC_NOT_FOUND).body(null);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.SC_INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 	
 	@DeleteMapping("/")
