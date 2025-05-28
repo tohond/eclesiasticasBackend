@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.http.HttpHeaders;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -103,7 +105,7 @@ public class ActasController {
     }
 	
 	@GetMapping("/pdf")
-	public ResponseEntity<byte[]> generarPdf(@RequestBody PdfRequestDTO request) {
+	public ResponseEntity<?> generarPdf(@RequestBody PdfRequestDTO request) {
         try {
             byte[] pdf = pdfservice.generarPdfDesdePlantilla(request);
 
@@ -117,7 +119,10 @@ public class ActasController {
             return new ResponseEntity<>(pdf, headers, HttpStatus.SC_ACCEPTED);
 
         } catch (FileNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.SC_NOT_FOUND).body(null);
+        	
+        	Map<String,String> error = new HashMap<>();
+        	error.put("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.SC_NOT_FOUND).body(error);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.SC_INTERNAL_SERVER_ERROR).body(null);
         }
