@@ -15,6 +15,8 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 //import pixelpulse.eclesiasticasbackend.model.Matrimonio;
 
@@ -28,9 +30,12 @@ public class PdfService {
     public byte[] generarPdfDesdePlantilla(PdfRequestDTO request) throws IOException {
         // 1. Cargar plantilla Word
         String plantillaPath = "plantillas_actas/" + request.getTipoDocumento()+ request.getTipoPdf()+ ".docx";
-
-        try (InputStream plantilla = getClass().getClassLoader().getResourceAsStream(plantillaPath)) {
-            if (plantilla == null) throw new FileNotFoundException("No se encontró la plantilla");
+        Resource resource = new ClassPathResource(plantillaPath);
+        try (InputStream plantilla = resource.getInputStream()) {
+            if (plantilla == null) {
+            	
+            	throw new FileNotFoundException("No se encontró la plantilla");
+            	}
 
             XWPFDocument doc = new XWPFDocument(plantilla);
 
