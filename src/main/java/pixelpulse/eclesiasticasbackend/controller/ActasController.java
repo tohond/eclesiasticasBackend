@@ -104,7 +104,7 @@ public class ActasController {
         return ResponseEntity.ok(results);
     }
 	
-	@GetMapping("/pdf")
+	@PostMapping("/pdf")
 	public ResponseEntity<?> generarPdf(@RequestBody PdfRequestDTO request) {
         try {
             byte[] pdf = pdfservice.generarPdfDesdePlantilla(request);
