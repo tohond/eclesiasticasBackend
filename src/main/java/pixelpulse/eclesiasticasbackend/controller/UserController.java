@@ -99,39 +99,62 @@ public ResponseEntity<?> editProfile(
         @RequestHeader("Authorization") String token,
         @RequestBody Map<String, String> requestBody) {
     try {
+        // 1) Verificar que llegue el token en el header
+        if (token == null || !token.startsWith("Bearer ")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                                 .body(Map.of("error", "Falta o es inválido el Authorization header"));
+        }
+
+        // 2) Extraer UID del token de Firebase
         String uid = firebaseAuth.verifyIdToken(token.replace("Bearer ", "")).getUid();
+
+        // 3) Leer campos del body
         String email = requestBody.get("email");
         String nombre = requestBody.get("nombre");
         String apellido = requestBody.get("apellido");
-        String newPassword = requestBody.get("password");
-        
-        // Armar la petición a Firebase para actualizar el usuario
+        String newPassword = requestBody.get("password"); // podría ser null
+
+        // 4) Validar campos mínimos antes de llamar a Firebase
+        if (email == null || email.isBlank()) {
+            return ResponseEntity.badRequest()
+                                 .body(Map.of("error", "El campo 'email' no puede estar vacío"));
+        }
+        if (nombre == null || apellido == null) {
+            return ResponseEntity.badRequest()
+                                 .body(Map.of("error", "Los campos 'nombre' y 'apellido' son requeridos"));
+        }
+
+        // 5) Armar la petición a Firebase
         UserRecord.UpdateRequest updateRequest = new UserRecord.UpdateRequest(uid)
-            .setDisplayName(nombre + " " + apellido)
-            .setEmail(email);
-        
-        // Solo seteamos la contraseña si en la petición viene "password"
+            .setEmail(email)
+            .setDisplayName((nombre + " " + apellido).trim());
+
+        // 6) Si llega contraseña, la seteamos
         if (newPassword != null && !newPassword.isBlank()) {
             updateRequest.setPassword(newPassword);
         }
-        
+
+        // 7) Intentar actualizar en Firebase
         UserRecord user = firebaseAuth.updateUser(updateRequest);
-        
-        // Devolvemos en el body la info que se actualizó (sin el password, por seguridad)
+
+        // 8) Construir respuesta exitosa (sin devolver la contraseña)
         Map<String, String> response = new HashMap<>();
         response.put("email", user.getEmail());
         response.put("nombre", nombre);
         response.put("apellido", apellido);
-        // NO agregamos el password en la respuesta de vuelta.
-        
         return ResponseEntity.ok(response);
 
-    } catch (FirebaseAuthException e) {
-        Map<String, String> error = new HashMap<>();
-        error.put("error", "Error actualizando perfil: " + e.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+    } catch (Exception e) {
+        // PARA DEPURAR: imprimir traza completa
+        e.printStackTrace();
+
+        // Devolver en el body el mensaje de excepción para saber qué está fallando
+        String mensaje = (e.getMessage() != null ? e.getMessage() : "Error interno desconocido");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                             .body(Map.of("error", "Error actualizando perfil: " + mensaje));
     }
 }
+
 
 	
 	
