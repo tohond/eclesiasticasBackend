@@ -53,7 +53,8 @@ public class UserController {
 		this.emailService= emailService;
 	}
 
-	
+
+	/*
 
 	@PostMapping("/update-profile")
 	public ResponseEntity<?> editProfile(@RequestHeader("Authorization") String token,
@@ -91,7 +92,47 @@ public class UserController {
 
 		}
 	}
-	
+	*/
+
+	@PostMapping("/update-profile")
+public ResponseEntity<?> editProfile(
+        @RequestHeader("Authorization") String token,
+        @RequestBody Map<String, String> requestBody) {
+    try {
+        String uid = firebaseAuth.verifyIdToken(token.replace("Bearer ", "")).getUid();
+        String email = requestBody.get("email");
+        String nombre = requestBody.get("nombre");
+        String apellido = requestBody.get("apellido");
+        String newPassword = requestBody.get("password");
+        
+        // Armar la petición a Firebase para actualizar el usuario
+        UserRecord.UpdateRequest updateRequest = new UserRecord.UpdateRequest(uid)
+            .setDisplayName(nombre + " " + apellido)
+            .setEmail(email);
+        
+        // Solo seteamos la contraseña si en la petición viene "password"
+        if (newPassword != null && !newPassword.isBlank()) {
+            updateRequest.setPassword(newPassword);
+        }
+        
+        UserRecord user = firebaseAuth.updateUser(updateRequest);
+        
+        // Devolvemos en el body la info que se actualizó (sin el password, por seguridad)
+        Map<String, String> response = new HashMap<>();
+        response.put("email", user.getEmail());
+        response.put("nombre", nombre);
+        response.put("apellido", apellido);
+        // NO agregamos el password en la respuesta de vuelta.
+        
+        return ResponseEntity.ok(response);
+
+    } catch (FirebaseAuthException e) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", "Error actualizando perfil: " + e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+    }
+}
+
 	
 	
 	@PostMapping("/reset-password")
