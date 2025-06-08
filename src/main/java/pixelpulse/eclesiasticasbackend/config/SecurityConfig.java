@@ -39,25 +39,20 @@ import pixelpulse.eclesiasticasbackend.security.FirebaseAuthenticationFilter;
 @Configuration
 @EnableWebSecurity(debug=true)
 public class SecurityConfig {
-	
-	
+
+
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-        	.cors().and()
-            .csrf(csrf -> csrf.disable())
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> {auth
-                .requestMatchers("api/auth/**","/").permitAll()
-            	.anyRequest().authenticated();
-                
-            }
-            );
-            
-        http.oauth2ResourceServer()
-        .jwt();
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
+                .addFilterBefore(new FirebaseAuthenticationFilter(), org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/signup/request").authenticated()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().permitAll()
+                );
         return http.build();
     }
-    
+
+
 
 }

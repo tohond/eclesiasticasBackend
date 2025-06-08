@@ -1,14 +1,17 @@
 package pixelpulse.eclesiasticasbackend.controller;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.firebase.auth.FirebaseToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -20,10 +23,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 
+import pixelpulse.eclesiasticasbackend.model.UserRequest;
 import jakarta.mail.MessagingException;
 import pixelpulse.eclesiasticasbackend.controller.AuthController.FirebaseSignInRequest;
 import pixelpulse.eclesiasticasbackend.controller.AuthController.FirebaseSignInResponse;
 import pixelpulse.eclesiasticasbackend.dto.requests.LoginRequestDTO;
+import pixelpulse.eclesiasticasbackend.model.enums.RequestStatus;
+import pixelpulse.eclesiasticasbackend.repository.UserRequestRepository;
 import pixelpulse.eclesiasticasbackend.service.auth.FirebaseTokenService;
 import pixelpulse.eclesiasticasbackend.service.others.EmailService;
 import pixelpulse.eclesiasticasbackend.service.users.UserService;
@@ -38,6 +44,7 @@ public class UserController {
 	@Value("${firebase.webapikey}")
 	private String webApiKey;
 
+	private final UserRequestRepository userRequestRepository;
 	private final UserService userService;
 	private final FirebaseTokenService firebaseTokenService;
 	private final EmailService emailService;
@@ -45,12 +52,35 @@ public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 	
 	@Autowired
-	public UserController(UserService userService, FirebaseTokenService firebaseTokenService,
-			FirebaseAuth firebaseAuth, EmailService emailService) {
-		this.userService = userService;
+	public UserController(UserRequestRepository userRequestRepository, UserService userService, FirebaseTokenService firebaseTokenService,
+                          FirebaseAuth firebaseAuth, EmailService emailService) {
+        this.userRequestRepository = userRequestRepository;
+        this.userService = userService;
 		this.firebaseTokenService = firebaseTokenService;
 		this.firebaseAuth = firebaseAuth;
 		this.emailService= emailService;
+	}
+
+	@PostMapping("/signup/request")
+	public ResponseEntity<?> requestSignup(@AuthenticationPrincipal FirebaseToken token) {
+		String firebaseUid = token.getUid();
+		String email = token.getEmail();
+		String name = (String) token.getClaims().get("name");
+
+		// Validar si ya existe una solicitud
+		if (userRequestRepository.existsByFirebaseUid(firebaseUid)) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("Ya se envió una solicitud.");
+		}
+		UserRequest request = new UserRequest();
+		request.setFirebaseUid(firebaseUid);
+		request.setEmail(email);
+		request.setDisplayName(name);
+		request.setStatus(RequestStatus.PENDING);
+		request.setCreatedAt(LocalDateTime.now());
+
+		userRequestRepository.save(request);
+
+		return ResponseEntity.ok("Solicitud de registro enviada.");
 	}
 
 
