@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,9 @@ import pixelpulse.eclesiasticasbackend.dto.create.createActaDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createBautizoDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createConfirmacionDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createMatrimonioDTO;
+import pixelpulse.eclesiasticasbackend.dto.edit.EditBautizoDTO;
+import pixelpulse.eclesiasticasbackend.dto.edit.EditConfirmacionDTO;
+import pixelpulse.eclesiasticasbackend.dto.edit.EditMatrimonioDTO;
 import pixelpulse.eclesiasticasbackend.service.actas.ActaService;
 import pixelpulse.eclesiasticasbackend.service.actas.BautizoService;
 import pixelpulse.eclesiasticasbackend.service.actas.ConfirmacionService;
@@ -128,11 +132,33 @@ public class ActasController {
         }
     }
 	
-	@DeleteMapping("/")
+	@PutMapping("/editar")
 	public ResponseEntity<?> editProfile(
-			@PathVariable String id ){
-		Long uid = Long.getLong(id);
-		//actaService.deleteActaById(uuid);
+			@RequestBody Map<String,String> map ){
+		Long uid = Long.valueOf(map.get("id"));
+		if (uid==null) {
+			Map<String,String> error = new HashMap<>();
+        	error.put("error", "No ID:"+map.get("id"));
+			return ResponseEntity.status(HttpStatus.SC_BAD_REQUEST).body(error);
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		
+		String tipo = map.get("tipo");
+		
+		if ( tipo.equals("matrimonio") ){
+			EditMatrimonioDTO dto = mapper.convertValue(map, EditMatrimonioDTO.class);
+			return  ResponseEntity.ok(matrimonioService.updateMatrimonio(uid, dto));
+		}
+		else if (tipo.equals("confirmacion") ){
+			EditConfirmacionDTO dto =mapper.convertValue(map, EditConfirmacionDTO.class);
+			return  ResponseEntity.ok(confirmacionService.updateConfirmacion(uid,dto));
+		}
+		else if (tipo.equals("bautizo") ){
+			EditBautizoDTO dto =mapper.convertValue(map, EditBautizoDTO.class);
+			return  ResponseEntity.ok(bautizoService.updateBautizo(uid,dto));
+		}
+		
+		
 		return null;
 		
 	}
@@ -148,21 +174,21 @@ public class ActasController {
 			map.replace("tipo", tipo);
 			if ( tipo.equals("matrimonio") ){
 				createMatrimonioDTO dto = mapper.convertValue(map, createMatrimonioDTO.class);
-				matrimonioService.createMatrimonio(dto);
+				return  ResponseEntity.ok(matrimonioService.createMatrimonio(dto));
 			}
 			else if (tipo.equals("confirmacion") ){
 				createConfirmacionDTO dto =mapper.convertValue(map, createConfirmacionDTO.class);
-				confirmacionService.createConfirmacion(dto);
+				return  ResponseEntity.ok(confirmacionService.createConfirmacion(dto));
 			}
 			else if (tipo.equals("bautizo") ){
 				createBautizoDTO dto =mapper.convertValue(map, createBautizoDTO.class);
-				bautizoService.createBautizo(dto);
+				return  ResponseEntity.ok(bautizoService.createBautizo(dto)) ;
 			}
 		}
-		
+		return null;
 		
 		//actaService.deleteActaById(uuid);
-		return null;
+		
 		
 	}
 	

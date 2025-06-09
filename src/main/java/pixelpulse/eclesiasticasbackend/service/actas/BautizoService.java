@@ -9,6 +9,7 @@ import pixelpulse.eclesiasticasbackend.dto.ConfirmacionDTO;
 import pixelpulse.eclesiasticasbackend.dto.MatrimonioDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createBautizoDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createMatrimonioDTO;
+import pixelpulse.eclesiasticasbackend.dto.edit.EditBautizoDTO;
 import pixelpulse.eclesiasticasbackend.mapper.BautizoMapper;
 import pixelpulse.eclesiasticasbackend.mapper.MapStructMapper;
 import pixelpulse.eclesiasticasbackend.model.Acta;
@@ -134,13 +135,69 @@ public class BautizoService {
         return savedbautizo;
     }
 
-    public BautizoDTO updateBautizo(Long id, BautizoDTO bautizoDTO) {
+    public BautizoDTO updateBautizo(Long id, EditBautizoDTO bautizoDTO) {
         if (!bautizoRepository.existsById(id)) {
             throw new EntityNotFoundException("Bautizo no encontrado con ID: " + id);
         }
         
-        Bautizo bautizo = bautizoMapper.fromDto(bautizoDTO);
+        Bautizo bautizo = bautizoRepository.findById(id).get();
+        Acta a = bautizo.getActa();
+        a.setNumeroActa(bautizoDTO.getNumeroActa());
+        a.setFolio(bautizoDTO.getFolio());
+        a.setLibro(bautizoDTO.getLibro());
+        a.setFecha(bautizoDTO.getFecha());
+        a.setNotas(bautizoDTO.getNotas());
+        
+        Persona p = bautizo.getIdBautizado();
+        p.setNombre1(bautizoDTO.getNombre1());
+        p.setNombre2(bautizoDTO.getNombre2());
+        p.setApellido1(bautizoDTO.getApellido1());
+        p.setApellido2(bautizoDTO.getApellido2());
+        p.setFechaNacimiento(bautizoDTO.getFechaNacimiento());
+        p.setCiudadnacimiento(bautizoDTO.getCiudadNacimiento());
+        p.getPadre().setNombre1(bautizoDTO.getNombresPadre());
+        p.getMadre().setNombre1(bautizoDTO.getNombresMadre());
+        
+        
+        bautizo.setAbueloPaterno(bautizoDTO.getAbueloPaterno());
+        bautizo.setAbuelaMaterna(bautizoDTO.getAbuelaMaterna());
+        bautizo.setAbueloMaterno(bautizoDTO.getAbueloMaterno());
+        bautizo.setAbuelaPaterna(bautizoDTO.getAbuelaPaterna());
+        bautizo.setNombresmadrina(bautizoDTO.getNombremadrinas());
+        bautizo.setNombrespadrino(bautizoDTO.getNombrepadrinos());
+        
+        // Actualizar sacerdote que da fe
+        Sacerdote doyfe;
+        if(bautizoDTO.getIdDoyFe() == null || bautizoDTO.getIdDoyFe().isBlank()) {
+            if(bautizo.getIdDoyfe() == null) {
+                doyfe = new Sacerdote();
+                Persona p1 = new Persona();
+                p1.setNombre1(bautizoDTO.getNombresDoyFe());
+                doyfe.setPersona(p1);
+            } else {
+                doyfe = bautizo.getIdDoyfe();
+                doyfe.getPersona().setNombre1(bautizoDTO.getNombresDoyFe());
+            }
+        } else {
+            doyfe = sacerdoteRepository.findSacerdoteById(Long.valueOf(bautizoDTO.getIdDoyFe()));
+        }
 
+        // Actualizar sacerdote
+        Sacerdote sacerdote;
+        if(bautizoDTO.getIdSacerdote() == null || bautizoDTO.getIdSacerdote().isBlank()) {
+            if(bautizo.getIdSacerdote() == null) {
+                sacerdote = new Sacerdote();
+                Persona p2 = new Persona();
+                p2.setNombre1(bautizoDTO.getNombresSacerdote());
+                sacerdote.setPersona(p2);
+            } else {
+                sacerdote = bautizo.getIdSacerdote();
+                sacerdote.getPersona().setNombre1(bautizoDTO.getNombresSacerdote());
+            }
+        } else {
+            sacerdote = sacerdoteRepository.findSacerdoteById(Long.valueOf(bautizoDTO.getIdSacerdote()));
+        }
+        
         Bautizo updatedBautizo = bautizoRepository.save(bautizo);
         return bautizoMapper.toDto(updatedBautizo);
     }

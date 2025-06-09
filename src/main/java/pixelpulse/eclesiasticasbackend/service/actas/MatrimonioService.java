@@ -4,6 +4,7 @@ import pixelpulse.eclesiasticasbackend.dto.BautizoDTO;
 import pixelpulse.eclesiasticasbackend.dto.ConfirmacionDTO;
 import pixelpulse.eclesiasticasbackend.dto.MatrimonioDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createMatrimonioDTO;
+import pixelpulse.eclesiasticasbackend.dto.edit.EditMatrimonioDTO;
 import pixelpulse.eclesiasticasbackend.mapper.MapStructMapper;
 import pixelpulse.eclesiasticasbackend.mapper.MatrimonioMapper;
 import pixelpulse.eclesiasticasbackend.mapper.PersonaMapper;
@@ -161,15 +162,93 @@ public class MatrimonioService {
         return mapper.toDto(savedMatrimonio);
     }
 
-    public MatrimonioDTO updateConfirmacion(String id, MatrimonioDTO confirmacionDTO) {
-        if (!matrimonioRepository.existsById(Long.valueOf(id))) {
-            throw new EntityNotFoundException("Confirmación no encontrada con ID: " + id);
+    public MatrimonioDTO updateMatrimonio(Long id, EditMatrimonioDTO dto) {
+        // Buscar el matrimonio existente
+        Matrimonio existingMatrimonio = matrimonioRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Matrimonio no encontrado con id: " + id));
+
+        // Actualizar datos del acta
+        Acta acta = existingMatrimonio.getActa();
+        acta.setNumeroActa(dto.getNumeroActa());
+        acta.setFolio(dto.getFolio());
+        acta.setLibro(dto.getLibro());
+        acta.setFecha(dto.getFecha());
+        acta.setNotas(dto.getNotaMarginal());
+        acta.setTipo(dto.getTipo());
+
+        // Actualizar datos de la esposa (personaA)
+        Persona personaA = existingMatrimonio.getPersonaA();
+        personaA.setNombre1(dto.getEsposanombre1());
+        personaA.setNombre2(dto.getEsposanombre2());
+        personaA.setApellido1(dto.getEsposaapellido1());
+        personaA.setApellido2(dto.getEsposaapellido2());
+        personaA.setFechaNacimiento(dto.getFechaNacimientoEsposa());
+        personaA.setCiudadnacimiento(dto.getLugarNacimientoEsposa());
+
+        // Actualizar datos del esposo (personaB)
+        Persona personaB = existingMatrimonio.getPersonaB();
+        personaB.setNombre1(dto.getEsposonombre1());
+        personaB.setNombre2(dto.getEsposonombre2());
+        personaB.setApellido1(dto.getEsposoapellido1());
+        personaB.setApellido2(dto.getEsposoapellido2());
+        personaB.setFechaNacimiento(dto.getFechaNacimientoEsposo());
+        personaB.setCiudadnacimiento(dto.getLugarNacimientoEsposo());
+
+        // Actualizar padres de la esposa
+        Persona madrePersonaA = personaA.getMadre();
+        madrePersonaA.setNombre1(dto.getNombresMadreEsposa());
+        Persona padrePersonaA = personaA.getPadre();
+        padrePersonaA.setNombre1(dto.getNombresPadreEsposa());
+
+        // Actualizar padres del esposo
+        Persona madrePersonaB = personaB.getMadre();
+        madrePersonaB.setNombre1(dto.getNombresMadreEsposo());
+        Persona padrePersonaB = personaB.getPadre();
+        padrePersonaB.setNombre1(dto.getNombresPadreEsposo());
+
+        // Actualizar sacerdote que da fe
+        Sacerdote doyfe;
+        if(dto.getIdDoyFe() == null || dto.getIdDoyFe().isBlank()) {
+            if(existingMatrimonio.getIdDoyFe() == null) {
+                doyfe = new Sacerdote();
+                Persona p1 = new Persona();
+                p1.setNombre1(dto.getNombresDoyFe());
+                doyfe.setPersona(p1);
+            } else {
+                doyfe = existingMatrimonio.getIdDoyFe();
+                doyfe.getPersona().setNombre1(dto.getNombresDoyFe());
+            }
+        } else {
+            doyfe = sacerdoteRepository.findSacerdoteById(Long.valueOf(dto.getIdDoyFe()));
         }
-        
-        Matrimonio confirmacion = mapper.fromDto(confirmacionDTO);
-        
-        Matrimonio updatedConfirmacion = matrimonioRepository.save(confirmacion);
-        return mapper.toDto(updatedConfirmacion);
+
+        // Actualizar sacerdote
+        Sacerdote sacerdote;
+        if(dto.getIdSacerdote() == null || dto.getIdSacerdote().isBlank()) {
+            if(existingMatrimonio.getIdSacerdote() == null) {
+                sacerdote = new Sacerdote();
+                Persona p2 = new Persona();
+                p2.setNombre1(dto.getNombresSacerdote());
+                sacerdote.setPersona(p2);
+            } else {
+                sacerdote = existingMatrimonio.getIdSacerdote();
+                sacerdote.getPersona().setNombre1(dto.getNombresSacerdote());
+            }
+        } else {
+            sacerdote = sacerdoteRepository.findSacerdoteById(Long.valueOf(dto.getIdSacerdote()));
+        }
+
+        // Actualizar campos adicionales del matrimonio
+        existingMatrimonio.setIdDoyFe(doyfe);
+        existingMatrimonio.setIdSacerdote(sacerdote);
+        existingMatrimonio.setTestigo1(dto.getNombrestestigo1());
+        existingMatrimonio.setTestigo2(dto.getNombrestestigo2());
+        existingMatrimonio.setTestigo3(dto.getNombrestestigo3());
+        existingMatrimonio.setTestigo4(dto.getNombrestestigo4());
+
+        // Guardar los cambios
+        Matrimonio updatedMatrimonio = matrimonioRepository.save(existingMatrimonio);
+        return mapper.toDto(updatedMatrimonio);
     }
 
     public void deleteConfirmacion(String id) {

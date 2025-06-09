@@ -5,6 +5,7 @@ import pixelpulse.eclesiasticasbackend.dto.ConfirmacionDTO;
 import pixelpulse.eclesiasticasbackend.dto.SacerdoteDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createBautizoDTO;
 import pixelpulse.eclesiasticasbackend.dto.create.createConfirmacionDTO;
+import pixelpulse.eclesiasticasbackend.dto.edit.EditConfirmacionDTO;
 import pixelpulse.eclesiasticasbackend.mapper.ConfirmacionMapper;
 import pixelpulse.eclesiasticasbackend.mapper.MapStructMapper;
 import pixelpulse.eclesiasticasbackend.mapper.PersonaMapper;
@@ -155,15 +156,110 @@ public class ConfirmacionService {
 		return savedconf;
 	}
 
-	public ConfirmacionDTO updateConfirmacion(String id, ConfirmacionDTO confirmacionDTO) {
-		if (!confirmacionRepository.existsById(Long.valueOf(id))) {
-			throw new EntityNotFoundException("Confirmación no encontrada con ID: " + id);
-		}
+	public Confirmacion updateConfirmacion(Long id, EditConfirmacionDTO dto) {
+	    // Buscar la confirmación existente
+	    Confirmacion existingConfirmacion = confirmacionRepository.findById(id)
+	        .orElseThrow(() -> new RuntimeException("Confirmación no encontrada con id: " + id));
 
-		Confirmacion confirmacion = mapper.fromDto(confirmacionDTO);
+	    // Actualizar datos del acta
+	    Acta acta = existingConfirmacion.getActa();
+	    acta.setNumeroActa(dto.getNumeroActa());
+	    acta.setFolio(dto.getFolio());
+	    acta.setLibro(dto.getLibro());
+	    acta.setFecha(dto.getFecha());
+	    acta.setNotas(dto.getNotaMarginal());
+	    acta.setTipo(dto.getTipo());
 
-		Confirmacion updatedConfirmacion = confirmacionRepository.save(confirmacion);
-		return mapper.toDto(updatedConfirmacion);
+	    // Actualizar datos del padre
+	    Persona padre = existingConfirmacion.getConfirmante().getPadre();
+	    padre.setNombre1(dto.getNombresPadre());
+
+	    // Actualizar datos de la madre
+	    Persona madre = existingConfirmacion.getConfirmante().getMadre();
+	    madre.setNombre1(dto.getNombresMadre());
+
+	    // Actualizar datos de la madrina
+	    Persona madrina = existingConfirmacion.getMadrina();
+	    madrina.setNombre1(dto.getNombresmadrina());
+
+	    // Actualizar datos del padrino
+	    Persona padrino = existingConfirmacion.getPadrino();
+	    padrino.setNombre1(dto.getNombrespadrino());
+
+	    // Actualizar datos del confirmado
+	    Persona confirmado = existingConfirmacion.getConfirmante();
+	    confirmado.setCiudadnacimiento(dto.getCiudadNacimiento());
+	    confirmado.setNombre1(dto.getNombre1());
+	    confirmado.setNombre2(dto.getNombre2());
+	    confirmado.setApellido1(dto.getApellido1());
+	    confirmado.setApellido2(dto.getApellido2());
+
+	    // Actualizar parroquia
+	    if (dto.getIdParroquia() != null) {
+	        Parroquia parroquia = new Parroquia();
+	        parroquia.setId(Long.valueOf(dto.getIdParroquia()));
+	        existingConfirmacion.setParroquia(parroquia);
+	    } else {
+	        existingConfirmacion.setParroquia(null);
+	    }
+
+	    // Actualizar sacerdote que da fe
+	    Sacerdote doyfe;
+	    if (dto.getIdDoyFe() == null || dto.getIdDoyFe().isBlank()) {
+	        if (existingConfirmacion.getDoyfe() == null) {
+	            doyfe = new Sacerdote();
+	            Persona p1 = new Persona();
+	            p1.setNombre1(dto.getNombresDoyFe());
+	            doyfe.setPersona(p1);
+	        } else {
+	            doyfe = existingConfirmacion.getDoyfe();
+	            doyfe.getPersona().setNombre1(dto.getNombresDoyFe());
+	        }
+	    } else {
+	        doyfe = sacerdoteRepository.findSacerdoteById(Long.valueOf(dto.getIdDoyFe()));
+	    }
+
+	    // Actualizar sacerdote
+	    Sacerdote sacerdote;
+	    if (dto.getIdSacerdote() == null || dto.getIdSacerdote().isBlank()) {
+	        if (existingConfirmacion.getSacerdote() == null) {
+	            sacerdote = new Sacerdote();
+	            Persona p2 = new Persona();
+	            p2.setNombre1(dto.getNombresSacerdote());
+	            sacerdote.setPersona(p2);
+	        } else {
+	            sacerdote = existingConfirmacion.getSacerdote();
+	            sacerdote.getPersona().setNombre1(dto.getNombresSacerdote());
+	        }
+	    } else {
+	        sacerdote = sacerdoteRepository.findSacerdoteById(Long.valueOf(dto.getIdSacerdote()));
+	    }
+
+	    // Actualizar monseñor
+	    Sacerdote monsr;
+	    if (dto.getIdmonsr() == null || dto.getIdmonsr().isBlank()) {
+	        if (existingConfirmacion.getMonsr() == null) {
+	            monsr = new Sacerdote();
+	            Persona p3 = new Persona();
+	            p3.setNombre1(dto.getNombresmonsr());
+	            monsr.setPersona(p3);
+	        } else {
+	            monsr = existingConfirmacion.getMonsr();
+	            monsr.getPersona().setNombre1(dto.getNombresmonsr());
+	        }
+	    } else {
+	        monsr = sacerdoteRepository.findSacerdoteById(Long.valueOf(dto.getIdmonsr()));
+	    }
+
+	    // Actualizar campos de la confirmación
+	    existingConfirmacion.setDoyfe(doyfe);
+	    existingConfirmacion.setSacerdote(sacerdote);
+	    existingConfirmacion.setMonsr(monsr);
+	    existingConfirmacion.setMadrina(madrina);
+	    existingConfirmacion.setPadrino(padrino);
+
+	    // Guardar los cambios
+	    return confirmacionRepository.save(existingConfirmacion);
 	}
 
 	public void deleteConfirmacion(String id) {
