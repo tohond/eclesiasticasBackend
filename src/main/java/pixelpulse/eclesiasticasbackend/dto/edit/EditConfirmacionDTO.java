@@ -244,11 +244,11 @@ public class EditConfirmacionDTO{
 	}
 
 	public String getIdmonsr() {
-		return StringUtils.isBlank(idmonsr) ? null : idmonsr;
+		return idmonsr;
 	}
 
 	public void setIdmonsr(String idmonsr) {
-		this.idmonsr = StringUtils.isBlank(idmonsr) ? null : idmonsr.trim();
+		this.idmonsr = idmonsr;
 	}
 
 	public String getNombresmonsr() {
