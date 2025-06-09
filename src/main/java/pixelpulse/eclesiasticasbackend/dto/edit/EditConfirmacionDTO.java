@@ -244,13 +244,6 @@ public class EditConfirmacionDTO{
 	}
 
 
-<<<<<<< HEAD
-=======
-	public void setIdmonsr(String idmonsr) {
-		this.idmonsr = idmonsr;
-	}
->>>>>>> branch 'main' of https://github.com/tohond/eclesiasticasBackend.git
-
 	public String getNombresmonsr() {
 		return nombresmonsr;
 	}
