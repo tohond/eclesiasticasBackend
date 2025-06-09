@@ -197,7 +197,6 @@ public class ConfirmacionService {
 	    // Actualizar parroquia
 	    if (dto.getIdParroquia() != null) {
 	        Parroquia parroquia = new Parroquia();
-	        parroquia.setId(Long.valueOf(dto.getIdParroquia()));
 	        existingConfirmacion.setParroquia(parroquia);
 	    } else {
 	        existingConfirmacion.setParroquia(null);
