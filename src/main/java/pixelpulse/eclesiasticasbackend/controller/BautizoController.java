@@ -39,15 +39,7 @@ public class BautizoController {
         		//new ResponseEntity<>(bautizoService.createConfirmacion(bautizoDTO), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<BautizoDTO> updateBautizo(@PathVariable Long id, @RequestBody BautizoDTO bautizoDTO) {
-        try {
-            return ResponseEntity.ok(bautizoService.updateBautizo(id, bautizoDTO));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
+   
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBautizo(@PathVariable Long id) {
         try {

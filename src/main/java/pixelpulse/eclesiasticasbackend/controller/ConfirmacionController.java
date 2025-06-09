@@ -38,14 +38,7 @@ public class ConfirmacionController {
         		//new ResponseEntity<>(confirmacionService.createConfirmacion(confirmacionDTO), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ConfirmacionDTO> updateConfirmacion(@PathVariable String id, @RequestBody ConfirmacionDTO confirmacionDTO) {
-        try {
-            return ResponseEntity.ok(confirmacionService.updateConfirmacion(id, confirmacionDTO));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
+  
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteConfirmacion(@PathVariable String id) {
