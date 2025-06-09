@@ -235,25 +235,11 @@ public class ConfirmacionService {
 	    }
 
 	    // Actualizar monseñor
-	    Sacerdote monsr;
-	    if (dto.getIdmonsr() == null || dto.getIdmonsr().isBlank()) {
-	        if (existingConfirmacion.getMonsr() == null) {
-	            monsr = new Sacerdote();
-	            Persona p3 = new Persona();
-	            p3.setNombre1(dto.getNombresmonsr());
-	            monsr.setPersona(p3);
-	        } else {
-	            monsr = existingConfirmacion.getMonsr();
-	            monsr.getPersona().setNombre1(dto.getNombresmonsr());
-	        }
-	    } else {
-	        monsr = sacerdoteRepository.findSacerdoteById(Long.valueOf(dto.getIdmonsr()));
-	    }
-
+	    	existingConfirmacion.getMonsr().getPersona().setNombre1(dto.getNombresmonsr());
 	    // Actualizar campos de la confirmación
 	    existingConfirmacion.setDoyfe(doyfe);
 	    existingConfirmacion.setSacerdote(sacerdote);
-	    existingConfirmacion.setMonsr(monsr);
+;
 	    existingConfirmacion.setMadrina(madrina);
 	    existingConfirmacion.setPadrino(padrino);
 

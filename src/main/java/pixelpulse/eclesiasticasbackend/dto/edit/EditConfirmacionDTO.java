@@ -27,7 +27,7 @@ public class EditConfirmacionDTO{
 	private String nombresSacerdote;
 	private String idDoyFe;
 	private String nombresDoyFe;
-	private String idmonsr;
+
 	private String nombresmonsr;
 	private String idParroquia;
 	
@@ -243,13 +243,7 @@ public class EditConfirmacionDTO{
 		this.notaMarginal = notaMarginal;
 	}
 
-	public String getIdmonsr() {
-		return idmonsr;
-	}
 
-	public void setIdmonsr(String idmonsr) {
-		this.idmonsr = idmonsr;
-	}
 
 	public String getNombresmonsr() {
 		return nombresmonsr;
